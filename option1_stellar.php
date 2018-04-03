@@ -90,7 +90,7 @@
 <table>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Spectral resolution (R = &lambda;/&delta;&lambda;) :&nbsp;&nbsp;<input type="text" name="R" value=<?php echo $_GET['R'] ?>  size="10" maxlength="50"/></td>
-                <td style="padding: 0px 0px 10px 30px;">Telescope aperture (meters) :&nbsp;&nbsp;<input type=i"text" name="aperture" value=<?php echo $_GET['aperture'] ?>  size="10" maxlength="50"/></td>
+                <td style="padding: 0px 0px 10px 30px;">Telescope aperture (metres) :&nbsp;&nbsp;<input type="text" name="aperture" value=<?php echo $_GET['aperture'] ?>  size="10" maxlength="50"/></td>
         </tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value=<?php echo $_GET['throughput'] ?>  size="10" maxlength="50"/></td>

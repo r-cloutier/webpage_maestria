@@ -92,7 +92,7 @@ td, th {
                             <li><a class="page-scroll" href="http://astro.utoronto.ca/~cloutier/index.html#research-section">Research</a></li>
                             <li><a class="page-scroll" href="http://astro.utoronto.ca/~cloutier/index.html#cv-section">CV</a></li>
                             <li><a class="page-scroll" href="http://astro.utoronto.ca/~cloutier/index.html#contact-section">Contact</a></li>
-                            <li><a href="">RVFC</a></li>
+                            <li><a href="http://maestria.astro.umontreal.ca/rvfc/">RVFC</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                   </div><!-- /.container -->
@@ -105,12 +105,10 @@ td, th {
 	    
             <!-- ========== BEGIN CALCULATOR FORM======== -->
 	    <br><br><br><br><br>
-            <form action="http://maestria.astro.umontreal.ca/rvfc/index.html" method="get" >
+            <form action="http://maestria.astro.umontreal.ca/rvfc/RVFollowupCalculator.php" method="get" >
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_calculate_sigRV_phot" value="Option 1: calculator-derived RV precision" />
 	    <br/><br/>
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_set_sigRV_phot" value="Option 2: user-specified RV precision" />
-	    <br/><br/>
-            &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_upload_fields" value="Option 3: upload input file" />
 
             <!-- Calculate sigRV using the calculator -->
             <?php if (isset($_GET['submit_calculate_sigRV_phot']) && ! isset($_GET['submit_spec'])) : ?>
@@ -129,12 +127,6 @@ td, th {
             <!-- Ask user to specify sigRV instead of calculating it -->
             <?php if (isset($_GET['submit_set_sigRV_phot'])) : ?>
                  <?php include 'option2.php'; ?>
-            <?php endif; ?>
-
-
-	    <!-- Upload file for a particular calcuation -->
-	    <?php if (isset($_GET['submit_upload_fields']) || isset($_GET['submit_upload'])) : ?>
-                 <?php include 'option3.php'; ?>
             <?php endif; ?>
 
 
