@@ -92,7 +92,7 @@
 name="Kband">&nbsp;&nbsp;K band-->
 
 
-<br><br>
+<br><br><br>
 <table>
 	<tr>
 	        <td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmin" value="<?php echo
