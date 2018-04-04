@@ -16,6 +16,10 @@
 	}
 ?>
 
+<!-- Save parameters to a file to be read by the calculator -->
+
+
+
 <?php if (isset($_GET['R']) && floatval($_GET['R'])>0) : ?>
 <table>
 	<tr>

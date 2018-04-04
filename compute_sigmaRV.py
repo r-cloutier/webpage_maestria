@@ -99,11 +99,17 @@ def _get_full_spectrum(Teff, logg, Z):
     assert logg in loggs
     Zs = np.append(np.arange(-4,-2,1), np.arange(-2,1.5,.5))
     assert Z in Zs
+    if Z == 0:
+	Zstr = '-0.0'
+    elif Z > 0:
+	Zstr = '+%.1f'%Z
+    else:
+	Zstr = '%.1f'%Z
 
     # Download the spectrum
     prefix = "ftp://phoenix.astro.physik.uni-goettingen.de/HiResFITS/" + \
              "PHOENIX-ACES-AGSS-COND-2011/"
-    fname = "Z-%.1f/lte%.5d-%.2f-%.1f"%(Z, Teff, logg, Z) + \
+    fname = "Z%s/lte%.5d-%.2f%s"%(Zstr, Teff, logg, Zstr) + \
             ".PHOENIX-ACES-AGSS-COND-2011-HiRes.fits"
     spec_fits = fits.open(prefix+fname)[0]
 
@@ -351,11 +357,11 @@ def _rescale_sigmaRV(sigmaRV, mag, band_str, texp_min, aperture, throughput, R,
         The rescaled SNR of the spectrum
 
     '''
-    snr = _get_snr(mag, band_str, texp_min, aperture, throughput, R)
+    snr = get_snr(mag, band_str, texp_min, aperture, throughput, R)
     return sigmaRV * SNRtarget / snr
     
 
-def _get_snr(mag, band_str, texp_min, aperture, throughput, R):
+def get_snr(mag, band_str, texp_min, aperture, throughput, R):
     '''
     Compute the SNR of the spectrum in a certain band (e.g. 'J').
 
@@ -488,8 +494,8 @@ def exposure_time_calculator_per_band(mags, band_strs, aperture, throughput, R,
     texps = np.arange(texpmin, texpmax+.1, .1)  # minutes
     SNRs = np.zeros(texps.size)
     for i in range(texps.size):
-        SNRs[i] = _get_snr(reference_mag, reference_band, texps[i],
-                           aperture, throughput, R)
+        SNRs[i] = get_snr(reference_mag, reference_band, texps[i],
+                          aperture, throughput, R)
 
     if SNRs.min() > SNRtarget:
         return float(texpmin)
