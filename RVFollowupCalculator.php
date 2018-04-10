@@ -109,6 +109,13 @@ td, th {
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_calculate_sigRV_phot" value="Option 1: calculator-derived RV precision" />
 	    <br/><br/>
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_set_sigRV_phot" value="Option 2: user-specified RV precision" />
+            <br/><br/>
+	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_test" value="test python" />
+
+	    <?php if (isset($_GET['submit_test'])) : ?>
+	    	<?php echo "here";
+		$output = exec("/usr/bin/python2.7 /data/cpapir/www/rvfc/test.py"); ?>
+	    <?php endif; ?>
 
             <!-- Calculate sigRV using the calculator -->
             <?php if (isset($_GET['submit_calculate_sigRV_phot']) && ! isset($_GET['submit_spec'])) : ?>

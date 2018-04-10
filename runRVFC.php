@@ -192,3 +192,8 @@
 
 <br>
 <p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>RVFC Results:</b></p>&nbsp;&nbsp;&nbsp;
+<?php 
+echo "here";
+$results = exec("/usr/bin/python2.7 test.py");
+echo $results;
+?>

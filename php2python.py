@@ -65,16 +65,18 @@ def update_input_files(wlmin, wlmax, R, aperture, throughput, floor, wlcen, targ
     h.close()
 
 
-def run_calculator(Kdetsig, Ntrials=1, runGP=True):
+def run_calculator(Kdetsig, duration=100, NGPtrials=1):
+    runGP = True if NGPtrials > 0 else False
     nRV_calculator(Kdetsig,
                    input_planet_fname='user_planet.in',`
                    input_star_fname='user_star.in',
                    input_spectrograph_fname='user_spectrograph.in',
                    input_sigRV_fname='user_sigRV.in',
-                   output_fname='RVFCoutput',
-                   Ntrials=Ntrials, runGP=runGP)
+                   output_fname='RVFCoutput', duration=duration,
+                   NGPtrials=NGPtrials, runGP=runGP,
+		   verbose_results=True)
 
-    
+
 if __name__ == '__main__':
     bands = list(sys.argv[1])
     R = float(sys.argv[2])
@@ -102,7 +104,7 @@ if __name__ == '__main__':
     vsini = float(sys.argv[24])
     Prot = float(sys.argv[25])
     Kdetsig = float(sys.argv[26])
-    Ntrials = float(sys.argv[27])
+    NGPtrials = float(sys.argv[27])
     runGP = int(sys.argv[28])
     
     update_input_files(bands, R, aperture, throughput, floor, wlcen, targetsnr,
@@ -110,4 +112,4 @@ if __name__ == '__main__':
                        sigRVact, sigRVplanets, sigRVeff, P, rp, mp, mags, Ms,
                        Rs, Teff, Z, vsini, Prot):
 
-    run_calulator(Kdetsig, Ntrials, runGP)
+    #run_calulator(Kdetsig, NGPtrials=NGPtrials)
