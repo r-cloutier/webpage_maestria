@@ -191,10 +191,30 @@
 	</tr>
 </table>
 
+
+<!-- Set dumby variables for spectrograph parameters -->
+<?php 
+	$wlminin = (isset($_GET['wlmin']) ? $_GET['wlmin'] : 0);
+	$wlmaxin = (isset($_GET['wlmax']) ? $_GET['wlmax'] : 0);
+	$Rin = (isset($_GET['R']) ? $_GET['R'] : 0);
+	$aperturein = (isset($_GET['aperture']) ? $_GET['aperture'] : 0);
+	$throughputin = (isset($_GET['throughput']) ? $_GET['throughput'] : 0);
+	$maxtelluricin = (isset($_GET['maxtelluric']) ? $_GET['maxtelluric'] : 0);
+	$floorin = (isset($_GET['floor']) ? $_GET['floor'] : 0);
+	$overheadin = (isset($_GET['overhead']) ? $_GET['overhead'] : 0);
+	$sigRVphotin = (isset($_GET['sigRVphot']) ? $_GET['sigRVphot'] : 0);
+	$sigRVactin = (isset($_GET['sigRVact']) ? $_GET['sigRVact'] : -1);
+	$sigRVplanetsin = (isset($_GET['sigRVplanets']) ? $_GET['sigRVplanets'] : -1);
+	$sigRVeffin = (isset($_GET['sigRVeff']) ? $_GET['sigRVeff'] : -1);
+	$magin = (isset($_GET['mag']) ? $_GET['mag'] : 0);
+?>
+
+
 <br>
 <p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>RVFC Results:</b></p>&nbsp;&nbsp;&nbsp;
 <?php 
-	$arguments = $_GET['wlmin']." ".$_GET['wlmax'];
+	$arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overhead."
+	".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin;
 	//$results = exec("/usr/bin/python2.7 /data/cpapir/www/rvfc/php2python.py ".$arguments);
 	echo $arguments;
 ?>

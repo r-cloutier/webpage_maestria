@@ -96,7 +96,7 @@ if __name__ == '__main__':
     rp = float(sys.argv[15])
     mp = float(sys.argv[16])
 
-    mags = list(sys.argv[17])
+    mag = list(sys.argv[17])
     Ms = float(sys.argv[18])
     Rs = float(sys.argv[19])
     Teff = float(sys.argv[20])
@@ -110,6 +110,6 @@ if __name__ == '__main__':
     update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, overhead, 
 		       texp, sigRVphot, sigRVact, sigRVplanets, sigRVeff,
 		       P, rp, mp, 
-		       mags, Ms, Rs, Teff, Z, vsini, Prot)
+		       mag, Ms, Rs, Teff, Z, vsini, Prot)
 
     #run_calulator(Kdetsig, NGPtrials=NGPtrials)
