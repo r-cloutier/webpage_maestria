@@ -68,7 +68,6 @@
 <?php endif; ?>
 
 
-
 <table>
 	<tr>
 		<td style="padding: 5px 10px; font-size:20px" width="22%"><b>Planet parameters:</b></td>
@@ -78,27 +77,28 @@
                 <td style="padding: 5px 10px; font-size:20px" width="22%"><b>RV noise sources:</b></td>
                 <td></td>
 	</tr>
-        <tr>
-                <td style="padding: 5px 10px;" width="22%">Orbital period</td>
+	<?php if (isset($_GET['R']) && floatval($_GET['R'])>0) : ?>
+		<tr>
+		<td></td>
+		<td></td>
+		<?php
+			if (($_GET['wlmin'] <= 555) && ($_GET['wlmax'] >= 555)) {
+				$mag_str = 'V';
+			} elseif (($_GET['wlmin'] <= 1250) && ($_GET['wlmax'] >= 1250)) {
+				$mag_str = 'J';
+			}
+		?>
+		<td style="padding: 5px 10px;" width="22%"><?php echo $mag_str; ?></td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['mag'],2,".",""); ?></td>
+		<td></td>
+		<td></td>
+		</tr>
+	<?php endif; ?>
+	<tr>
+		<td style="padding: 5px 10px;" width="22%">Orbital Period</td>
 		<td style="padding: 5px 10px;" width="11%"><?php echo $_GET['P']; ?> days</td>
-		<?php if (isset($_GET['R']) && floatval($_GET['R'])>0) : ?>
-			<?php
-				$mag_str = "";
-				$mags = "";
-				if (isset($_GET['Vband'])) {
-					$mag_str .= 'V';
-					$mags += $_GET['Vmag'];
-				} elseif (isset($_GET['Jband'])) {
-					$mag_str .= 'J';
-                                        $mags += $_GET['Jmag'];
-				}
-			?>
-			<td style="padding: 5px 10px;" width="22%"><?php echo $mag_str; ?></td>
-			<td style="padding: 5px 10px;" width="11%"><?php echo $mags; ?></td>
-		<?php else: ?>
-                	<td style="padding: 5px 10px;" width="22%">Stellar mass</td>
-                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['Ms'],2,".",""); ?> M<sub>&#x02299;</sub></td>
-		<?php endif; ?>
+		<td style="padding: 5px 10px;" width="22%">Stellar mass</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['Ms'],2,".",""); ?> M<sub>&#x02299;</sub></td>
                 <td style="padding: 5px 10px;" width="22%">Exposure time</td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo $_GET['texp']; ?> min</td>
         </tr>
@@ -111,7 +111,7 @@
 		<?php else: ?>
                         <td style="padding: 5px 10px;" width="11%">-</td>
 		<?php endif; ?>
-                <td style="padding: 5px 10px;" width="22%">Photon-noise limited RV precision</td>
+                <td style="padding: 5px 10px;" width="22%">Photon-noise RV precision</td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVphot'],2,".",""); ?> m/s</td>
         </tr>
         <tr>
@@ -175,7 +175,7 @@
 	</tr>
 	<tr>
 		<td style="padding: 5px 10px;" width="24%">Desired K detection significance</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['Kdetsig'],1,'.',''); ?></td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['Kdetsig'],2,'.',''); ?></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -194,7 +194,7 @@
 <br>
 <p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>RVFC Results:</b></p>&nbsp;&nbsp;&nbsp;
 <?php 
-$arguments = $_GET['wlmin']." ".$_GET['wlmax']
-$results = exec("/usr/bin/python2.7 /data/cpapir/www/rvfc/php2python.py ".$arguments);
-echo $results;
+	$arguments = $_GET['wlmin']." ".$_GET['wlmax'];
+	//$results = exec("/usr/bin/python2.7 /data/cpapir/www/rvfc/php2python.py ".$arguments);
+	echo $arguments;
 ?>
