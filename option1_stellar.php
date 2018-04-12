@@ -121,7 +121,7 @@
                 <td style="padding: 0px 0px 10px 30px;">Planetary radius (R<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="rp" value="<?php echo isset($_GET['rp']) ? $_GET['rp'] : $rp ?>"  size="10" maxlength="50"/></td>
         </tr>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Planetary mass (M<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="mp" value="<?php echo isset($_GET['mp']) ? $_GET['mp'] : $rp ?>"  size="10" maxlength="50"/>&ensp;(leave blank to estimate the planetary mass from its radius)</td>
+                <td style="padding: 0px 0px 10px 30px;">Planetary mass (M<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="mp" value="<?php echo isset($_GET['mp']) ? $_GET['mp'] : $mp ?>"  size="10" maxlength="50"/>&ensp;(leave blank to estimate the planetary mass from its radius)</td>
         </tr>
 </table>
 
@@ -238,7 +238,7 @@ specified above.</p><br>
                 <td style="padding: 0px 0px 10px 30px;">Desired K detection signficance (K/&sigma;<sub>K</sub>) :&nbsp;&nbsp;<input type="text" name="Kdetsig" value="<?php echo isset($_GET['Kdetsig']) ? $_GET['Kdetsig'] : 3 ?>"  size="10" maxlength="50"/></td>
         </tr>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="Ntrials" value="<?php echo isset($_GET['Ntrials']) ? $_GET['Ntrials'] : 10 ?>"  size="10" maxlength="50"/>&ensp;(set to zero for the white noise calculation only)</td>
+                <td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials" value="<?php echo isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 10 ?>"  size="10" maxlength="50"/>&ensp;(set to zero for the white noise calculation only)</td>
         </tr>
 </table>
 

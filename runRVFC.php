@@ -183,7 +183,7 @@
         </tr>
         <tr>
                 <td style="padding: 5px 10px;" width="24%">Number of GP trials</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['Ntrials'],0,'',''); ?></td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['NGPtrials'],0,'',''); ?></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -194,27 +194,35 @@
 
 <!-- Set dumby variables for spectrograph parameters -->
 <?php 
-	$wlminin = (isset($_GET['wlmin']) ? $_GET['wlmin'] : 0);
-	$wlmaxin = (isset($_GET['wlmax']) ? $_GET['wlmax'] : 0);
-	$Rin = (isset($_GET['R']) ? $_GET['R'] : 0);
-	$aperturein = (isset($_GET['aperture']) ? $_GET['aperture'] : 0);
-	$throughputin = (isset($_GET['throughput']) ? $_GET['throughput'] : 0);
-	$maxtelluricin = (isset($_GET['maxtelluric']) ? $_GET['maxtelluric'] : 0);
-	$floorin = (isset($_GET['floor']) ? $_GET['floor'] : 0);
-	$overheadin = (isset($_GET['overhead']) ? $_GET['overhead'] : 0);
-	$sigRVphotin = (isset($_GET['sigRVphot']) ? $_GET['sigRVphot'] : 0);
-	$sigRVactin = (isset($_GET['sigRVact']) ? $_GET['sigRVact'] : -1);
-	$sigRVplanetsin = (isset($_GET['sigRVplanets']) ? $_GET['sigRVplanets'] : -1);
-	$sigRVeffin = (isset($_GET['sigRVeff']) ? $_GET['sigRVeff'] : -1);
-	$magin = (isset($_GET['mag']) ? $_GET['mag'] : 0);
+	$wlminin = (($_GET['wlmin']>0) ? $_GET['wlmin'] : 0);
+	$wlmaxin = (($_GET['wlmax']>0) ? $_GET['wlmax'] : 0);
+	$Rin = (($_GET['R']>0) ? $_GET['R'] : 0);
+	$aperturein = (($_GET['aperture']>0) ? $_GET['aperture'] : 0);
+	$throughputin = (($_GET['throughput']>0) ? $_GET['throughput'] : 0);
+	$maxtelluricin = (($_GET['maxtelluric']>0) ? $_GET['maxtelluric'] : 0);
+	$floorin = (($_GET['floor']>0) ? $_GET['floor'] : 0);
+	$overheadin = (($_GET['overhead']>0) ? $_GET['overhead'] : 0);
+	$sigRVphotin = (($_GET['sigRVphot']>0) ? $_GET['sigRVphot'] : 0);
+	$sigRVactin = (($_GET['sigRVact']>0) ? $_GET['sigRVact'] : -1);
+	$sigRVplanetsin = (($_GET['sigRVplanets']>0) ? $_GET['sigRVplanets'] : -1);
+	$sigRVeffin = (($_GET['sigRVeff']>0) ? $_GET['sigRVeff']-1 : -1);
+	$mpin = (($_GET['mp']>0) ? $_GET['mp'] : 0);
+	$magin = (($_GET['mag']>0) ? $_GET['mag'] : 0);
+	$Msin = (($_GET['Ms']>0) ? $_GET['Ms'] : 0);
+	$Rsin = (($_GET['Rs']>0) ? $_GET['Rs'] : 0);
+	$Teffin = (($_GET['Teff']>0) ? $_GET['Teff'] : 0);
+	$Zin = (($_GET['Z']>0) ? $_GET['Z'] : 0);
+	$vsiniin = (($_GET['vsini']>0) ? $_GET['vsini'] : 0);
+	$Protin = (($_GET['Prot']>0) ? $_GET['Prot'] : 0);
 ?>
 
 
 <br>
 <p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>RVFC Results:</b></p>&nbsp;&nbsp;&nbsp;
 <?php 
-	$arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overhead."
-	".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin;
+	$arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin."
+	".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin."
+	".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
 	//$results = exec("/usr/bin/python2.7 /data/cpapir/www/rvfc/php2python.py ".$arguments);
 	echo $arguments;
 ?>

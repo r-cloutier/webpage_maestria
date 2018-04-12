@@ -114,7 +114,7 @@ def write_pdf_str(output_fname, magiclistofstuff2write, figures=False):
 
 
 def plot_hist(arr, labels, xlabel, fname):
-    Ntrials, Narr = arr.shape
+    NGPtrials, Narr = arr.shape
     assert len(labels) == Narr
     
     fig = plt.figure(figsize=(6,4))
