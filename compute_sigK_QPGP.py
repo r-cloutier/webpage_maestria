@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 import numpy as np
 import sympy
 from PyAstronomy.pyasl import foldAt

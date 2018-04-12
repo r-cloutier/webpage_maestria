@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 from imports import *
 from PyAstronomy.pyasl import foldAt
 from compute_sigK_QPGP import compute_sigmaK_GP

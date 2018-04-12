@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 from imports import *
 
 global G
@@ -68,7 +68,7 @@ def planet_contrast(rp_Rearth, SMA_AU, albedo=.3):
 
 def get_baraffe_Ls(Ms, age=2):
     # Get Baraffe data
-    baraffe = np.loadtxt('InputData/BCAH98.dat')
+    baraffe = np.loadtxt('/data/cpapir/www/rvfc/InputData/BCAH98.dat')
     barmass = baraffe[:,0]    # Msun
     barage = baraffe[:,1]     # Gyrs
     barTeff = baraffe[:,2]    # K

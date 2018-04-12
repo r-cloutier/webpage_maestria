@@ -1,6 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 from imports import *
-
 
 global c, h, bands
 c, h = 299792458., 6.62607004e-34

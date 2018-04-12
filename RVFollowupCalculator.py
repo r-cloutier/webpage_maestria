@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 from imports import *
 from compute_sigmaRV import *
 from sigmaRV_activity import *
@@ -11,11 +11,11 @@ global G
 G = 6.67e-11
 
 def nRV_calculator(Kdetsig,
-                   input_planet_fname='InputFiles/user_planet.in',
-                   input_star_fname='InputFiles/user_star.in',
-                   input_spectrograph_fname='InputFiles/user_spectrograph.in',
-                   input_sigRV_fname='InputFiles/user_sigRV.in',
-                   output_fname='RVFollowupCalculator',
+                   input_planet_fname='/data/cpapir/www/rvfc/InputFiles/user_planet.in',
+                   input_star_fname='/data/cpapir/www/rvfc/InputFiles/user_star.in',
+                   input_spectrograph_fname='/data/cpapir/www/rvfc/InputFiles/user_spectrograph.in',
+                   input_sigRV_fname='/data/cpapir/www/rvfc/InputFiles/user_sigRV.in',
+                   output_fname='/data/cpapir/www/rvfc/Results/RVFollowupCalculator',
                    duration=100, NGPtrials=1, runGP=True, verbose_results=True):
     '''
     Compute the number of RV measurements required to detect an input 
@@ -88,7 +88,7 @@ def nRV_calculator(Kdetsig,
         # compute sigRV_phot once if needed
         if sigRV_phot <= 0:
             transmission_fname = 'tapas_000001.ipac'
-            wlTAPAS, transTAPAS = np.loadtxt('InputData/%s'%transmission_fname,
+            wlTAPAS, transTAPAS = np.loadtxt('/data/cpapir/www/rvfc/InputData/%s'%transmission_fname,
                                              skiprows=23).T
             wlTAPAS *= 1e-3  # microns
             SNRtarget, sigRV_phot = _compute_sigRV_phot(band_strs, mags, Teff, logg,
@@ -162,7 +162,7 @@ def _read_planet_input(input_planet_fname):
     '''
     Read-in planetary data from the input file.
     '''
-    f = open('%s'%input_planet_fname, 'r')
+    f = open(input_planet_fname, 'r')
     g = f.readlines()
     f.close()
     return float(g[3]), float(g[5]), float(g[7])
@@ -172,7 +172,7 @@ def _read_star_input(input_star_fname):
     '''
     Read-in stellar data from the input file.
     '''
-    f = open('%s'%input_star_fname, 'r')
+    f = open(input_star_fname, 'r')
     g = f.readlines()
     f.close()
     return float(g[3]), float(g[5]), float(g[7]), float(g[9]), \
@@ -183,7 +183,7 @@ def _read_spectrograph_input(input_spectrograph_fname):
     '''
     Read-in spectrograph data from the input file.
     '''
-    f = open('%s'%input_spectrograph_fname, 'r')
+    f = open(input_spectrograph_fname, 'r')
     g = f.readlines()
     f.close()
     return float(g[3])*1e-3, float(g[5])*1e-3, float(g[7]), \
@@ -194,7 +194,7 @@ def _read_sigRV_input(input_sigRV_fname):
     '''
     Read-in RV noise source data from the input file.
     '''
-    f = open('%s'%input_sigRV_fname, 'r')
+    f = open(input_sigRV_fname, 'r')
     g = f.readlines()
     f.close()
     return float(g[3]), float(g[5]), float(g[7]), float(g[9]), float(g[11])
@@ -346,7 +346,7 @@ def _get_absolute_stellar_magnitudes(Ms):
 
     # First set of isochrones (ubvri)
     logages,Mss,Mus,Mbs,Mvs,Mrs,Mis,Mjs,Mhs,Mks = \
-                                np.loadtxt('InputData/isoc_z019_ubvrijhk.dat',
+                                np.loadtxt('/data/cpapir/www/rvfc/InputData/isoc_z019_ubvrijhk.dat',
                                 usecols=(0,1,7,8,9,10,11,12,13,14)).T
     g = abs(logages-logage) == np.min(abs(logages-logage))
     Mss,Mus,Mbs,Mvs,Mrs,Mis,Mjs,Mhs,Mks = Mss[g],Mus[g],Mbs[g],Mvs[g],Mrs[g], \
@@ -358,7 +358,7 @@ def _get_absolute_stellar_magnitudes(Ms):
                               Mhs[g],Mks[g]
     # Second set of isochrones (ZYJHK)
     logages2,Mss2,MZs,MYs,MJs,MHs,MKs = \
-                                np.loadtxt('InputData/isoc_z019_ZYJHK.dat',
+                                np.loadtxt('/data/cpapir/www/rvfc/InputData/isoc_z019_ZYJHK.dat',
                                 usecols=(0,1,7,8,9,10,11)).T
     g = abs(logages2-logage) == np.min(abs(logages2-logage))
     Mss2,MZs,MYs,MJs,MHs,MKs = Mss2[g],MZs[g],MYs[g],MJs[g],MHs[g],MKs[g]
@@ -402,7 +402,7 @@ def _write_results2file(output_fname, magiclistofstuff2write):
         os.mkdir('Results')
     except OSError:
         pass
-    f = open('Results/%s.dat'%output_fname, 'w')
+    f = open(output_fname, 'w')
     f.write(g)
     f.close()
 
@@ -429,7 +429,7 @@ def _print_results(output, output_fname=''):
     
     # save text file if desired
     if output_fname != '':
-        h = open('Results/%s.txt'%output_fname, 'w')
+        h = open(output_fname, 'w')
         h.write(g)
         h.close()
 
