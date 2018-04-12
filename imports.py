@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import numpy as np
 import matplotlib.pyplot as plt
 import glob, sys, os, time, george

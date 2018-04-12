@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from imports import *
 
 def get_data():

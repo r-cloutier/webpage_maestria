@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import numpy as np
 import rvs
 from scipy.interpolate import interp1d

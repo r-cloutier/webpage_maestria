@@ -223,6 +223,7 @@
 	$arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin."
 	".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin."
 	".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
-	//$results = exec("/usr/bin/python2.7 /data/cpapir/www/rvfc/php2python.py ".$arguments);
-	echo $arguments;
+	$results = exec("/usr/bin/python2.7 php2python.py ".$arguments);
+	//$resuls = exec('/usr/bin/python2.7 test.py');
+	echo "/usr/bin/python2.7 php2python.py ".$arguments;
 ?>

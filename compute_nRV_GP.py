@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from imports import *
 from PyAstronomy.pyasl import foldAt
 from compute_sigK_QPGP import compute_sigmaK_GP
