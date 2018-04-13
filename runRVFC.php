@@ -220,11 +220,11 @@
 	// Run calculator and save the output to a txt file
         $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
 	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	//echo $results;
+	//echo $output_fname;
 
 	// Read output
 	$file = fopen($output_fname, 'r');
-	$data = fgetcsv($file, filesize($spectrograph_input_file));
+	$data = fgetcsv($file, filesize($output_fname));
 	$mags = $data[0];
 	$band_strs = $data[1];
 	$sigRV_phot = $data[2];
@@ -238,8 +238,14 @@
 <table>
 	<tr>
 		<td style="padding: 5px 10px;" width="24%">Number of RV measurements (white noise)</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['nRVGP'],1,'.',''); ?></td>
-		<td></td>
-		<td></td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($nRV,1,'.',''); ?></td>
+		<td style="padding: 5px 10px;" width="24%">Total observing time (white noise)</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($tobs,1,'.',''); ?> hrs</td>
+	</tr>
+	<tr>	
+		<td style="padding: 5px 10px;" width="24%">Number of RV measurements (correlated noise)</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($nRVGP,1,'.',''); ?></td>
+		<td style="padding: 5px 10px;" width="24%">Total observing time (correlated noise)</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($tobsGP,1,'.',''); ?> hrs</td>
 	</tr>
 </table>
