@@ -1,6 +1,6 @@
 #!/usr/bin/python2.7
 import numpy as np
-import rvs
+import rvs_custom as rvs
 from scipy.interpolate import interp1d
 from astropy.io import ascii
 

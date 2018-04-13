@@ -1,6 +1,6 @@
 #!/usr/bin/python2.7
 import numpy as np
-import rvs
+import rvs_custom as rvs
 import massradius as mr
 
 

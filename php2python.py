@@ -1,13 +1,13 @@
 #!/usr/bin/python2.7
-#import os, sys
-from imports import *
-#from RVFollowupCalculator import nRV_calculator
+import os, sys
+import numpy as np
+from RVFollowupCalculator import nRV_calculator
 
 
 def update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, overhead, 
 		       texp, sigRVphot, sigRVact, sigRVplanets, sigRVeff, 
 		       P, rp, mp, 
-		       mags, Ms, Rs, Teff, Z, vsini, Prot):
+		       mag, Ms, Rs, Teff, Z, vsini, Prot):
     # derive unqiue suffix
     suffix = '%.6f'%np.random.rand() + '_%.6f'%np.random.rand()
     suffix = suffix.replace('.','d')
@@ -16,8 +16,8 @@ def update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric
     f = open('/data/cpapir/www/rvfc/InputFiles/user_spectrograph_template.in', 'r')
     g = f.read()
     f.close()
-    g = g.replace('<<wlmin>>', wlmin)
-    g = g.replace('<<wlmax>>', wlmax)
+    g = g.replace('<<wlmin>>', '%.3f'%wlmin)
+    g = g.replace('<<wlmax>>', '%.3f'%wlmax)
     g = g.replace('<<R>>', '%i'%R)
     g = g.replace('<<aperture>>', '%.2f'%aperture)
     g = g.replace('<<throughput>>', '%.2f'%throughput)
@@ -29,7 +29,7 @@ def update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric
     h.close()
     
     # update sigRV
-    f = open('/data/cpapir/www/rvfc/user_sigRV_template.in', 'r')
+    f = open('/data/cpapir/www/rvfc/InputFiles/user_sigRV_template.in', 'r')
     g = f.read()
     f.close()
     g = g.replace('<<texp>>', '%.3f'%texp)
@@ -42,7 +42,7 @@ def update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric
     h.close()
 
     # update planet
-    f = open('/data/cpapir/www/rvfc/user_planet_template.in', 'r')
+    f = open('/data/cpapir/www/rvfc/InputFiles/user_planet_template.in', 'r')
     g = f.read()
     f.close()
     g = g.replace('<<P>>', '%.4f'%P)
@@ -53,10 +53,10 @@ def update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric
     h.close()
 
     # update star
-    f = open('/data/cpapir/www/rvfc/user_star_template.in', 'r')
+    f = open('/data/cpapir/www/rvfc/InputFiles/user_star_template.in', 'r')
     g = f.read()
     f.close()
-    g = g.replace('<<mag>>', ','.join(['%.2f'%i for i in mags]))
+    g = g.replace('<<mag>>', '%.3f'%mag)
     g = g.replace('<<Ms>>', '%.3f'%Ms)
     g = g.replace('<<Rs>>', '%.3f'%Rs)
     g = g.replace('<<Teff>>', '%i'%Teff)
@@ -70,13 +70,24 @@ def update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric
     return suffix
 
 
+def clean_input_files(suffix):
+    os.system('rm /data/cpapir/www/rvfc/InputFiles/user_sigRV_%s.in'%suffix)
+    os.system('rm /data/cpapir/www/rvfc/InputFiles/user_spectrograph_%s.in'%suffix)
+    os.system('rm /data/cpapir/www/rvfc/InputFiles/user_star_%s.in'%suffix)
+    os.system('rm /data/cpapir/www/rvfc/InputFiles/user_planet_%s.in'%suffix)
+
+
 def run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, overhead, 
 		   texp, sigRVphot, sigRVact, sigRVplanets, sigRVeff, 
 		   P, rp, mp,
 		   mag, Ms, Rs, Teff, Z, vsini, Prot,
 		   Kdetsig, duration=100, NGPtrials=1):
-    runGP = True if NGPtrials > 0 else False
+    
+    # setup input files
     suffix = update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, overhead, texp, sigRVphot, sigRVact, sigRVplanets, sigRVeff, P, rp, mp, mag, Ms, Rs, Teff, Z, vsini, Prot)
+    
+    # run calculator
+    runGP = True if NGPtrials > 0 else False
     #nRV_calculator(Kdetsig,
     #               input_planet_fname='user_planet_%s.in'%suffix,
     #               input_star_fname='user_star_%s.in'%suffix,
@@ -85,15 +96,13 @@ def run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, ov
     #               output_fname='RVFCoutput_%s.txt'%suffix, duration=duration,
     #               NGPtrials=NGPtrials, runGP=runGP, verbose_results=True)
 
+    # clean-up
+    clean_input_files(suffix)
 
 
 if __name__ == '__main__':
-    #f = open('/data/cpapir/www/rvfc/Results/tmp.txt', 'w')
-    f = open('Results/tmp.txt', 'w')
-    f.write('Hello World\n')
-    f.close()
-	
-'''assert len(sys.argv) == 25
+    
+    assert len(sys.argv) == 26
 
     wlmin = float(sys.argv[1])
     wlmax = float(sys.argv[2])
@@ -114,7 +123,7 @@ if __name__ == '__main__':
     rp = float(sys.argv[15])
     mp = float(sys.argv[16])
 
-    mag = list(sys.argv[17])
+    mag = float(sys.argv[17])
     Ms = float(sys.argv[18])
     Rs = float(sys.argv[19])
     Teff = float(sys.argv[20])
@@ -124,10 +133,9 @@ if __name__ == '__main__':
 
     Kdetsig = float(sys.argv[24])
     NGPtrials = float(sys.argv[25])
-
-    #run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, overhead, 
-#		   texp, sigRVphot, sigRVact, sigRVplanets, sigRVeff,
-#		   P, rp, mp, 
-#		   mag, Ms, Rs, Teff, Z, vsini, Prot,
-#		   Kdetsig, NGPtrials=NGPtrails)
-'''
+    
+    run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, overhead, 
+		   texp, sigRVphot, sigRVact, sigRVplanets, sigRVeff,
+		   P, rp, mp, 
+		   mag, Ms, Rs, Teff, Z, vsini, Prot,
+		   Kdetsig, NGPtrials=NGPtrials)
