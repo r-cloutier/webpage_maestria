@@ -16,9 +16,6 @@
 	}
 ?>
 
-<!-- Save parameters to a file to be read by the calculator -->
-
-
 <!-- Print parameters to outut screen -->
 <?php if (isset($_GET['R']) && floatval($_GET['R'])>0) : ?>
 <table>
@@ -219,8 +216,30 @@
 
 <br>
 <p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>RVFC Results:</b></p>&nbsp;&nbsp;&nbsp;
-<?php 
-	$arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
-	$results = exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	echo "/usr/bin/python2.7 php2python.py ".$arguments;
+<?php
+	// Run calculator and save the output to a txt file
+        $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
+	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
+	//echo $results;
+
+	// Read output
+	$file = fopen($output_fname, 'r');
+	$data = fgetcsv($file, filesize($spectrograph_input_file));
+	$mags = $data[0];
+	$band_strs = $data[1];
+	$sigRV_phot = $data[2];
+	$sigRV_eff = $data[3];
+	$sigK_target = $data[4];
+	$nRV = $data[5];
+	$nRVGP = $data[6];
+	$tobs = $data[7];
+	$tobsGP = $data[8];
 ?>
+<table>
+	<tr>
+		<td style="padding: 5px 10px;" width="24%">Number of RV measurements (white noise)</td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['nRVGP'],1,'.',''); ?></td>
+		<td></td>
+		<td></td>
+	</tr>
+</table>

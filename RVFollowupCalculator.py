@@ -160,7 +160,9 @@ def nRV_calculator(Kdetsig,
     ##_write_results2file(output_fname, output)
     ##create_pdf(output_fname, output)
     if verbose_results:
-        _print_results(output, output_fname)
+        #_print_results(output, output_fname)
+	print output_fname
+	_save_RVFC(output, output_fname)
     return output
 
 
@@ -415,6 +417,14 @@ def _write_results2file(output_fname, magiclistofstuff2write):
         os.mkdir('Results')
     except OSError:
         pass
+    f = open(output_fname, 'w')
+    f.write(g)
+    f.close()
+
+
+def _save_RVFC(output, output_fname):
+    P, rp, mp, K, mags, Ms, Rs, Teff, Z, vsini, Prot, band_strs, R, aperture, throughput, RVnoisefloor, centralwl_microns, maxtelluric, toverhead, texp, SNRtarget, sigRV_phot, sigRV_act, sigRV_planet, sigRV_eff, sigK_target, nRV, nRVGP, NGPtrials, tobs, tobsGP = output
+    g = '%s,%s,%.2f,%.2f,%.2f,%.1f,%.1f,%.3f,%.3f'%(', '.join(mags.astype(str)),''.join(band_strs),sigRV_phot,sigRV_eff,sigK_target,nRV,nRVGP,tobs,tobsGP)
     f = open(output_fname, 'w')
     f.write(g)
     f.close()
