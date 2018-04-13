@@ -50,6 +50,8 @@
 	$mpout = $data[2];
 	$magsout = $data[3];
 	$band_strsout = $data[4];
+	echo $magsout;
+	echo $band_strsout;
 	$Msout = $data[5];
 	$Rsout = $data[6];
 	$Teffout = $data[7];
@@ -178,7 +180,7 @@
 		<?php endif; ?>
 		<td style="padding: 5px 10px;" width="22%">Photon-noise RV precision</td>
 		<?php if (floatval($_GET['sigRVphot']) > 0) : ?>
-                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVphot'],2,".",""); ?> m/s</td>
+                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_photout,2,".",""); ?> m/s</td>
 		<?php else: ?>
 			<td style="padding: 5px 10px;" width="11%">-</td>
 		<?php endif; ?>
@@ -194,7 +196,7 @@
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">RV activity rms</td>
 		<?php if (floatval($_GET['sigRVact']) > 0) : ?>
-                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVact'],2,".",""); ?> m/s</td>
+                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_actout,2,".",""); ?> m/s</td>
 		<?php else: ?>
 			<td style="padding: 5px 10px;" width="11%">-</td>
 		<?php endif; ?>
@@ -210,7 +212,7 @@
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">RV rms from additional planets</td>
 		<?php if (floatval($_GET['sigRVplanets']) > 0) : ?>
-                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVplanets'],2,'.',''); ?> m/s</td>
+                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_planetout,2,'.',''); ?> m/s</td>
 		<?php else: ?>
 			<td style="padding: 5px 10px;" width="11%">-</td>
 		<?php endif; ?>
