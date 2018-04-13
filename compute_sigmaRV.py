@@ -65,8 +65,10 @@ def _get_wavelengthgrid():
         coverage)
 
     '''
-    fname = "ftp://phoenix.astro.physik.uni-goettingen.de/HiResFITS/" + \
-            "WAVE_PHOENIX-ACES-AGSS-COND-2011.fits"
+    #fname = "ftp://phoenix.astro.physik.uni-goettingen.de/HiResFITS/" + \
+    #        "WAVE_PHOENIX-ACES-AGSS-COND-2011.fits"
+    fname = "/data/cpapir/www/rvfc/HiResFITS/" + \
+    	    "WAVE_PHOENIX-ACES-AGSS-COND-2011.fits"
     wl_fits = fits.open(fname)[0]
     return np.ascontiguousarray(wl_fits.data) * 1e-4  # in microns
 
@@ -107,8 +109,9 @@ def _get_full_spectrum(Teff, logg, Z):
 	Zstr = '%.1f'%Z
 
     # Download the spectrum
-    prefix = "ftp://phoenix.astro.physik.uni-goettingen.de/HiResFITS/" + \
-             "PHOENIX-ACES-AGSS-COND-2011/"
+    #prefix = "ftp://phoenix.astro.physik.uni-goettingen.de/HiResFITS/" + \
+    #         "PHOENIX-ACES-AGSS-COND-2011/"
+    prefix = "/data/cpapir/www/rvfc/HiResFITS/PHOENIX-ACES-AGSS-COND-2011/"
     fname = "Z%s/lte%.5d-%.2f%s"%(Zstr, Teff, logg, Zstr) + \
             ".PHOENIX-ACES-AGSS-COND-2011-HiRes.fits"
     spec_fits = fits.open(prefix+fname)[0]
