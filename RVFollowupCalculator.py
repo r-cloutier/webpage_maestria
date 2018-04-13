@@ -73,12 +73,13 @@ def nRV_calculator(Kdetsig,
 
             # get mags for each spectral bin based on reference magnitude and Teff
             logg = float(unp.nominal_values(_compute_logg(Ms, Rs)))
-	    mags = V2all(mag, Teff, logg, Z) if Vcen else J2all(mag, Teff, logg, Z)
+	    magsfull = V2all(mag, Teff, logg, Z) if Vcen else J2all(mag, Teff, logg, Z)
 	    all_band_strs = np.array(['U','B','V','R','I','Y','J','H','K'])
-	    mags = mags[np.in1d(all_band_strs, band_strs)]
+	    mags = magsfull[np.in1d(all_band_strs, band_strs)]
 	    g = np.isnan(mags)
 	    if g.sum() > 0:
-		mags[g] = float(.5 * (mags[np.where(g)[0]-1] + mags[np.where(g)[0]+1]))
+	        gfull = np.isnan(magsfull)
+		mags[g] = float(.5 * (magsfull[np.where(gfull)[0]-1] + magsfull[np.where(gfull)[0]+1]))
 
 	    do_checks(throughput, maxtelluric)
 

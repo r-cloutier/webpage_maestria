@@ -39,8 +39,8 @@
 
 	// Run calculator and save the output to a txt file
         $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
-	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	echo "/usr/bin/python2.7 php2python.py ".$arguments;
+	$output_fname = 'Results/RVFCoutput_0d671519_0d986103.txt';//exec("/usr/bin/python2.7 php2python.py ".$arguments);
+	//echo "/usr/bin/python2.7 php2python.py ".$arguments;
 
 	// Read output
 	$file = fopen($output_fname, 'r');
@@ -48,10 +48,13 @@
 	$Pout = $data[0];
 	$rpout = $data[1];
 	$mpout = $data[2];
-	$magsout = $data[3];
+	$magsout_arr = explode("-",$data[3]);
+	$magsout = "";
+	for ($i=0; $i<sizeof($magsout_arr); $i++) {	
+		$suffix = ($i < sizeof($magsout_arr)-1 ? ", " : "");
+		$magsout .= number_format($magsout_arr[$i],2,".","").$suffix;
+	}
 	$band_strsout = $data[4];
-	echo $magsout;
-	echo $band_strsout;
 	$Msout = $data[5];
 	$Rsout = $data[6];
 	$Teffout = $data[7];
@@ -151,8 +154,8 @@
 				$mag_str = 'J';
 			}
 		?>
-		<td style="padding: 5px 10px;" width="22%"><?php echo $mag_str; ?></td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['mag'],2,".",""); ?></td>
+		<td style="padding: 5px 10px;" width="22%"><?php echo $band_strsout; ?></td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo $magsout; ?></td>
 		<td></td>
 		<td></td>
 		</tr>
