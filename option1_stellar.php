@@ -49,7 +49,8 @@
 		$throughputin = number_format($data[5],2,".","");
 		$maxtelluricin = number_format($data[6],2,".","");
 		$floorin = number_format($data[7],1,".",""); 
-		$overheadin = number_format($data[8],0,"","");
+		$texpin = number_format($data[8],1,".","");
+		$overheadin = number_format($data[9],0,"","");
 
 		// get spectral bands
 		/*for ($i=8; $i<=sizeof($data)-1; $i++) {
@@ -105,8 +106,11 @@
 	</tr>
 	<tr>
                 <td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value=<?php echo $_GET['floor'] ?>  size="10" maxlength="50"/></td>
-                <td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value=<?php echo $_GET['overhead'] ?>  size="10" maxlength="50"/></td>
+                <td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value=<?php echo $_GET['texp'] ?>  size="10" maxlength="50"/></td>
         </tr>
+	<tr>
+		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value=<?php echo $_GET['overhead'] ?>  size="10" maxlength="50"/></td>
+	</tr>
 </table>
 
 <br>&emsp;<input type=submit value="Resolve remaining fields" name="stellar"/>
@@ -217,9 +221,6 @@ specified above.</p><br>
 <br>
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>RV noise sources:</b></p><br>&nbsp;&nbsp;&nbsp;
 <table>
-        <tr>
-                <td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value="<?php echo isset($_GET['texp']) ? $_GET['texp'] : $texp ?>"  size="10" maxlength="50"/></td>
-        </tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">RV activity rms (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVact" value="<?php echo isset($_GET['sigRVact']) ? $_GET['sigRVact'] : $sigRVact ?>"  size="10" maxlength="50"/>&ensp;(leave blank to sample from an appropriate empirical distribution)</td>
         </tr>

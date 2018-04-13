@@ -70,8 +70,13 @@ name="Kband">&nbsp;&nbsp;K band-->
 	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo isset($_GET['floor']) ? $floorin : $floor ?>"  size="10" maxlength="50"/></td>
+		<td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value="<?php echo
+		isset($_GET['texp']) ? $texpin : $texp ?>"  size="10" maxlength="50"/></td>
+	</tr>
+	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value="<?php echo isset($_GET['overhead']) ? $overheadin : $overhead ?>"  size="10" maxlength="50"/></td>
 	</tr>
+	<td></td>
 </table>
 
 <br>&emsp;<input type=submit value="Resolve remaining fields" name="stellar"/>
