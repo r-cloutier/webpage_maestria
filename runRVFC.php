@@ -1,5 +1,3 @@
-<p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>RVFC input parameters:</b></p>&nbsp;&nbsp;&nbsp;
-
 <?php 
 	function RV_K($P, $Ms, $mp) {
 		$G = 6.67408e-11;
@@ -15,6 +13,71 @@
 		return $rp / pow($P, 1./3);
 	}
 ?>
+
+<!-- Set dumby variables for spectrograph parameters -->
+<?php 
+	$wlminin = (($_GET['wlmin']>0) ? $_GET['wlmin'] : 0);
+	$wlmaxin = (($_GET['wlmax']>0) ? $_GET['wlmax'] : 0);
+	$Rin = (($_GET['R']>0) ? $_GET['R'] : 0);
+	$aperturein = (($_GET['aperture']>0) ? $_GET['aperture'] : 0);
+	$throughputin = (($_GET['throughput']>0) ? $_GET['throughput'] : 0);
+	$maxtelluricin = (($_GET['maxtelluric']>0) ? $_GET['maxtelluric'] : 0);
+	$floorin = (($_GET['floor']>0) ? $_GET['floor'] : 0);
+	$overheadin = (($_GET['overhead']>0) ? $_GET['overhead'] : 0);
+	$sigRVphotin = (($_GET['sigRVphot']>0) ? $_GET['sigRVphot'] : 0);
+	$sigRVactin = (($_GET['sigRVact']>0) ? $_GET['sigRVact'] : -1);
+	$sigRVplanetsin = (($_GET['sigRVplanets']>0) ? $_GET['sigRVplanets'] : -1);
+	$sigRVeffin = (($_GET['sigRVeff']>0) ? $_GET['sigRVeff']-1 : -1);
+	$mpin = (($_GET['mp']>0) ? $_GET['mp'] : 0);
+	$magin = (($_GET['mag']>0) ? $_GET['mag'] : 0);
+	$Msin = (($_GET['Ms']>0) ? $_GET['Ms'] : 0);
+	$Rsin = (($_GET['Rs']>0) ? $_GET['Rs'] : 0);
+	$Teffin = (($_GET['Teff']>0) ? $_GET['Teff'] : 0);
+	$Zin = (($_GET['Z']>0) ? $_GET['Z'] : 0);
+	$vsiniin = (($_GET['vsini']>0) ? $_GET['vsini'] : 0);
+	$Protin = (($_GET['Prot']>0) ? $_GET['Prot'] : 0);
+?>
+
+<?php
+	// Run calculator and save the output to a txt file
+        $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
+	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
+	echo "/usr/bin/python2.7 php2python.py ".$arguments;
+
+	// Read output
+	$file = fopen($output_fname, 'r');
+	$data = fgetcsv($file, filesize($output_fname));
+	$P = $data[0];
+	$rp = $data[1];
+	$mp = $data[2];
+	$mags = $data[3];
+	$band_strs = $data[4];
+	$Ms = $data[5];
+	$Rs = $data[6];
+	$Teff = $data[7];
+	$Z = $data[8];
+	$vsini = $data[9];
+	$Prot = $data[10];
+	$R = $data[11];
+	$aperture = $data[12];
+	$throughput = $data[13];
+	$floor = $data[14];
+	$centralwl = $data[15];
+	$maxtelluric = $data[16];
+	$overhead = $data[17];
+	$texp = $data[18];
+	$sigRV_phot = $data[19];
+	$sigRV_eff = $data[20];
+	$sigK_target = $data[21];
+	$nRV = $data[22];
+	$nRVGP = $data[23];
+	$tobs = $data[24];
+	$tobsGP = $data[25];
+?>
+
+
+<p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>RVFC input parameters:</b></p>&nbsp;&nbsp;&nbsp;
+
 
 <!-- Print parameters to outut screen -->
 <?php if (isset($_GET['R']) && floatval($_GET['R'])>0) : ?>
@@ -189,69 +252,8 @@
 </table>
 
 
-<!-- Set dumby variables for spectrograph parameters -->
-<?php 
-	$wlminin = (($_GET['wlmin']>0) ? $_GET['wlmin'] : 0);
-	$wlmaxin = (($_GET['wlmax']>0) ? $_GET['wlmax'] : 0);
-	$Rin = (($_GET['R']>0) ? $_GET['R'] : 0);
-	$aperturein = (($_GET['aperture']>0) ? $_GET['aperture'] : 0);
-	$throughputin = (($_GET['throughput']>0) ? $_GET['throughput'] : 0);
-	$maxtelluricin = (($_GET['maxtelluric']>0) ? $_GET['maxtelluric'] : 0);
-	$floorin = (($_GET['floor']>0) ? $_GET['floor'] : 0);
-	$overheadin = (($_GET['overhead']>0) ? $_GET['overhead'] : 0);
-	$sigRVphotin = (($_GET['sigRVphot']>0) ? $_GET['sigRVphot'] : 0);
-	$sigRVactin = (($_GET['sigRVact']>0) ? $_GET['sigRVact'] : -1);
-	$sigRVplanetsin = (($_GET['sigRVplanets']>0) ? $_GET['sigRVplanets'] : -1);
-	$sigRVeffin = (($_GET['sigRVeff']>0) ? $_GET['sigRVeff']-1 : -1);
-	$mpin = (($_GET['mp']>0) ? $_GET['mp'] : 0);
-	$magin = (($_GET['mag']>0) ? $_GET['mag'] : 0);
-	$Msin = (($_GET['Ms']>0) ? $_GET['Ms'] : 0);
-	$Rsin = (($_GET['Rs']>0) ? $_GET['Rs'] : 0);
-	$Teffin = (($_GET['Teff']>0) ? $_GET['Teff'] : 0);
-	$Zin = (($_GET['Z']>0) ? $_GET['Z'] : 0);
-	$vsiniin = (($_GET['vsini']>0) ? $_GET['vsini'] : 0);
-	$Protin = (($_GET['Prot']>0) ? $_GET['Prot'] : 0);
-?>
-
-
 <br>
 <p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>RVFC Results:</b></p>&nbsp;&nbsp;&nbsp;
-<?php
-	// Run calculator and save the output to a txt file
-        $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
-	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	echo "/usr/bin/python2.7 php2python.py ".$arguments;
-
-	// Read output
-	$file = fopen($output_fname, 'r');
-	$data = fgetcsv($file, filesize($output_fname));
-	$P = $data[0];
-	$rp = $data[1];
-	$mp = $data[2];
-	$mags = $data[3];
-	$band_strs = $data[4];
-	$Ms = $data[5];
-	$Rs = $data[6];
-	$Teff = $data[7];
-	$Z = $data[8];
-	$vsini = $data[9];
-	$Prot = $data[10];
-	$R = $data[11];
-	$aperture = $data[12];
-	$throughput = $data[13];
-	$floor = $data[14];
-	$centralwl = $data[15];
-	$maxtelluric = $data[16];
-	$overhead = $data[17];
-	$texp = $data[18];
-	$sigRV_phot = $data[19];
-	$sigRV_eff = $data[20];
-	$sigK_target = $data[21];
-	$nRV = $data[22];
-	$nRVGP = $data[23];
-	$tobs = $data[24];
-	$tobsGP = $data[25];
-?>
 <table>
 	<tr>
 		<td style="padding: 5px 10px;" width="24%">Number of RV measurements (white noise)</td>
