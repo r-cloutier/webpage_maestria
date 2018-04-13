@@ -39,8 +39,8 @@
 
 	// Run calculator and save the output to a txt file
         $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
-	$output_fname = 'Results/RVFCoutput_0d671519_0d986103.txt';//exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	//echo "/usr/bin/python2.7 php2python.py ".$arguments;
+	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
+	echo "/usr/bin/python2.7 php2python.py ".$arguments;
 
 	// Read output
 	$file = fopen($output_fname, 'r');
@@ -182,7 +182,7 @@
                         <td style="padding: 5px 10px;" width="11%">-</td>
 		<?php endif; ?>
 		<td style="padding: 5px 10px;" width="22%">Photon-noise RV precision</td>
-		<?php if (floatval($_GET['sigRVphot']) > 0) : ?>
+		<?php if ($sigRV_photout > 0) : ?>
                 	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_photout,2,".",""); ?> m/s</td>
 		<?php else: ?>
 			<td style="padding: 5px 10px;" width="11%">-</td>
