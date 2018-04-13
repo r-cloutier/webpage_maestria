@@ -27,7 +27,7 @@
 	$sigRVphotin = (($_GET['sigRVphot']>0) ? $_GET['sigRVphot'] : 0);
 	$sigRVactin = (($_GET['sigRVact']>0) ? $_GET['sigRVact'] : -1);
 	$sigRVplanetsin = (($_GET['sigRVplanets']>0) ? $_GET['sigRVplanets'] : -1);
-	$sigRVeffin = (($_GET['sigRVeff']>0) ? $_GET['sigRVeff']-1 : -1);
+	$sigRVeffin = (($_GET['sigRVeff']>0) ? $_GET['sigRVeff'] : -1);
 	$mpin = (($_GET['mp']>0) ? $_GET['mp'] : 0);
 	$magin = (($_GET['mag']>0) ? $_GET['mag'] : 0);
 	$Msin = (($_GET['Ms']>0) ? $_GET['Ms'] : 0);
@@ -36,43 +36,44 @@
 	$Zin = (($_GET['Z']>0) ? $_GET['Z'] : 0);
 	$vsiniin = (($_GET['vsini']>0) ? $_GET['vsini'] : 0);
 	$Protin = (($_GET['Prot']>0) ? $_GET['Prot'] : 0);
-?>
 
-<?php
 	// Run calculator and save the output to a txt file
         $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
 	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	echo "/usr/bin/python2.7 php2python.py ".$arguments;
+	//echo "/usr/bin/python2.7 php2python.py ".$arguments;
 
 	// Read output
 	$file = fopen($output_fname, 'r');
 	$data = fgetcsv($file, filesize($output_fname));
-	$P = $data[0];
-	$rp = $data[1];
-	$mp = $data[2];
-	$mags = $data[3];
-	$band_strs = $data[4];
-	$Ms = $data[5];
-	$Rs = $data[6];
-	$Teff = $data[7];
-	$Z = $data[8];
-	$vsini = $data[9];
-	$Prot = $data[10];
-	$R = $data[11];
-	$aperture = $data[12];
-	$throughput = $data[13];
-	$floor = $data[14];
-	$centralwl = $data[15];
-	$maxtelluric = $data[16];
-	$overhead = $data[17];
-	$texp = $data[18];
-	$sigRV_phot = $data[19];
-	$sigRV_eff = $data[20];
-	$sigK_target = $data[21];
-	$nRV = $data[22];
-	$nRVGP = $data[23];
-	$tobs = $data[24];
-	$tobsGP = $data[25];
+	$Pout = $data[0];
+	$rpout = $data[1];
+	$mpout = $data[2];
+	$magsout = $data[3];
+	$band_strsout = $data[4];
+	$Msout = $data[5];
+	$Rsout = $data[6];
+	$Teffout = $data[7];
+	$Zout = $data[8];
+	$vsiniout = $data[9];
+	$Protout = $data[10];
+	$Rout = $data[11];
+	$apertureout = $data[12];
+	$throughputout = $data[13];
+	$floorout = $data[14];
+	$centralwlout = $data[15];
+	$maxtelluricout = $data[16];
+	$overheadout = $data[17];
+	$texpout = $data[18];
+	$sigRV_photout = $data[19];
+	$sigRV_actout = $data[20];
+	$sigRV_planetout = $data[21];
+	$sigRV_effout = $data[22];
+	$sigK_targetout = $data[23];
+	$NGPtrials = $data[24];
+	$nRVout = $data[25];
+	$nRVGPout = $data[26];
+	$tobsout = $data[27];
+	$tobsGPout = $data[28];
 ?>
 
 
@@ -159,8 +160,12 @@
 		<td style="padding: 5px 10px;" width="11%"><?php echo $_GET['P']; ?> days</td>
 		<td style="padding: 5px 10px;" width="22%">Stellar mass</td>
 		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['Ms'],2,".",""); ?> M<sub>&#x02299;</sub></td>
-                <td style="padding: 5px 10px;" width="22%">Exposure time</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo $_GET['texp']; ?> min</td>
+		<td style="padding: 5px 10px;" width="22%">RV noise floor</td>
+		<?php if (floatval($_GET['floor']) > 0) : ?>
+			<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['floor'],2,".",""); ?> m/s</td>
+		<?php else: ?>
+			<td style="padding: 5px 10px;" width="11%">-</td>
+		<?php endif; ?>
         </tr>
         <tr>
                 <td style="padding: 5px 10px;" width="22%">Planetary radius</td>
@@ -171,12 +176,16 @@
 		<?php else: ?>
                         <td style="padding: 5px 10px;" width="11%">-</td>
 		<?php endif; ?>
-                <td style="padding: 5px 10px;" width="22%">Photon-noise RV precision</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVphot'],2,".",""); ?> m/s</td>
+		<td style="padding: 5px 10px;" width="22%">Photon-noise RV precision</td>
+		<?php if (floatval($_GET['sigRVphot']) > 0) : ?>
+                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVphot'],2,".",""); ?> m/s</td>
+		<?php else: ?>
+			<td style="padding: 5px 10px;" width="11%">-</td>
+		<?php endif; ?>
         </tr>
         <tr>
                 <td style="padding: 5px 10px;" width="22%">Planetary mass</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['mp'],2,".",""); ?> M<sub>&#x02295;</sub></td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($mpout,2,".",""); ?> M<sub>&#x02295;</sub></td>
                 <td style="padding: 5px 10px;" width="22%">Effective temperature</td>
                 <?php if (floatval($_GET['Teff']) > 0) : ?>
                         <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['Teff'],0,"",""); ?> K</td>
@@ -184,11 +193,15 @@
 			<td style="padding: 5px 10px;" width="11%">-</td>
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">RV activity rms</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVact'],2,".",""); ?> m/s</td>
+		<?php if (floatval($_GET['sigRVact']) > 0) : ?>
+                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVact'],2,".",""); ?> m/s</td>
+		<?php else: ?>
+			<td style="padding: 5px 10px;" width="11%">-</td>
+		<?php endif; ?>
         </tr>
         <tr>
                 <td style="padding: 5px 10px;" width="22%">RV semi-amplitude</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format(RV_K($_GET['P'],$_GET['Ms'],$_GET['mp']),2,'.',''); ?> m/s</td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format(RV_K($_GET['P'],$_GET['Ms'],$mpout),2,'.',''); ?> m/s</td>
 		<td style="padding: 5px 10px;" width="22%">Metallicity</td>
                 <?php if ($_GET['Z'] != "") : ?>
                         <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['Z'],2,'.',''); ?> [Fe/H]</td>
@@ -196,7 +209,11 @@
 			<td style="padding: 5px 10px;" width="11%">-</td>
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">RV rms from additional planets</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVplanets'],2,'.',''); ?> m/s</td>
+		<?php if (floatval($_GET['sigRVplanets']) > 0) : ?>
+                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVplanets'],2,'.',''); ?> m/s</td>
+		<?php else: ?>
+			<td style="padding: 5px 10px;" width="11%">-</td>
+		<?php endif; ?>
         </tr>
         <tr>    
                 <td style="padding: 5px 10px;" width="22%">&#x3A9;&emsp;[R<sub>&#x02295;</sub>/days<sup>1/3</sup>]</td>
@@ -208,7 +225,7 @@
                         <td style="padding: 5px 10px;" width="11%">-</td>
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">Effective RV rms</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['sigRVeff'],2,'.',''); ?> m/s</td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_effout,2,'.',''); ?> m/s</td>
         </tr>
         <tr>
                 <td></td>
@@ -256,15 +273,35 @@
 <p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>RVFC Results:</b></p>&nbsp;&nbsp;&nbsp;
 <table>
 	<tr>
+		<td style="padding: 5px 10px;" width="24%">Exposure time</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['texp'],2,'.',''); ?> min</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td style="padding: 5px 10px;" width="24%">Overhead</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['overhead'],2,'.',''); ?> min</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td style="padding: 5px 10px;" width="24%">K measurement precision</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigK_targetout,2,'.',''); ?> m/s</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td style="padding: 5px 10px;" width="24%">Number of GP trials</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['NGPtrials'],0,'',''); ?></td>
+		<td></td>
+	</tr>
+	<tr>
 		<td style="padding: 5px 10px;" width="24%">Number of RV measurements (white noise)</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($nRV,1,'.',''); ?></td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($nRVout,1,'.',''); ?></td>
 		<td style="padding: 5px 10px;" width="24%">Total observing time (white noise)</td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($tobs,1,'.',''); ?> hrs</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($tobsout,1,'.',''); ?> hrs</td>
 	</tr>
 	<tr>	
 		<td style="padding: 5px 10px;" width="24%">Number of RV measurements (correlated noise)</td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($nRVGP,1,'.',''); ?></td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($nRVGPout,1,'.',''); ?></td>
 		<td style="padding: 5px 10px;" width="24%">Total observing time (correlated noise)</td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($tobsGP,1,'.',''); ?> hrs</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($tobsGPout,1,'.',''); ?> hrs</td>
 	</tr>
 </table>

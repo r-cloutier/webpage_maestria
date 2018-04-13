@@ -114,7 +114,7 @@ def nRV_calculator(Kdetsig,
                             sigRV_planet**2)
 
     # get target K measurement uncertainty
-    mp = float(_get_planet_mass(rp)) if mp == 0 else mp
+    mp = float(_get_planet_mass(rp)) if mp <= 0 else mp
     K, sigK_target = _get_sigK(Kdetsig, P, Ms, mp)
 
     # compute number of RVs required for a white and red noise model
@@ -160,7 +160,7 @@ def nRV_calculator(Kdetsig,
     ##_write_results2file(output_fname, output)
     ##create_pdf(output_fname, output)
     if verbose_results:
-        _print_results(output, output_fname)
+        #_print_results(output, output_fname)
 	print output_fname
 	_save_RVFC(output, output_fname)
     return output
@@ -424,7 +424,7 @@ def _write_results2file(output_fname, magiclistofstuff2write):
 
 def _save_RVFC(output, output_fname):
     P, rp, mp, K, mags, Ms, Rs, Teff, Z, vsini, Prot, band_strs, R, aperture, throughput, RVnoisefloor, centralwl_microns, maxtelluric, toverhead, texp, SNRtarget, sigRV_phot, sigRV_act, sigRV_planet, sigRV_eff, sigK_target, nRV, nRVGP, NGPtrials, tobs, tobsGP = output
-    g = '%.7f,%.4f,%.4f,%s,%s,%.4f,%.4f,%i,%.3f,%.3f,%.3f,%i,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.1f,%.1f,%.3f,%.3f'%(P,rp,mp,'-'.join(mags.astype(str)),''.join(band_strs),Ms,Rs,Teff,Z,vsini,Prot,R,aperture,throughput,RVnoisefloor,centralwl_microns,maxtelluric,toverhead,texp,sigRV_phot,sigRV_eff,sigK_target,nRV,nRVGP,tobs,tobsGP)
+    g = '%.7f,%.4f,%.4f,%s,%s,%.4f,%.4f,%i,%.3f,%.3f,%.3f,%i,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.2f,%.2f,%i,%.1f,%.1f,%.3f,%.3f'%(P,rp,mp,'-'.join(mags.astype(str)),''.join(band_strs),Ms,Rs,Teff,Z,vsini,Prot,R,aperture,throughput,RVnoisefloor,centralwl_microns,maxtelluric,toverhead,texp,sigRV_phot,sigRV_act,sigRV_planet,sigRV_eff,sigK_target,NGPtrials,nRV,nRVGP,tobs,tobsGP)
     f = open(output_fname, 'w')
     f.write(g)
     f.close()
