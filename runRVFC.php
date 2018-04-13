@@ -39,7 +39,8 @@
 
 	// Run calculator and save the output to a txt file
         $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
-	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
+	//$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
+	$output_fname = "Results/RVFCoutput_0d140624_0d166808.txt";
 	echo "/usr/bin/python2.7 php2python.py ".$arguments;
 
 	// Read output
@@ -123,9 +124,9 @@
         </tr>
         <tr>
 		<td style="padding: 5px 10px;" width="22%">Exposure time</td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['texp'],0,"",""); ?> min</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($texpout,2,".",""); ?> min</td>
                 <td style="padding: 5px 10px;" width="22%">Overhead</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['overhead'],0,"",""); ?> min</td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($overheadout,2,".",""); ?> min</td>
                 <td></td>
                 <td></td>
         </tr>
@@ -198,7 +199,7 @@
 			<td style="padding: 5px 10px;" width="11%">-</td>
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">RV activity rms</td>
-		<?php if (floatval($_GET['sigRVact']) > 0) : ?>
+		<?php if ($sigRV_actout >= 0) : ?>
                 	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_actout,2,".",""); ?> m/s</td>
 		<?php else: ?>
 			<td style="padding: 5px 10px;" width="11%">-</td>
@@ -214,7 +215,7 @@
 			<td style="padding: 5px 10px;" width="11%">-</td>
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">RV rms from additional planets</td>
-		<?php if (floatval($_GET['sigRVplanets']) > 0) : ?>
+		<?php if ($sigRV_planetout >= 0) : ?>
                 	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_planetout,2,'.',''); ?> m/s</td>
 		<?php else: ?>
 			<td style="padding: 5px 10px;" width="11%">-</td>
@@ -256,18 +257,18 @@
                 <td></td>
 	</tr>
 	<tr>
+		<td style="padding: 5px 10px;" width="24%">Exposure time</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($texpout,2,'.',''); ?> min</td>
+		<td style="padding: 5px 10px;" width="24%">Overhead</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($overheadout,2,'.',''); ?> min</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
 		<td style="padding: 5px 10px;" width="24%">Desired K detection significance</td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['Kdetsig'],2,'.',''); ?></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-        </tr>
-        <tr>
                 <td style="padding: 5px 10px;" width="24%">Number of GP trials</td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['NGPtrials'],0,'',''); ?></td>
-                <td></td>
-                <td></td>
                 <td></td>
                 <td></td>
 	</tr>
@@ -277,16 +278,6 @@
 <br>
 <p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>RVFC Results:</b></p>&nbsp;&nbsp;&nbsp;
 <table>
-	<tr>
-		<td style="padding: 5px 10px;" width="24%">Exposure time</td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['texp'],2,'.',''); ?> min</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td style="padding: 5px 10px;" width="24%">Overhead</td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($_GET['overhead'],2,'.',''); ?> min</td>
-		<td></td>
-	</tr>
 	<tr>
 		<td style="padding: 5px 10px;" width="24%">K measurement precision</td>
 		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigK_targetout,2,'.',''); ?> m/s</td>
