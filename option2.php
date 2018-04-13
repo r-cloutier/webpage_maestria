@@ -20,8 +20,14 @@
 		<td style="padding: 0px 0px 10px 30px;">Stellar mass (M<sub>&#x02299;</sub>) :&nbsp;&nbsp;<input type="text" name="Ms" value="<?php echo isset($_GET['Ms']) ? $_GET['Ms'] : $Ms ?>"  size="10" maxlength="50"/></td>
 	</tr>
 	<tr>
+	        <td style="padding: 0px 0px 10px 30px;">Stellar radius (R<sub>&#x02299;</sub>) :&nbsp;&nbsp;<input type="text" name="Rs" value="<?php echo isset($_GET['Rs']) ? $_GET['Rs'] : $Rs ?>"  size="10" maxlength="50"/>&ensp;(only required if sampling the RV activity rms)</td>
+	</tr>
+	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Effective temperature (K) :&nbsp;&nbsp;<input type="text" name="Teff" value="<?php echo isset($_GET['Teff']) ? $_GET['Teff'] : $Teff ?>"  size="10" maxlength="50"/>&ensp;(only required if sampling either the RV activity rms or RV rms from additional planets)</td>
         </tr>
+	<tr>                
+		<td style="padding: 0px 0px 10px 30px;">Metallicity ([Fe/H]) :&nbsp;&nbsp;<input type="text" name="Z" value="<?php echo isset($_GET['Z']) ? $_GET['Z'] : $Z ?>"  size="10" maxlength="50"/>&ensp;(only required if sampling the RV activity rms)</td>
+	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Rotation period (days) :&nbsp;&nbsp;<input type="text" name="Prot" value="<?php echo isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50"/>&ensp;(only required if sampling the RV activity rms)</td>
         </tr>

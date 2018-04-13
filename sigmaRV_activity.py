@@ -3,6 +3,7 @@ import numpy as np
 import rvs_custom as rvs
 from scipy.interpolate import interp1d
 from astropy.io import ascii
+from Teff2color import *
 
 
 def F82sigmaRV(F8, Teff):
@@ -337,6 +338,14 @@ def Prot2logRhk(Prot, B_V):
     fint = interp1d(Prots, logRhks, bounds_error=False,
                     fill_value=(logRhks.min(), logRhks.max()))
     return float(fint(Prot)) + np.random.randn() * .2
+
+
+def get_B_V(Teff, logg, FeH):
+    Teffs,_,_,_,B_Vs,_,_,_,_,_,_,_ = get_data()
+    g = isolate_logg_FeH(logg, FeH)
+    fint = interp1d(Teffs[g], B_Vs[g])
+    B_V = fint(Teff)
+    return B_V
 
 
 def get_sigmaRV_activity(Teff, Ms, Prot, B_V):

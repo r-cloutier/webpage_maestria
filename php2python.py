@@ -88,13 +88,13 @@ def run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, ov
     
     # run calculator
     runGP = True if NGPtrials > 0 else False
-    #nRV_calculator(Kdetsig,
-    #               input_planet_fname='user_planet_%s.in'%suffix,
-    #               input_star_fname='user_star_%s.in'%suffix,
-    #               input_spectrograph_fname='user_spectrograph_%s.in'%suffix,
-    #               input_sigRV_fname='user_sigRV_%s.in'%suffix,
-    #               output_fname='RVFCoutput_%s.txt'%suffix, duration=duration,
-    #               NGPtrials=NGPtrials, runGP=runGP, verbose_results=True)
+    nRV_calculator(Kdetsig,
+                   input_planet_fname='/data/cpapir/www/rvfc/InputFiles/user_planet_%s.in'%suffix,
+                   input_star_fname='/data/cpapir/www/rvfc/InputFiles/user_star_%s.in'%suffix,
+                   input_spectrograph_fname='/data/cpapir/www/rvfc/InputFiles/user_spectrograph_%s.in'%suffix,
+                   input_sigRV_fname='/data/cpapir/www/rvfc/InputFiles/user_sigRV_%s.in'%suffix,
+                   output_fname='/data/cpapir/www/rvfc/Results/RVFCoutput_%s.txt'%suffix, duration=duration,
+                   NGPtrials=NGPtrials, runGP=runGP, verbose_results=True)
 
     # clean-up
     clean_input_files(suffix)

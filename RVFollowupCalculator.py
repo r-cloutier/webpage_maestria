@@ -15,7 +15,7 @@ def nRV_calculator(Kdetsig,
                    input_star_fname='/data/cpapir/www/rvfc/InputFiles/user_star.in',
                    input_spectrograph_fname='/data/cpapir/www/rvfc/InputFiles/user_spectrograph.in',
                    input_sigRV_fname='/data/cpapir/www/rvfc/InputFiles/user_sigRV.in',
-                   output_fname='/data/cpapir/www/rvfc/Results/RVFollowupCalculator',
+                   output_fname='/data/cpapir/www/rvfc/Results/RVFollowupCalculator.txt',
                    duration=100, NGPtrials=1, runGP=True, verbose_results=True):
     '''
     Compute the number of RV measurements required to detect an input 
@@ -47,37 +47,7 @@ def nRV_calculator(Kdetsig,
     P, rp, mp = _read_planet_input(input_planet_fname)
     mag, Ms, Rs, Teff, Z, vsini, Prot = _read_star_input(input_star_fname)
 
-    # get central band
-    Vcen, Jcen = False, False
-    if (wlmin <= .555 <= wlmax):
-        centralwl_nm = 555
-        Vcen = True
-    elif (wlmin <= 1.250 <= wlmax):
-        centralwl_nm = 1250
-        Jcen = True
-    else:
-        raise ValueError('Spectral coverage does not include the V or J-band.')
-    
-    # get spectral bands corresponding to the wavelength range
-    band_strs = _get_spectral_bands(wlmin, wlmax)
-
-    # get mags for each spectral bin based on reference magnitude and Teff
-    logg = float(unp.nominal_values(_compute_logg(Ms, Rs)))
-    mags = V2all(mag, Teff, logg, Z) if Vcen else J2all(mag, Teff, logg, Z)
-    all_band_strs = np.array(['U','B','V','R','I','Y','J','H','K'])
-    mags = mags[np.in1d(all_band_strs, band_strs)]
-    g = np.isnan(mags)
-    if g.sum() > 0:
-        mags[g] = float(.5 * (mags[np.where(g)[0]-1] + mags[np.where(g)[0]+1]))
-    
     # checks
-    if mags.size != band_strs.size:
-        raise ValueError('Must have the same number of magnitudes as ' + \
-                         'bands: %s'%(''.join(band_strs)))
-    if (maxtelluric < 0) or (maxtelluric >= 1):
-        raise ValueError('Invalid telluric transmittance value.')
-    if (throughput <= 0) or (throughput >= 1):
-        raise ValueError('Invalid throughput value.')
     if runGP and (duration < P):
         raise ValueError('Time-series duration must be longer than the' + \
                          "planet's orbital period.")
@@ -87,6 +57,31 @@ def nRV_calculator(Kdetsig,
         
         # compute sigRV_phot once if needed
         if sigRV_phot <= 0:
+            # get central band
+            Vcen, Jcen = False, False
+	    if (wlmin <= .555 <= wlmax):
+	        centralwl_nm = 555
+		Vcen = True
+	    elif (wlmin <= 1.250 <= wlmax):
+		centralwl_nm = 1250
+		Jcen = True
+	    else:
+		raise ValueError('Spectral coverage does not include the V or J-band.')
+
+    	    # get spectral bands corresponding to the wavelength range
+            band_strs = _get_spectral_bands(wlmin, wlmax)
+
+            # get mags for each spectral bin based on reference magnitude and Teff
+            logg = float(unp.nominal_values(_compute_logg(Ms, Rs)))
+	    mags = V2all(mag, Teff, logg, Z) if Vcen else J2all(mag, Teff, logg, Z)
+	    all_band_strs = np.array(['U','B','V','R','I','Y','J','H','K'])
+	    mags = mags[np.in1d(all_band_strs, band_strs)]
+	    g = np.isnan(mags)
+	    if g.sum() > 0:
+		mags[g] = float(.5 * (mags[np.where(g)[0]-1] + mags[np.where(g)[0]+1]))
+
+	    do_checks(throughput, maxtelluric)
+
             transmission_fname = 'tapas_000001.ipac'
             wlTAPAS, transTAPAS = np.loadtxt('/data/cpapir/www/rvfc/InputData/%s'%transmission_fname,
                                              skiprows=23).T
@@ -97,13 +92,20 @@ def nRV_calculator(Kdetsig,
                                                         centralwl_nm, maxtelluric,
                                                         wlTAPAS, transTAPAS)
             
-        # get RV noise sources
-        Bmag, Vmag = _get_magnitudes(band_strs, mags, Ms)
-        B_V = Bmag - Vmag
-        if sigRV_act < 0:
-            sigRV_act = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
-        if sigRV_planet < 0:
-            sigRV_planet = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
+            # get RV noise sources
+            Bmag, Vmag = _get_magnitudes(band_strs, mags, Ms)
+            B_V = Bmag - Vmag
+            if sigRV_act < 0:
+            	sigRV_act = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
+            if sigRV_planet < 0:
+            	sigRV_planet = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
+
+	else:
+	    if sigRV_act < 0:
+	        B_V = get_B_V(Teff, logg, Z)
+	    	sigRV_act = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
+	    if sigRV_planet < 0:
+		sigRV_planet = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
 
         # compute sigRV_eff
         sigRV_eff = np.sqrt(RVnoisefloor**2 + \
@@ -145,6 +147,10 @@ def nRV_calculator(Kdetsig,
         
     # write results to file
     NGPtrials = int(NGPtrials) if runGP else 0
+    try:
+      	_ = mags
+    except NameError:
+        mags, band_strs, centralwl_nm = np.zeros(1), [''], 0
     output = [P, rp, mp, K,
               mags, Ms, Rs, Teff, Z, vsini, Prot,
               band_strs, R, aperture, throughput, RVnoisefloor,
@@ -156,7 +162,14 @@ def nRV_calculator(Kdetsig,
     if verbose_results:
         _print_results(output, output_fname)
     return output
-    
+
+
+def do_checks(throughput):
+    if (throughput <= 0) or (throughput >= 1):
+        raise ValueError('Throughput must be between 0-1.')
+    if (maxtelluric <= 0) or (throughput >= 1):
+        raise ValueError('Maxtelluric must be between 0-1.')
+
 
 def _read_planet_input(input_planet_fname):
     '''
