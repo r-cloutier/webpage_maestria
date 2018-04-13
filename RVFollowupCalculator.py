@@ -424,7 +424,7 @@ def _write_results2file(output_fname, magiclistofstuff2write):
 
 def _save_RVFC(output, output_fname):
     P, rp, mp, K, mags, Ms, Rs, Teff, Z, vsini, Prot, band_strs, R, aperture, throughput, RVnoisefloor, centralwl_microns, maxtelluric, toverhead, texp, SNRtarget, sigRV_phot, sigRV_act, sigRV_planet, sigRV_eff, sigK_target, nRV, nRVGP, NGPtrials, tobs, tobsGP = output
-    g = '%s,%s,%.2f,%.2f,%.2f,%.1f,%.1f,%.3f,%.3f'%(', '.join(mags.astype(str)),''.join(band_strs),sigRV_phot,sigRV_eff,sigK_target,nRV,nRVGP,tobs,tobsGP)
+    g = '%.7f,%.4f,%.4f,%s,%s,%.4f,%.4f,%i,%.3f,%.3f,%.3f,%i,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.1f,%.1f,%.3f,%.3f'%(P,rp,mp,', '.join(mags.astype(str)),''.join(band_strs),Ms,Rs,Teff,Z,vsini,Prot,R,aperture,throughput,RVnoisefloor,centralwl_microns,maxtelluric,toverhead,texp,sigRV_phot,sigRV_eff,sigK_target,nRV,nRVGP,tobs,tobsGP)
     f = open(output_fname, 'w')
     f.write(g)
     f.close()

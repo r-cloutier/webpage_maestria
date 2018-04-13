@@ -220,20 +220,37 @@
 	// Run calculator and save the output to a txt file
         $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
 	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	//echo $output_fname;
+	echo "/usr/bin/python2.7 php2python.py ".$arguments;
 
 	// Read output
 	$file = fopen($output_fname, 'r');
 	$data = fgetcsv($file, filesize($output_fname));
-	$mags = $data[0];
-	$band_strs = $data[1];
-	$sigRV_phot = $data[2];
-	$sigRV_eff = $data[3];
-	$sigK_target = $data[4];
-	$nRV = $data[5];
-	$nRVGP = $data[6];
-	$tobs = $data[7];
-	$tobsGP = $data[8];
+	$P = $data[0];
+	$rp = $data[1];
+	$mp = $data[2];
+	$mags = $data[3];
+	$band_strs = $data[4];
+	$Ms = $data[5];
+	$Rs = $data[6];
+	$Teff = $data[7];
+	$Z = $data[8];
+	$vsini = $data[9];
+	$Prot = $data[10];
+	$R = $data[11];
+	$aperture = $data[12];
+	$throughput = $data[13];
+	$floor = $data[14];
+	$centralwl = $data[15];
+	$maxtelluric = $data[16];
+	$overhead = $data[17];
+	$texp = $data[18];
+	$sigRV_phot = $data[19];
+	$sigRV_eff = $data[20];
+	$sigK_target = $data[21];
+	$nRV = $data[22];
+	$nRVGP = $data[23];
+	$tobs = $data[24];
+	$tobsGP = $data[25];
 ?>
 <table>
 	<tr>
