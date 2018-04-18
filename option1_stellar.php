@@ -227,9 +227,6 @@ specified above.</p><br>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">RV rms from additional planets (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVplanets" value="<?php echo isset($_GET['sigRVplanets']) ? $_GET['sigRVplanets'] : $sigRVplanets ?>"  size="10" maxlength="50"/>&ensp;(leave blank to sample from an appropriate empirical distribution)</td>
         </tr>
-        <tr>
-		<td style="padding: 0px 0px 10px 30px;">Effective RV rms (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVeff" value="<?php echo isset($_GET['sigRVeff']) ? $_GET['sigRVeff'] : $sigRVplanets ?>"  size="10" maxlength="50"/>&ensp;(leave blank to compute from the above RV noise sources)</td>
-        </tr>
 </table>
 
 <br>
