@@ -109,8 +109,8 @@ td, th {
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_calculate_sigRV_phot" value="Option 1: RVFC-derived RV precision" />
 	    <br/><br/>
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_set_sigRV_phot" value="Option 2: user-specified RV precision" />
-	    <!---<br><br>
-	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_upload" value="Option 3: upload file" />-->
+	    <br><br>
+	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_upload" value="Option 3: upload file" />
 
             <!-- Calculate sigRV using the calculator -->
             <?php if (isset($_GET['submit_calculate_sigRV_phot']) && ! isset($_GET['submit_spec'])) : ?>
@@ -136,7 +136,7 @@ td, th {
 	    <?php if (isset($_GET['submit_upload'])) : ?>
 	    	<br><br>
 		<p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>Option 3: upload input file</b></p>&nbsp;&nbsp;&nbsp;
-		<form enctype="multipart/form-data" action="option3.php" method="post">
+		<form enctype="multipart/form-data" action="http://maestria.astro.umontreal.ca/rvfc/option3.php" method="post">
         		<input name="userfile" type="file" accept=".csv"/><br>
 	        	<input name="submit_file" type="submit" value="Upload csv">
 		</form>
