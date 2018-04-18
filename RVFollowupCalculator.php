@@ -106,11 +106,11 @@ td, th {
             <!-- ========== BEGIN CALCULATOR FORM======== -->
 	    <br><br><br><br><br>
 	    <form action="http://maestria.astro.umontreal.ca/rvfc/RVFollowupCalculator.php" method="get" >
-	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_calculate_sigRV_phot" value="Option 1: calculator-derived RV precision" />
+	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_calculate_sigRV_phot" value="Option 1: RVFC-derived RV precision" />
 	    <br/><br/>
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_set_sigRV_phot" value="Option 2: user-specified RV precision" />
-	    <br><br>
-	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_upload" value="Option 3: upload file" />
+	    <!---<br><br>
+	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_upload" value="Option 3: upload file" />-->
 
             <!-- Calculate sigRV using the calculator -->
             <?php if (isset($_GET['submit_calculate_sigRV_phot']) && ! isset($_GET['submit_spec'])) : ?>
@@ -134,6 +134,7 @@ td, th {
 
 	    <!-- Upload a file that automatically fills the fields -->
 	    <?php if (isset($_GET['submit_upload'])) : ?>
+	    	<br><br>
 		<p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>Option 3: upload input file</b></p>&nbsp;&nbsp;&nbsp;
 		<form enctype="multipart/form-data" action="option3.php" method="post">
         		<input name="userfile" type="file" accept=".csv"/><br>

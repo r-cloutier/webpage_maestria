@@ -1,4 +1,5 @@
-<p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>Option 1: calculator-derived RV precision</b></p>&nbsp;&nbsp;&nbsp;
+<br><br>
+<p style="font-size:24px">&nbsp;&nbsp;&nbsp;<b>Option 1: RVFC-derived RV precision</b></p>&nbsp;&nbsp;&nbsp;
 
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Spectrograph parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
 

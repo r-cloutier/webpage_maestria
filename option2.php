@@ -1,4 +1,5 @@
-<p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>Option 2: user-specified RV precision</b></p>&nbsp;&nbsp;&nbsp;
+<br><br>
+<p style="font-size:24px">&nbsp;&nbsp;&nbsp;<b>Option 2: user-specified RV precision</b></p>&nbsp;&nbsp;&nbsp;
 
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Planet parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
 <table>
