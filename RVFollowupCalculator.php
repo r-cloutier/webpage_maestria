@@ -74,7 +74,7 @@ td, th {
 
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-             		<a class="navbar-brand" href="http://astro.utoronto.ca/~cloutier/"><font style="color:#fff">Ryan Cloutier</font></a>
+             		<a class="navbar-brand" href="http://maestria.astro.umontreal.ca/rvfc/"><font style="color:#fff">RVFC</font></a>
 		        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -105,7 +105,7 @@ td, th {
 	    
             <!-- ========== BEGIN CALCULATOR FORM======== -->
 	    <br><br><br><br><br>
-            <form action="http://maestria.astro.umontreal.ca/rvfc/RVFollowupCalculator.php" method="get" >
+	    <form action="http://maestria.astro.umontreal.ca/rvfc/RVFollowupCalculator.php" method="get" >
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_calculate_sigRV_phot" value="Option 1: calculator-derived RV precision" />
 	    <br/><br/>
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_set_sigRV_phot" value="Option 2: user-specified RV precision" />

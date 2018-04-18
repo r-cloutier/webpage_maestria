@@ -538,7 +538,7 @@ a.rotate-box-1:hover, a.rotate-box-2:hover {
 	margin-bottom:48px;
 }
 .portfolio_menu ul{
-	list-style: none outside none;
+	list-style: disc outside disc;
     text-align: center;
 }
 .portfolio_menu ul li{

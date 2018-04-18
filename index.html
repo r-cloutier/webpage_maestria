@@ -74,7 +74,7 @@ td, th {
 
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-             		<a class="navbar-brand" href="http://astro.utoronto.ca/~cloutier/"><font style="color:#fff">Ryan Cloutier</font></a>
+             		<a class="navbar-brand" href="http://maestria.astro.umontreal.ca/rvfc/"><font style="color:#fff">RVFC</font></a>
 		        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -92,7 +92,7 @@ td, th {
                             <li><a class="page-scroll" href="http://astro.utoronto.ca/~cloutier/index.html#research-section">Research</a></li>
                             <li><a class="page-scroll" href="http://astro.utoronto.ca/~cloutier/index.html#cv-section">CV</a></li>
                             <li><a class="page-scroll" href="http://astro.utoronto.ca/~cloutier/index.html#contact-section">Contact</a></li>
-                            <li><a href="http://maestria.astro.umontreal.ca/rvfc/RVFollowupCalculator.php">RVFC</a></li>-->
+                            <li><a href="http://maestria.astro.umontreal.ca/rvfc/">RVFC</a></li>-->
                         </ul>
                     </div><!-- /.navbar-collapse -->
                   </div><!-- /.container -->
@@ -105,6 +105,65 @@ td, th {
 	    
             <!-- ========== BEGIN CALCULATOR FORM======== -->
 	    <br><br><br><br><br>
+	    <div align="center" style="font-size=20px;padding-left:160px;padding-right:160px">
+	    	<p style="font-size:30px"><b>RVFC: Radial Velocity Follow-up Calculator</b></p><br>
+	    </div>
+	    <div align="justify" style="padding-left:160px;padding-right:160px">
+		<p style="font-size=20px">The RVFC is an web-based tool used to calculate the number of radial
+		velocity measurements required to detect the semi-amplitude of a known transiting exoplanet
+		at a desired detection significance. Such calculations are useful for planning observations
+		and the distribution of observing time among a set of targetted transiting planetary
+		systems. Inherent assumptions in the RVFC and instructions on its use here are given below or
+		are described in detail in <b>add paper link here.</b></p>
+
+		<br><h5>Version history</h5>
+	    </div>
+	    <div style="padding-left:180px;padding-right:160px">
+		<ul>
+			<li><b>v1.0</b> <i>18/04/2018:</i> initial version of the RVFC</li>
+		</ul>
+	    </div>
+	    <div style="padding-left:160px;padding-right:160px">
+		<br><h5>Inherent assumptions in the RVFC</h5>
+		&#9679;&emsp;When calculating the number of RV measurements with the RVFC, we always assume that:
+	    </div>
+	    <div style="padding-left:200px;padding-right:160px">
+	    	<br>
+		<ul>
+			<li>&#9675;&emsp;the planet's orbital solution is well-approximated as circular.</li><br>
+			<li>&#9675;&emsp;the value of the transiting planet's orbital period <i>P</i> and time of mid-transit <i>T</i><sub>0</sub>
+			are known to ultra-high precision compared to the RV semi-amplitude <i>K</i> such that correlations between the measured values of
+			<i>P</i>, <i>T</i><sub>0</sub>, and <i>K</i> are unimportant.</li><br>
+		</ul>
+	    </div>
+	    <div style="padding-left:160px;padding-right:160px">
+	        &#9679;&emsp;When calculating the number of RV measurements with the RVFC&#8213;when the RV noise model is white&#8213;we further assume that:
+	    </div>
+	    <div style="padding-left:200px;padding-right:160px">
+	    	<br>
+		<ul>
+			<li>&#9675;&emsp;the window function of the RV time-series is (approximately) sampled uniformly over the planet's full
+			orbital phase.</li><br>
+			<li>&#9675;&emsp;there is a characteristic scalar RV uncertainty equal to the rms of the RV
+			residuals after the removal of planetary signals.</li><br>
+		</ul>
+	    </div>
+	    <div style="padding-left:160px;padding-right:160px">
+		<br><h5>Instructions</h5>
+		Option 1: to-be used when the photon-noise limited RV precision is unknown for the target of interest.
+	    </div>
+	    <div style="padding-left:180px;padding-right:160px">
+		<br>
+		<ul>
+			<li>&emsp;1) enter the required parameters of the RV spectrograph. Alternatively, a set of spectrographs with default
+			parameter values can be resolved from the corresponding drop-down menu. The default values are not fixed and may be modified
+			before proceeding if desired.</li><br>
+		</ul>
+
+	    </div>
+	    <br><br>
+
+	    
             <form action="http://maestria.astro.umontreal.ca/rvfc/RVFollowupCalculator.php" method="get" >
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_calculate_sigRV_phot" value="Option 1: calculator-derived RV precision" />
 	    <br><br>
