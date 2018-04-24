@@ -1,12 +1,6 @@
 <br><br>
 <p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>Option 3: upload input file</b></p>&nbsp;&nbsp;&nbsp;
 
-<form action="option3.php" method="post" enctype="multipart/form-data">
-	<?php echo $_SERVER['PHP_SELF']; ?>
-	<input name="userfile" type="file" accept=".csv"/><br>
-	<input name="submit_file" type="submit" value="Upload csv">
-</form>
-
 <?php
 $target_dir = "UploadedFiles/";
 $target_file = $target_dir . basename($_FILES["userfile"]["name"]);
