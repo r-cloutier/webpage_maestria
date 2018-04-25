@@ -55,22 +55,23 @@
 	</tr>
 	<tr>
 	        <td style="padding: 0px 0px 10px 30px;">Stellar radius (R<sub>&#x02299;</sub>) :&nbsp;&nbsp;<input type="text" name="Rs"
-		value="<?php echo isset($_GET['Rs']) ? $_GET['Rs'] : $Rs ?>"  size="10" maxlength="50"/> (<b>&#42;</b> if "RV activity rms" is
-		unspecified)</td>
+		value="<?php echo isset($_GET['Rs']) ? $_GET['Rs'] : $Rs ?>"  size="10" maxlength="50"/>
+		<span class="error"><?php echo ($RsErr!=NULL) ? $RsErr : "" ?></span></td>
 	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Effective temperature (K) :&nbsp;&nbsp;<input type="text" name="Teff" value="<?php echo
-		isset($_GET['Teff']) ? $_GET['Teff'] : $Teff ?>"  size="10" maxlength="50"/> (<b>&#42;</b> if "RV activity rms" or "RV rms
-		from additional planets" is unspecified)</td>
+		isset($_GET['Teff']) ? $_GET['Teff'] : $Teff ?>"  size="10" maxlength="50"/>
+		<span class="error"><?php echo ($TeffErr!=NULL) ? $TeffErr : "" ?></span></td>
         </tr>
 	<tr>                
 		<td style="padding: 0px 0px 10px 30px;">Metallicity ([Fe/H]) :&nbsp;&nbsp;<input type="text" name="Z" value="<?php echo
-		isset($_GET['Z']) ? $_GET['Z'] : $Z ?>"  size="10" maxlength="50"/> (<b>&#42;</b> if "RV activity rms" is unspecified)</td>
+		isset($_GET['Z']) ? $_GET['Z'] : $Z ?>"  size="10" maxlength="50"/>
+		<span class="error"><?php echo ($ZErr!=NULL) ? $ZErr : "" ?></span></td>
 	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Rotation period (days) :&nbsp;&nbsp;<input type="text" name="Prot" value="<?php echo
-		isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50"/> (<b>&#42;</b> if "RV activity rms" is 
-		                unspecified)</td>
+		isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50"/>
+		<span class="error"><?php echo ($ProtErr!=NULL) ? $ProtErr : "" ?></span></td>
         </tr>
 </table>
 
@@ -79,8 +80,8 @@
 <table>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo
-		isset($_GET['floor']) ? $floorin : $floor ?>"  size="10" maxlength="50"/> (<b>&#42;</b> if "Effective RV rms" is 
-		                unspecified)</td>
+		isset($_GET['floor']) ? $floorin : $floor ?>"  size="10" maxlength="50"/>
+		span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
 	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Photon-noise limited RV precision (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVphot"
