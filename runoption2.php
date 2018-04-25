@@ -90,11 +90,9 @@
 			$overheadErr = $Errs[11];
 			$KdetsigErr = $Errs[12];
 			$NGPtrialsErr = $Errs[13];
-			echo 'missing a required field';
 			include "option2.php";
 		} else {
-			echo 'no missing fields';
-			//include "runRVFC.php";
+			include "runRVFC.php";
 		}
 	}
 ?>
