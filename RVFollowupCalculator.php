@@ -149,9 +149,15 @@ td, th {
 	    <?php endif; ?>
 
 
-	    <!-- Run the RVFC -->
-	    <?php if (isset($_GET['runrvfc'])) : ?>
-		<?php include 'runRVFC.php'; ?>
+            <!-- Run the RVFC for option 1-->
+	    <?php if (isset($_GET['runrvfc1'])) : ?>
+		<?php include 'runoption1.php'; ?>
+	    <?php endif; ?>
+
+
+	    <!-- Run the RVFC for option 2-->
+	    <?php if (isset($_GET['runrvfc2'])) : ?>
+		<?php include 'runoption2.php'; ?>
 	    <?php endif; ?>
 	    </form>
 	    <!-- ========= END CALCULATOR FUNCTION=========-->

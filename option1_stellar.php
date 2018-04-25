@@ -268,4 +268,4 @@ specified above.</p><br>
         </tr>
 </table>
 
-<br>&emsp;<input type=submit value="Run RVFC" name="runrvfc"/>
+<br>&emsp;<input type=submit value="Run RVFC" name="runrvfc1"/>
