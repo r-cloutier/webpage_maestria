@@ -111,13 +111,13 @@ td, th {
 	    <div align="justify" style="padding-left:160px;padding-right:160px">
 		<p style="font-size=20px">The RVFC is a web-based tool used to calculate the number of radial 
 		velocity measurements required to detect the semi-amplitude of a known transiting exoplanet 
-		at a desired detection significance. These calculations are performed in the general case of 
-		correlated RV noise and in the white noise limit. The latter being much less computationally 
-		expensive but often not valid in real empirical RV time-series. Calculations of the number of 
+		at a desired detection significance. These calculations can be performed in the general case of 
+		correlated RV noise and in the white noise limit which is less computationally expensive but often not and accurate approximation to
+		real empirical RV time-series. Calculations of the number of 
 		RV measurements&#8213;and total observing time&#8213;are useful for planning observations
 		and hence how to distribute observing time among a set of targeted transiting planetary
-		systems. The inherent assumptions in the RVFC and instructions on its use here are given below 
-		or are described in detail in <b>add paper link here.</b></p>
+		systems. The inherent assumptions in the RVFC and instructions on its use are provided below. Additionally, 
+		the model and calculator are described in detail in <b>add paper link here.</b></p>
 
 		<br><h5>Version history</h5>
 	    </div>
@@ -133,8 +133,8 @@ td, th {
 	    <div style="padding-left:200px;padding-right:160px">
 	    	<br>
 		<ul>
-			<li>&#9675;&emsp;the planet's orbital solution is well-approximated as circular.</li><br>
-			<li>&#9675;&emsp;the value of the transiting planet's orbital period <i>P</i> and time of mid-transit <i>T</i><sub>0</sub>
+			<li>&emsp;the planet's orbital solution is well-approximated as circular.</li><br>
+			<li>&emsp;the value of the transiting planet's orbital period <i>P</i> and time of mid-transit <i>T</i><sub>0</sub>
 			are known to ultra-high precision compared to the RV semi-amplitude <i>K</i> such that correlations between the measured values of
 			<i>P</i>, <i>T</i><sub>0</sub>, and <i>K</i> are unimportant.</li><br>
 		</ul>
@@ -145,10 +145,10 @@ td, th {
 	    <div style="padding-left:200px;padding-right:160px">
 	    	<br>
 		<ul>
-			<li>&#9675;&emsp;the window function of the RV time-series is (approximately) sampled uniformly over the planet's full
+			<li>&emsp;the window function of the RV time-series is (approximately) sampled uniformly over the planet's full
 			orbital phase.</li><br>
-			<li>&#9675;&emsp;there is a characteristic scalar RV uncertainty equal to the rms of the RV
-			residuals after the removal of planetary signals.</li><br>
+			<li>&emsp;there is a characteristic scalar RV uncertainty equal to the rms of the RV
+			residuals following the removal of planetary signals.</li><br>
 		</ul>
 	    </div>
 	    <div style="padding-left:160px;padding-right:160px">
@@ -165,42 +165,47 @@ td, th {
 			optional. If left blank, the planet's mass is calculated from an empirically-derived mass-radius relation.</li><br>
 			<li>&emsp;3) enter the required stellar parameters including the apparent stellar magnitude in either the <i>V</i> or
 			<i>J</i> band. The passband corresponding to the input magnitude is determined by the wavelength domain of the spectrograph
-			specified in step 1.</li><br>
+			specified in step 1 which should span either the <i>V</i> or <i>J</i> central wavelengths (i.e. 555 and 1250 nm
+			respectively).</li><br>
 			<li>&emsp;4) optionally, enter the rms values of additive RV noise sources from stellar activity and/or additional planets
 			in the system. These values can be set to zero to be ignored. If left blank, their values will be sampled from appropriate
 			empirical distributions according to the planetary and stellar parameters specified in steps 2 and 3.</li><br>
 			<li>&emsp;5) enter the required values of the simulation parameters. This includes the number of GP trials to-be run which
-			we recommend to be set to at least 10 as these results are sensitive to the window function of the observations.
-			Alternatively this value can be set to zero to only consider the white noise calculation.</li><br>
+			we recommend be set to at least ten as these results are sensitive to the window function of the observations and should
+			therefore be sampled. Alternatively, this value can be set to zero to only consider the white noise calculation.</li><br>
+			<li>&emsp;6) Click "Run RVFC" to begin the calculations. Reporting of the results to screen can take seconds up to
+			a few minutes of wall time depending on the number of GP trials selected.</li><br>
 		</ul>
 	    </div>
 	    <div style="padding-left:160px;padding-right:160px">
-		<b>Option 2:</b> to-be used when the photon-noise limited RV precision is known a-priori for the target of interest.
+		<b>Option 2:</b> to-be used when the photon-noise limited RV precision is known a-priori for the target of interest (often from
+		previous runs of the RVFC or from independent calculations).
 	    </div>
 	    <div style="padding-left:180px;padding-right:160px">
 	        <br>
 		<ul>
 			<li>&emsp;1) enter the required parameters of the transiting planet of interest. Including a value of the planetary mass is
 			optional. If left blank, the planet's mass is calculated from an empirically-derived mass-radius relation.</li><br>
-			<li>&emsp;2) enter the required stellar parameters. Most stellar parameters are only required if sampling RV noise sources
+			<li>&emsp;2) enter the required stellar parameters. Most stellar parameters are only needed if sampling RV noise sources
 			(see step 3).</li><br>
 			<li>&emsp;3) enter the additive RV noise sources including the spectrograph's RV noise floor and photon-noise
 			limited RV precision. Values from stellar activity and/or additional planets in the system can be set to zero to be ignored
 			or if left blank, their values will be sampled from appropriate empirical distributions according to the planetary and
-			stellar parameters specified in steps 2 and 3. The aforementioned values will be used to calculate the effective RV rms
+			stellar parameters specified in steps 1 and 2. The aforementioned values will be used to calculate the effective RV rms
 			which can alternatively be set verbatim thus negating the need to specify any other RV noise sources.</li><br>
-			<li>&emsp;4) enter the required values of the simulation parameters. This includes the number of GP trials to-be run which 
-			we recommend to be set to at least 10 as these results are sensitive to the window function of the observations.
-			Alternatively this value can be set to zero to only consider the white noise calculation.</li><br>
+			<li>&emsp;4) enter the required values of the simulation parameters. This includes the number of GP trials to-be run which
+			we recommend be set to at least ten as these results are sensitive to the window function of the observations and should
+			therefore be sampled. Alternatively, this value can be set to zero to only consider the white noise calculation.</li><br>
+			<li>&emsp;5) Click "Run RVFC" to begin the calculations. Reporting of the results to screen can take seconds up to
+			a few minutes of wall time depending on the number of GP trials selected.</li><br>
 		</ul>
 	    </div>
 	    <div style="padding-left:160px;padding-right:160px">
-	      	<br><h5>Notes</h5>
-		<ul>
-			<li>&#9679;&emsp;The window functions adopted when using the RVFC in the presence of correlated noise (i.e. number of GP trials
-			> 0) are uniformly sampled over a span of 100 days. The ability to upload custom window functions is intended for future
-			versions of the RVFC.</li>
-		</ul>
+	         <br><h5>Notes</h5>
+		 &#9679;&emsp;The window functions adopted when using the RVFC in the presence of correlated noise (i.e. number of GP trials
+		 > 0) are uniformly sampled over a span of 100 days. The ability to upload custom window functions is intended for future
+		 versions of the RVFC.<br><br>
+		 &#9679;&emsp;Questions and comments about the RVFC should be sent to <a href="mailto:cloutier@astro.utoronto.ca?" style="color:#C60000" target="_top">cloutier@astro.utoronto.ca</a>.
 	    </div>
 	    <br><br>
 

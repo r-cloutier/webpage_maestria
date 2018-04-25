@@ -7,8 +7,8 @@ from compute_nRV_GP import *
 from create_pdf import *
 from Teff2color import *
 
-global G
-G = 6.67e-11
+global G, NGPmax
+G, NGPmax = 6.67e-11, 1e2
 
 def nRV_calculator(Kdetsig,
                    input_planet_fname='/data/cpapir/www/rvfc/InputFiles/user_planet.in',
@@ -48,6 +48,8 @@ def nRV_calculator(Kdetsig,
     mag, Ms, Rs, Teff, Z, vsini, Prot = _read_star_input(input_star_fname)
 
     # checks
+    if NGPtrials > NGPmax:
+    	raise ValueError('Cannot exceed the maximum number of GP trials (i.e. 100).')
     if runGP and (duration < P):
         raise ValueError('Time-series duration must be longer than the' + \
                          "planet's orbital period.")

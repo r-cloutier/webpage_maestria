@@ -105,6 +105,10 @@ td, th {
 	    
             <!-- ========== BEGIN CALCULATOR FORM======== -->
 	    <br><br><br><br><br>
+	    <div align="center" style="font-size=20px;padding-left:160px;padding-right:160px">
+	    	<p style="font-size:30px"><b>RVFC: Radial Velocity Follow-up Calculator</b></p><br>
+	    </div>
+
 	    <form action="http://maestria.astro.umontreal.ca/rvfc/RVFollowupCalculator.php" method="get" >
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_calculate_sigRV_phot" value="Option 1: RVFC-derived RV precision" />
 	    <br/><br/>

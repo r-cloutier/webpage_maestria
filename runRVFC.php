@@ -25,8 +25,8 @@
 	$floorin = (($_GET['floor']>0) ? $_GET['floor'] : 0);
 	$overheadin = (($_GET['overhead']>0) ? $_GET['overhead'] : 0);
 	$sigRVphotin = (($_GET['sigRVphot']>0) ? $_GET['sigRVphot'] : 0);
-	$sigRVactin = (($_GET['sigRVact']>=0) ? $_GET['sigRVact'] : -1);
-	$sigRVplanetsin = (($_GET['sigRVplanets']>=0) ? $_GET['sigRVplanets'] : -1);
+	$sigRVactin = (($_GET['sigRVact']!=NULL) ? floatval($_GET['sigRVact']) : -1);   // should be >=
+	$sigRVplanetsin = (($_GET['sigRVplanets']!=NULL) ? floatval($_GET['sigRVplanets']) : -1);  // should be -1
 	$sigRVeffin = (($_GET['sigRVeff']>0) ? $_GET['sigRVeff'] : -1);
 	$mpin = (($_GET['mp']>0) ? $_GET['mp'] : 0);
 	$magin = (($_GET['mag']>0) ? $_GET['mag'] : 0);
@@ -36,12 +36,15 @@
 	$Zin = (($_GET['Z']>0) ? $_GET['Z'] : 0);
 	$vsiniin = (($_GET['vsini']>0) ? $_GET['vsini'] : 0);
 	$Protin = (($_GET['Prot']>0) ? $_GET['Prot'] : 0);
+        //echo $_GET['sigRVplanets']."n";
+	//echo $sigRVplanetsin;
 
 	// Run calculator and save the output to a txt file
-        $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
-	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	//$output_fname = "Results/RVFCoutput_0d140624_0d166808.txt";
-	//echo "/usr/bin/python2.7 php2python.py ".$arguments;
+        $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." 87
+	".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." 87 ".$_GET['P']." ".$_GET['rp']." ".$mpin." 87
+	".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." 87 ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
+	echo "/usr/bin/python2.7 php2python.py ".$arguments;
+	//$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
 
 	// Read output
 	$file = fopen($output_fname, 'r');

@@ -101,7 +101,11 @@ def run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, ov
 
 
 if __name__ == '__main__':
-    
+   
+    f = open('Results/tmp', 'w')
+    f.write('%i'%len(sys.argv))
+    f.close()
+
     assert len(sys.argv) == 26
 
     wlmin = float(sys.argv[1])
@@ -133,9 +137,9 @@ if __name__ == '__main__':
 
     Kdetsig = float(sys.argv[24])
     NGPtrials = float(sys.argv[25])
-    
-    run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, overhead, 
-		   texp, sigRVphot, sigRVact, sigRVplanets, sigRVeff,
-		   P, rp, mp, 
-		   mag, Ms, Rs, Teff, Z, vsini, Prot,
-		   Kdetsig, NGPtrials=NGPtrials)
+   
+    #run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, overhead, 
+#		   texp, sigRVphot, sigRVact, sigRVplanets, sigRVeff,
+#		   P, rp, mp, 
+#		   mag, Ms, Rs, Teff, Z, vsini, Prot,
+#		   Kdetsig, NGPtrials=NGPtrials)
