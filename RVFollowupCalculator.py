@@ -130,21 +130,25 @@ def nRV_calculator(Kdetsig,
     nRV = 2. * (sigRV_eff / sigK_target)**2
 
     if runGP:
-	if sigRV_act < 0:
-	    logg = float(unp.nominal_values(_compute_logg(Ms, Rs)))
-	    B_V = get_B_V(Teff, logg, Z)
-	    sigRV_act = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
-	if sigRV_planet < 0:
-	    sigRV_planet = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
-
+	#if sigRV_act < 0:
+	#    logg = float(unp.nominal_values(_compute_logg(Ms, Rs)))
+	#    B_V = get_B_V(Teff, logg, Z)
+	#    sigRV_act = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
+	#if sigRV_planet < 0:
+	#    sigRV_planet = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
     	NGPtrials = int(NGPtrials)
         nRVGPs = np.zeros(NGPtrials)
         for i in range(NGPtrials):
-            aGP = sigRV_act if sigRV_act != 0 else sigRV_eff
+            aGP = sigRV_act if sigRV_act >= 0 else sigRV_eff
+	    if aGP < 0:
+	    	raise ValueError('aGP cannot be negative.')
             lambdaGP = Prot * (3 + np.random.randn() * .1)
+	    if lambdaGP <= 0:
+	    	raise ValueError('lGP cannot be <= 0.')
             GammaGP = 2 + np.random.randn() * .1
             GPtheta = aGP, lambdaGP, GammaGP, Prot, sigRV_planet
             keptheta = P, K
+	    print GPtheta
             nRVGPs[i] = compute_nRV_GP(GPtheta, keptheta, sigRV_phot,
                                        sigK_target, duration=duration)
         nRVGP = np.median(nRVGPs)

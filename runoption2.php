@@ -35,18 +35,21 @@
         function is_Ms_bad() {
 	        if (($_GET['Ms']==NULL) || ($_GET['Ms']<0)) { $Ms_bad = True; } else { $Ms_bad = False;}    
 		return $Ms_bad; }
-	function is_Rs_bad() {
+	/*function is_Rs_bad() {
 		if (((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) || (($_GET['sigRVact']==NULL) && ($_GET['NGPtrials']>0))) && 
 		(($_GET['Rs']==NULL) || ($_GET['Rs']<0))) { $Rs_bad = True; } else { $Rs_bad = False;}
+		return $Rs_bad; }*/
+	function is_Rs_bad() {
+		if ((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) && (($_GET['Rs']==NULL) || ($_GET['Rs']<0)))
+		{ $Rs_bad = True; } else { $Rs_bad = False;}
 		return $Rs_bad; }
         function is_Teff_bad() {
-	        if ((((($_GET['sigRVact']==NULL) || ($_GET['sigRVplanets']==NULL)) && ($_GET['sigRVeff']==NULL)) || 
-		(($_GET['NGPtrials']>0) && (($_GET['sigRVact']==NULL) || ($_GET['sigRVplanets']==NULL)))) && (($_GET['Teff']==NULL) || 
+	        if (((($_GET['sigRVact']==NULL) || ($_GET['sigRVplanets']==NULL)) && ($_GET['sigRVeff']==NULL)) && (($_GET['Teff']==NULL) || 
 		($_GET['Teff']<0))) { $Teff_bad = True; } else { $Teff_bad = False;} 
 		return $Teff_bad; }
 	function is_Z_bad() {
-	        if (((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) || (($_GET['NGPtrials']>0) && ($_GET['sigRVact']==NULL))) && 
-		(($_GET['Z']==NULL) || ($_GET['Z']<0))) { $Z_bad = True; } else { $Z_bad = False;}
+	        if ((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) && (($_GET['Z']==NULL) || ($_GET['Z']<0))) 
+		{ $Z_bad = True; } else { $Z_bad = False;}
 		return $Z_bad; }
         function is_Prot_bad() {
 	        if (((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) || ($_GET['NGPtrials']>0)) && (($_GET['Prot']==NULL) ||

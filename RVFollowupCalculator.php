@@ -113,8 +113,9 @@ td, th {
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_calculate_sigRV_phot" value="Option 1: RVFC-derived RV precision" />
 	    <br/><br/>
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_set_sigRV_phot" value="Option 2: user-specified RV precision" />
-	    <!--<br><br>
-	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_upload" value="Option 3: upload file" />-->
+	    <br><br>
+	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_upload" value="Option 3: upload file" />
+
 
             <!-- Calculate sigRV using the calculator -->
             <?php if (isset($_GET['submit_calculate_sigRV_phot']) && ! isset($_GET['submit_spec'])) : ?>
@@ -144,7 +145,6 @@ td, th {
 
 	    <!-- Deal with the input file -->
 	    <?php if (isset($_GET["submit_file"])) : ?>
-	    	<?php echo 'here'; ?>
 	    	<?php include 'option3_process.php'; ?>
 	    <?php endif; ?>
 

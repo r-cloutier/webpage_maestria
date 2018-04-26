@@ -2,13 +2,16 @@
 <p style="font-size:30px">&nbsp;&nbsp;&nbsp;<b>Option 3: upload input file</b></p>&nbsp;&nbsp;&nbsp;
 
 <?php
-$target_dir = "UploadedFiles/";
-$target_file = $target_dir . basename($_FILES["userfile"]["name"]);
+$target_dir = "/data/cpapir/www/rvfc/UploadedFiles/";
+$target_file = $target_dir.basename($_FILES["userfile"]["name"]);
 $uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+$inipath = php_ini_loaded_file();
+$var = phpinfo();
+echo $var;
 
 // Check if image file is a actual image or fake image
-if (isset($_POST["submit_file"])) {
+if (isset($_GET["submit_file"])) {
     $check = (isset($_FILES["userfile"]["tmp_name"]));
     if($check !== false) {
 	echo "File is good";
@@ -18,4 +21,5 @@ if (isset($_POST["submit_file"])) {
 	$uploadOk = 0;
     }
 }
+	//echo $_FILES["userfile"]["tmp_name"];
 ?>

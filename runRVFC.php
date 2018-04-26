@@ -39,9 +39,9 @@
 
 	// Run calculator and save the output to a txt file
         $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin."	".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
-	echo "/usr/bin/python2.7 php2python.py ".$arguments;
+	//echo "/usr/bin/python2.7 php2python.py ".$arguments;
 	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	echo $output_fname;
+	//$output_fname = "/data/cpapir/www/rvfc/Results/RVFCoutput_0d307020_0d460557.txt";
 
 	// Read output
 	$file = fopen($output_fname, 'r');
@@ -199,7 +199,7 @@
 			<td style="padding: 5px 10px;" width="11%">-</td>
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">RV activity rms</td>
-		<?php if (($sigRV_actout >= 0) && ($_GET['sigRVeff']==NULL)) : ?>
+		<?php if ((($sigRV_actout >= 0) && ($_GET['sigRVeff']==NULL)) || (($sigRV_actout>=0) && ($_GET['NGPtrials']>0))) : ?>
                 	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_actout,2,".",""); ?> m/s</td>
 		<?php else: ?>
 			<td style="padding: 5px 10px;" width="11%">-</td>
@@ -287,7 +287,8 @@
 		<td style="padding: 5px 10px;" width="24%"><b>Number of RV measurements (white noise)</b></td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($nRVout,1,'.','').'</b>'; ?></td>
 		<td style="padding: 5px 10px;" width="24%"><b>Total observing time (white noise)</b></td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($tobsout,1,'.','').'</b>'; ?> <b>hrs</b></td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($tobsout,1,'.','').' hrs
+		&nbsp;('.number_format($tobsout/7.,1,'.','').' nights)</b>'; ?></td>
 	</tr>
 	<tr>	
 		<td style="padding: 5px 10px;" width="24%"><b>Number of RV measurements (correlated noise)</b></td>
@@ -298,7 +299,8 @@
 		<?php endif; ?>
 		<td style="padding: 5px 10px;" width="24%"><b>Total observing time (correlated noise)</b></td>
 		<?php if ($NGPtrialsout>0) : ?>
-			<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($tobsGPout,1,'.','').'</b>'; ?> <b>hrs</b></td>
+			<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($tobsGPout,1,'.','').' hrs
+			&nbsp;('.number_format($tobsGPout/7.,1,'.','').' nights)</b>'; ?></td>
 		<?php else: ?>
 		        <td style="padding: 5px 10px;" width="11%"><b>-</b></td>
 		<?php endif; ?>

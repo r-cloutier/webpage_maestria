@@ -12,11 +12,12 @@
 			optional. If left blank, the planet's mass is calculated from an empirically-derived mass-radius relation.</li><br>
 			<li>&emsp;2) enter the required stellar parameters. Most stellar parameters are only needed if sampling RV noise sources
 			(see step 3).</li><br>
-			<li>&emsp;3) enter the additive RV noise sources including the spectrograph's RV noise floor and photon-noise
-			limited RV precision. Values from stellar activity and/or additional planets in the system can be set to zero to be ignored
-			or if left blank, their values will be sampled from appropriate empirical distributions according to the planetary and
-			stellar parameters specified in steps 1 and 2. The aforementioned values will be used to calculate the effective RV rms
-			which can alternatively be set verbatim thus negating the need to specify any other RV noise sources.</li><br>
+			<li>&emsp;3) enter the additive RV noise sources individually or the effective RV rms alone. If individual RV noise sources
+			are added (i.e. the spectrograph's RV noise floor, the photon-noise limited RV precision, RV activity, and RV rms from
+			additional planets) then these values are used to calculate the effective RV rms which can alternatively be set verbatim
+			thus negating the need to specify any other RV noise source. Input values for the stellar activity and/or additional planets 
+			in the system can be set to zero to be ignored or if left blank, their values will be sampled from appropriate empirical 
+			distributions according to the planetary and stellar parameters specified in steps 1 and 2.</li><br>
 			<li>&emsp;4) enter the required values of the simulation parameters. This includes the number of GP trials to-be run
 			which&#8213;is used&#8213;we recommend be set to at least ten as these results are sensitive to the window function of 
 			the observations and should therefore be sampled. Alternatively, this value can be set to zero to only consider the white 
@@ -81,7 +82,7 @@
 <table>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo
-		isset($_GET['floor']) ? $floorin : $floor ?>"  size="10" maxlength="50"/>
+		isset($_GET['floor']) ? $_GET['floor'] : $floor ?>"  size="10" maxlength="50"/>
 		<span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
 	</tr>
 	<tr>
