@@ -6,13 +6,15 @@ $target_dir = "/data/cpapir/www/rvfc/UploadedFiles/";
 $target_file = $target_dir.basename($_FILES["userfile"]["name"]);
 $uploadOk = 1;
 
-$inipath = php_ini_loaded_file();
+//$inipath = php_ini_loaded_file();
 $var = phpinfo();
+//$var = sys_get_temp_dir();
 echo $var;
 
 // Check if image file is a actual image or fake image
 if (isset($_GET["submit_file"])) {
-    $check = (isset($_FILES["userfile"]["tmp_name"]));
+    //$check = (isset($_FILES["userfile"]["tmp_name"]));
+    $check = !empty($_FILES);
     if($check !== false) {
 	echo "File is good";
 	$uploadOk = 1;
