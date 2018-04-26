@@ -70,13 +70,6 @@ def update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric
     return suffix
 
 
-def clean_input_files(suffix):
-    os.system('rm /data/cpapir/www/rvfc/InputFiles/user_sigRV_%s.in'%suffix)
-    os.system('rm /data/cpapir/www/rvfc/InputFiles/user_spectrograph_%s.in'%suffix)
-    os.system('rm /data/cpapir/www/rvfc/InputFiles/user_star_%s.in'%suffix)
-    os.system('rm /data/cpapir/www/rvfc/InputFiles/user_planet_%s.in'%suffix)
-
-
 def run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, overhead, 
 		   texp, sigRVphot, sigRVact, sigRVplanets, sigRVeff, 
 		   P, rp, mp,
@@ -95,8 +88,6 @@ def run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, ov
                    output_fname='/data/cpapir/www/rvfc/Results/RVFCoutput_%s.txt'%suffix, duration=duration,
                    NGPtrials=NGPtrials, verbose_results=True)
 
-    # clean-up
-    clean_input_files(suffix)
 
 
 if __name__ == '__main__':

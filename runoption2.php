@@ -10,7 +10,8 @@
                 $TeffErr = ((is_Teff_bad()) ? '<b>* effective temperature is required to sample "RV activity rms" and/or "RV rms from additional
 		planets"</b>' : NULL);
                 $ZErr = ((is_Z_bad()) ? '<b>* metallicity is required to sample "RV activity rms"</b>' : NULL);
-                $ProtErr = ((is_Prot_bad()) ? '<b>* rotation period is required to sample "RV activity rms"</b>' : NULL);
+                $ProtErr = ((is_Prot_bad()) ? '<b>* rotation period is required to sample "RV activity rms" and for the correlated noise
+		calculations</b>' : NULL);
 		$floorErr = ((is_floor_bad()) ? '<b>* RV noise floor is required to calculate "Effective RV rms"</b>' : NULL);
 		$sigRVphotErr = ((is_sigRVphot_bad()) ? '<b>* Photon-noise limited RV precision is required to calculate "Effective RV rms"</b>' : NULL);
 		$sigRVactErr = ((is_sigRVact_bad()) ? '<b>* RV activity rms must be non-zero for the correlated noise calculations</b>' : NULL);
@@ -35,19 +36,21 @@
 	        if (($_GET['Ms']==NULL) || ($_GET['Ms']<0)) { $Ms_bad = True; } else { $Ms_bad = False;}    
 		return $Ms_bad; }
 	function is_Rs_bad() {
-		if ((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) && (($_GET['Rs']==NULL) || ($_GET['Rs']<0))) { $Rs_bad = True; } 
-		else { $Rs_bad = False;}
+		if (((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) || (($_GET['sigRVact']==NULL) && ($_GET['NGPtrials']>0))) && 
+		(($_GET['Rs']==NULL) || ($_GET['Rs']<0))) { $Rs_bad = True; } else { $Rs_bad = False;}
 		return $Rs_bad; }
         function is_Teff_bad() {
-	        if (((($_GET['sigRVact']==NULL) || ($_GET['sigRVplanets']==NULL)) && ($_GET['sigRVeff']==NULL)) && (($_GET['Teff']==NULL) || 
+	        if ((((($_GET['sigRVact']==NULL) || ($_GET['sigRVplanets']==NULL)) && ($_GET['sigRVeff']==NULL)) || 
+		(($_GET['NGPtrials']>0) && (($_GET['sigRVact']==NULL) || ($_GET['sigRVplanets']==NULL)))) && (($_GET['Teff']==NULL) || 
 		($_GET['Teff']<0))) { $Teff_bad = True; } else { $Teff_bad = False;} 
 		return $Teff_bad; }
 	function is_Z_bad() {
-	        if ((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) && (($_GET['Z']==NULL) || ($_GET['Z']<0))) { $Z_bad = True; } 
-		else { $Z_bad = False;}
+	        if (((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) || (($_GET['NGPtrials']>0) && ($_GET['sigRVact']==NULL))) && 
+		(($_GET['Z']==NULL) || ($_GET['Z']<0))) { $Z_bad = True; } else { $Z_bad = False;}
 		return $Z_bad; }
         function is_Prot_bad() {
-	        if ((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) && (($_GET['Prot']==NULL) || ($_GET['Prot']<0))) { $Prot_bad = True; } else { $Prot_bad = False;}
+	        if (((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) || ($_GET['NGPtrials']>0)) && (($_GET['Prot']==NULL) ||
+		($_GET['Prot']<=0))) { $Prot_bad = True; } else { $Prot_bad = False;} 
 		return $Prot_bad; }
         function is_floor_bad() {
 	        if (($_GET['sigRVeff']==NULL) && (($_GET['floor']==NULL) || ($_GET['floor']<0))) { $floor_bad = True; } else { $floor_bad = False;}
