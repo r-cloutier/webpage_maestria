@@ -1,5 +1,6 @@
 #!/usr/bin/python2.7
 from imports import *
+from scipy.interpolate import interp1d
 
 global G
 G = 6.67e-11
@@ -76,3 +77,27 @@ def get_baraffe_Ls(Ms, age=2):
     # Interpolate to get L
     lint_L = lint(np.array([barmass, barage]).T, barL)
     return 10**(lint_L(Ms, float(age)))   # Lsun
+
+
+def is_Lagrangestable(Ps, Ms, mps, eccs):
+    '''Compute if a system is Lagrange stable (conclusion of barnes+
+    greenberg 06).
+    mp_i = Mearth'''
+    Ps, mps, eccs = np.array(Ps), np.array(mps), np.array(eccs)
+    smas = AU2m(semimajoraxis(Ps, Ms, mps))
+    stable = np.zeros(mps.size-1)
+    for i in range(1, mps.size):
+	mu1 = Mearth2kg(mps[i-1]) / Msun2kg(Ms)
+	mu2 = Mearth2kg(mps[i]) / Msun2kg(Ms)
+	alpha = mu1+mu2
+	gamma1 = np.sqrt(1-float(eccs[i-1])**2)
+	gamma2 = np.sqrt(1-float(eccs[i])**2)
+	delta = np.sqrt(smas[i]/smas[i-1])
+	deltas = np.linspace(1.000001, delta, 1e3)
+	LHS = alpha**(-3.) * (mu1 + mu2/(deltas**2)) * \
+	      (mu1*gamma1 + mu2*gamma2*deltas)**2
+	RHS = 1. + 3**(4./3) * mu1*mu2/(alpha**(4./3))
+	fint = interp1d(LHS, deltas, bounds_error=False, fill_value=1e8)
+	deltacrit = fint(RHS)
+	stable[i-1] = True if delta >= 1.1*deltacrit else False
+    return stable

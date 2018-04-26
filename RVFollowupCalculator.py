@@ -6,6 +6,7 @@ from sigmaRV_planets import *
 from compute_nRV_GP import *
 from create_pdf import *
 from Teff2color import *
+import rvs_custom as rvs
 
 global G, NGPmax
 G, NGPmax = 6.67e-11, 1e2
@@ -105,6 +106,7 @@ def nRV_calculator(Kdetsig,
 
 	else:
 	    if sigRV_act < 0:
+	        logg = float(unp.nominal_values(_compute_logg(Ms, Rs)))
 	        B_V = get_B_V(Teff, logg, Z)
 	    	sigRV_act = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
 	    if sigRV_planet < 0:
@@ -125,6 +127,7 @@ def nRV_calculator(Kdetsig,
     nRV = 2. * (sigRV_eff / sigK_target)**2
 
     if runGP:
+    	NGPtrials = int(NGPtrials)
         nRVGPs = np.zeros(NGPtrials)
         for i in range(NGPtrials):
             aGP = sigRV_act if sigRV_act != 0 else sigRV_eff
