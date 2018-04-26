@@ -91,7 +91,8 @@
 	</tr>
         <tr>
 		<td style="padding: 0px 0px 10px 30px;">RV activity rms (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVact" value="<?php echo
-		isset($_GET['sigRVact']) ? $_GET['sigRVact'] : NULL ?>"  size="10" maxlength="50"/></td>
+		isset($_GET['sigRVact']) ? $_GET['sigRVact'] : NULL ?>"  size="10" maxlength="50"/>
+		<span class="error"><?php echo ($sigRVactErr!=NULL) ? $sigRVactErr : "" ?></span></td>
         </tr>
         <tr>
 		<td style="padding: 0px 0px 10px 30px;">RV rms from additional planets (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVplanets" value="<?php echo isset($_GET['sigRVplanets']) ? $_GET['sigRVplanets'] : $sigRVplanets ?>"  size="10" maxlength="50"/></td>

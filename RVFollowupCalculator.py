@@ -17,7 +17,7 @@ def nRV_calculator(Kdetsig,
                    input_spectrograph_fname='/data/cpapir/www/rvfc/InputFiles/user_spectrograph.in',
                    input_sigRV_fname='/data/cpapir/www/rvfc/InputFiles/user_sigRV.in',
                    output_fname='/data/cpapir/www/rvfc/Results/RVFollowupCalculator.txt',
-                   duration=100, NGPtrials=1, runGP=True, verbose_results=True):
+                   duration=100, NGPtrials=0, verbose_results=True):
     '''
     Compute the number of RV measurements required to detect an input 
     transiting planet around an input star with an input spectrograph at a 
@@ -47,10 +47,13 @@ def nRV_calculator(Kdetsig,
         toverhead = _read_spectrograph_input(input_spectrograph_fname)
     P, rp, mp = _read_planet_input(input_planet_fname)
     mag, Ms, Rs, Teff, Z, vsini, Prot = _read_star_input(input_star_fname)
+    clean_input_files(input_sigRV_fname, input_spectrograph_fname, 
+    		      input_planet_fname, input_star_fname)
 
     # checks
     if NGPtrials > NGPmax:
     	raise ValueError('Cannot exceed the maximum number of GP trials (i.e. 100).')
+    runGP = True if NGPtrials > 0 else False
     if runGP and (duration < P):
         raise ValueError('Time-series duration must be longer than the' + \
                          "planet's orbital period.")
@@ -127,6 +130,13 @@ def nRV_calculator(Kdetsig,
     nRV = 2. * (sigRV_eff / sigK_target)**2
 
     if runGP:
+	if sigRV_act < 0:
+	    logg = float(unp.nominal_values(_compute_logg(Ms, Rs)))
+	    B_V = get_B_V(Teff, logg, Z)
+	    sigRV_act = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
+	if sigRV_planet < 0:
+	    sigRV_planet = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
+
     	NGPtrials = int(NGPtrials)
         nRVGPs = np.zeros(NGPtrials)
         for i in range(NGPtrials):
@@ -488,3 +498,11 @@ def _save_results(output):
     f = open(fname, 'w')
     f.write(tocsv)
     f.close()
+
+
+def clean_input_files(input_sigRV_fname, input_spectrograph_fname, 
+		      input_planet_fname, input_star_fname):
+    os.system('rm %s'%input_sigRV_fname)
+    os.system('rm %s'%input_spectrograph_fname)
+    os.system('rm %s'%input_planet_fname)
+    os.system('rm %s'%input_star_fname)

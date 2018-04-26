@@ -13,11 +13,12 @@
                 $ProtErr = ((is_Prot_bad()) ? '<b>* rotation period is required to sample "RV activity rms"</b>' : NULL);
 		$floorErr = ((is_floor_bad()) ? '<b>* RV noise floor is required to calculate "Effective RV rms"</b>' : NULL);
 		$sigRVphotErr = ((is_sigRVphot_bad()) ? '<b>* Photon-noise limited RV precision is required to calculate "Effective RV rms"</b>' : NULL);
+		$sigRVactErr = ((is_sigRVact_bad()) ? '<b>* RV activity rms must be non-zero for the correlated noise calculations</b>' : NULL);
 		$texpErr = ((is_texp_bad()) ? '<b>exposure time is required</b>' : NULL);
 		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
 		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
-		$error_messages = array($PErr, $rpErr, $mpErr, $MsErr, $RsErr, $TeffErr, $ZErr, $ProtErr, $floorErr, $sigRVphotErr, $texpErr, $overheadErr, $KdetsigErr, $NGPtrialsErr);
+		$error_messages = array($PErr, $rpErr, $mpErr, $MsErr, $RsErr, $TeffErr, $ZErr, $ProtErr, $floorErr, $sigRVphotErr, $sigRVactErr, $texpErr, $overheadErr, $KdetsigErr, $NGPtrialsErr);
 		return $error_messages;
 	}
 
@@ -55,6 +56,9 @@
 	        if (($_GET['sigRVeff']==NULL) && (($_GET['sigRVphot']==NULL) || ($_GET['sigphotRV']<0))) { $sigRVphot_bad = True; } 
 		else { $sigRVphot_bad = False;} 			                
 		return $sigRVphot_bad; }
+	function is_sigRVact_bad() {
+		if (($_GET['NGPtrials']>0) && ($_GET['sigRVact']!=NULL) && ($_GET['sigRVact']==0)) { $sigRVact_bad = True; } else { $sigRVact_bad = False;}
+		return $sigRVact_bad; }
         function is_texp_bad() {
 	        if (($_GET['texp']==NULL) || ($_GET['texp']<0)) { $texp_bad = True; } else { $texp_bad = False;}    
 		return $texp_bad; }
@@ -73,8 +77,8 @@
 	// otherwise run the RVFC
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	        if ((is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_Ms_bad()) || (is_Rs_bad()) || (is_Teff_bad()) || (is_Z_bad()) || 
-		(is_Prot_bad()) || (is_floor_bad()) || (is_sigRVphot_bad()) || (is_texp_bad()) || (is_overhead_bad()) || (is_Kdetsig_bad()) ||
-		(is_NGPtrials_bad())) {
+		(is_Prot_bad()) || (is_floor_bad()) || (is_sigRVphot_bad()) || (is_sigRVact_bad()) || (is_texp_bad()) || (is_overhead_bad()) || 
+		(is_Kdetsig_bad()) || (is_NGPtrials_bad())) {
 			$Errs = report_missing_fields();
 			$PErr = $Errs[0];
 			$rpErr = $Errs[1];
@@ -86,10 +90,11 @@
 			$ProtErr = $Errs[7];
 			$floorErr = $Errs[8];
 			$sigRVphotErr = $Errs[9];
-			$texpErr = $Errs[10];
-			$overheadErr = $Errs[11];
-			$KdetsigErr = $Errs[12];
-			$NGPtrialsErr = $Errs[13];
+			$sigRVactErr = $Errs[10];
+			$texpErr = $Errs[11];
+			$overheadErr = $Errs[12];
+			$KdetsigErr = $Errs[13];
+			$NGPtrialsErr = $Errs[14];
 			include "option2.php";
 		} else {
 			include "runRVFC.php";
