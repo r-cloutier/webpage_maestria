@@ -10,14 +10,14 @@
                 $RsErr = ((is_Rs_bad()) ? '<b>stellar radius is required</b>' : NULL);
                 $TeffErr = ((is_Teff_bad()) ? '<b>effective temperature is required</b>' : NULL);
                 $ZErr = ((is_Z_bad()) ? '<b>metallicity is required</b>' : NULL);
-                /*$ProtErr = ((is_Prot_bad()) ? '<b>* rotation period is required to sample "RV activity rms" and for the correlated noise
+		$vsiniErr = ((is_vsini_bad()) ? '<b>vsini is required</b>' : NULL);
+                $ProtErr = ((is_Prot_bad()) ? '<b>* rotation period is required to sample "RV activity rms" and for the correlated noise
 		calculations</b>' : NULL);
-		$sigRVphotErr = ((is_sigRVphot_bad()) ? '<b>* Photon-noise limited RV precision is required to calculate "Effective RV rms"</b>' : NULL);
 		$sigRVactErr = ((is_sigRVact_bad()) ? '<b>* RV activity rms must be non-zero for the correlated noise calculations</b>' : NULL);
-		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
-		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);*/
-		$error_messages = array($PErr, $rpErr, $mpErr, $magErr, $MsErr, $RsErr, $TeffErr, $ZErr);//, $ProtErr, $floorErr, $sigRVphotErr, $sigRVactErr, $texpErr, $overheadErr, $KdetsigErr, $NGPtrialsErr);
+		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
+		$error_messages = array($PErr, $rpErr, $mpErr, $magErr, $MsErr, $RsErr, $TeffErr, $ZErr, $vsiniErr, $ProtErr, $sigRVactErr,
+		$KdetsigErr, $NGPtrialsErr);
 		return $error_messages;
 	}
 
@@ -45,14 +45,13 @@
 	function is_Z_bad() {
 	        if (($_GET['Z']==NULL)) { $Z_bad = True; } else { $Z_bad = False;}
 		return $Z_bad; }
+        function is_vsini_bad() {
+	        if (($_GET['vsini']==NULL) || ($_GET['vsini']<0)) { $vsini_bad = True; } else { $vsini_bad = False;}
+		return $vsini_bad; }
         function is_Prot_bad() {
-	        if (((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) || ($_GET['NGPtrials']>0)) && (($_GET['Prot']==NULL) ||
+	        if ((($_GET['sigRVact']==NULL) || ($_GET['NGPtrials']>0)) && (($_GET['Prot']==NULL) ||
 		($_GET['Prot']<=0))) { $Prot_bad = True; } else { $Prot_bad = False;} 
 		return $Prot_bad; }
-        function is_sigRVphot_bad() {
-	        if (($_GET['sigRVeff']==NULL) && (($_GET['sigRVphot']==NULL) || ($_GET['sigphotRV']<0))) { $sigRVphot_bad = True; } 
-		else { $sigRVphot_bad = False;} 			                
-		return $sigRVphot_bad; }
 	function is_sigRVact_bad() {
 		if (($_GET['NGPtrials']>0) && ($_GET['sigRVact']!=NULL) && ($_GET['sigRVact']==0)) { $sigRVact_bad = True; } else { $sigRVact_bad = False;}
 		return $sigRVact_bad; }
@@ -68,7 +67,7 @@
 	// otherwise run the RVFC
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		if ((is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_mag_bad()) || (is_Ms_bad()) || (is_Rs_bad()) || (is_Teff_bad()) ||
-		(is_Z_bad())) {
+		(is_Z_bad()) || (is_vsini_bad()) || (is_Prot_bad()) || (is_sigRVact_bad()) || (is_Kdetsig_bad()) || (is_NGPtrials_bad())) {
 			$Errs = report_missing_fields();
 			$PErr = $Errs[0];
 			$rpErr = $Errs[1];
@@ -78,13 +77,11 @@
 			$RsErr = $Errs[5];
 			$TeffErr = $Errs[6];
 			$ZErr = $Errs[7];
-			/*$ProtErr = $Errs[7];
-			$sigRVphotErr = $Errs[9];
+			$vsiniErr = $Errs[8];
+			$ProtErr = $Errs[9];
 			$sigRVactErr = $Errs[10];
-			$texpErr = $Errs[11];
-			$overheadErr = $Errs[12];
-			$KdetsigErr = $Errs[13];
-			$NGPtrialsErr = $Errs[14];*/
+			$KdetsigErr = $Errs[11];
+			$NGPtrialsErr = $Errs[12];
 			include "option1_stellar.php";
 		} else {
 			echo 'run RVFC';
