@@ -127,7 +127,8 @@ td, th {
             <?php endif; ?>
 
             <?php if (isset($_GET['stellar'])) : ?>
-                <?php include 'option1_stellar.php'; ?>
+	    	<?php include 'runoption1.php'; ?>
+                <!--<php include 'option1_stellar.php'; ?>-->
             <?php endif; ?>
 
 

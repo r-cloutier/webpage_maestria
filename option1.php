@@ -31,8 +31,8 @@
 
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Spectrograph parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
 	    
-<!-- only add blank spectrograph fields if not resolved the star yet-->
-<?php if (! isset($_GET['stellar'])) : ?>
+<!-- only add blank spectrograph fields if not resolved the star yet -->
+<?php if (! isset($_GET['stellar']) || ($option1Err!=NULL)) : ?>
 
 <FONT COLOR="990000">(optional: select a spectrograph template)&nbsp;&nbsp;&nbsp;</FONT>
 <select name="spectrograph">

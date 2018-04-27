@@ -2,7 +2,8 @@
 <?php
 
 	function report_missing_fields() {
-		$PErr = ((is_P_bad()) ? '<b>orbital period is required</b>' : NULL);
+		$wlminErr = ((is_wlmin_bad()) ? '<b>&#955;<sub>min</sub> is required</b>' : NULL);
+		/*$PErr = ((is_P_bad()) ? '<b>orbital period is required</b>' : NULL);
                 $rpErr = ((is_rp_bad()) ? '<b>planetary radius is required</b>' : NULL);
 		$mpErr = ((is_mp_bad()) ? '<b>* planetary mass must be positive and non-zero</b>' : NULL);
 		$MsErr = ((is_Ms_bad()) ? '<b>stellar mass is required</b>' : NULL);
@@ -18,11 +19,14 @@
 		$texpErr = ((is_texp_bad()) ? '<b>exposure time is required</b>' : NULL);
 		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
-		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
-		$error_messages = array($PErr, $rpErr, $mpErr, $MsErr, $RsErr, $TeffErr, $ZErr, $ProtErr, $floorErr, $sigRVphotErr, $sigRVactErr, $texpErr, $overheadErr, $KdetsigErr, $NGPtrialsErr);
+		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);*/
+		$error_messages = array($wlminErr); //$PErr, $rpErr, $mpErr, $MsErr, $RsErr, $TeffErr, $ZErr, $ProtErr, $floorErr, $sigRVphotErr, $sigRVactErr, $texpErr, $overheadErr, $KdetsigErr, $NGPtrialsErr);
 		return $error_messages;
 	}
 
+	function is_wlmin_bad() {
+		if (($_GET['wlmin']==NULL) || ($_GET['wlmin']<0)) { $wlmin_bad = True; } else { $wlmin_bad = False;}
+		return $wlmin_bad; }
 	function is_P_bad() {
 		if (($_GET['P']==NULL) || ($_GET['P']<0)) { $P_bad = True; } else { $P_bad = False;}
 		return $P_bad; }
@@ -82,11 +86,10 @@
 	// reload the option2 page if missing any required fields
 	// otherwise run the RVFC
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
-	        if ((is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_Ms_bad()) || (is_Rs_bad()) || (is_Teff_bad()) || (is_Z_bad()) || 
-		(is_Prot_bad()) || (is_floor_bad()) || (is_sigRVphot_bad()) || (is_sigRVact_bad()) || (is_texp_bad()) || (is_overhead_bad()) || 
-		(is_Kdetsig_bad()) || (is_NGPtrials_bad())) {
+		if ((is_wlmin_bad())) {
 			$Errs = report_missing_fields();
-			$PErr = $Errs[0];
+			$wlminErr = $Errs[0];
+			/*$PErr = $Errs[0];
 			$rpErr = $Errs[1];
 			$mpErr = $Errs[2];
 			$MsErr = $Errs[3];
@@ -100,8 +103,9 @@
 			$texpErr = $Errs[11];
 			$overheadErr = $Errs[12];
 			$KdetsigErr = $Errs[13];
-			$NGPtrialsErr = $Errs[14];
-			include "option2.php";
+			$NGPtrialsErr = $Errs[14];*/
+			$option1Err = True;
+			include "option1.php";
 		} else {
 			include "runRVFC.php";
 		}
