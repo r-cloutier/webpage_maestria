@@ -6,6 +6,7 @@
 		<b>Option 1:</b> to-be used when the photon-noise limited RV precision and the effective RV rms are unknown for the target of interest.
 	    </div>
 	    <div style="padding-left:180px;padding-right:160px">
+	        <br>
 		<ul>
 			<li>&emsp;1) enter the required parameters of the RV spectrograph. Alternatively, a set of spectrographs with default
 			parameter values can be resolved from the corresponding drop-down menu. The default values are not fixed and may be modified
@@ -79,30 +80,49 @@
 <br>&emsp;&emsp;<input type="checkbox" value="Kband" < if ($Kbandin == "Yes") : ?> checked< endif; ?>
 name="Kband">&nbsp;&nbsp;K band-->
 
-<br><br><br>
+<br><br>
 <table>
+	<tr>
+	       	<td style="padding: 0px 0px 10px 30px;"><b>&#42; required field</b></td>
+	       	<td></td>
+	</tr>
         <tr>
-	       <td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text"
+	       	<td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text"
 		name="wlmin" value="<?php echo isset($_GET['wlmin']) ? $wlminin : $wlmin ?>"  size="10"
-		maxlength="50"/></td>
-               <td style="padding: 0px 0px 10px 30px;">Maximum wavelength (nm) :&nbsp;&nbsp;<input type="text"
-	       name="wlmax" value="<?php echo isset($_GET['wlmax']) ? $wlmaxin : $wlmax ?>"  size="10" maxlength="50"/></td>
+		maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($wlminErr!=NULL) ? $wlminErr : "" ?></span></td>
+               	<td style="padding: 0px 0px 10px 30px;">Maximum wavelength (nm) :&nbsp;&nbsp;<input type="text"
+	       	name="wlmax" value="<?php echo isset($_GET['wlmax']) ? $wlmaxin : $wlmax ?>"  size="10" maxlength="50"/><b> &#42;</b>
+	       	<span class="error"><?php echo ($wlmaxErr!=NULL) ? $wlmaxErr : "" ?></span></td>
 	</tr>
 	<tr>
-		<td style="padding: 0px 0px 10px 30px;">Spectral resolution (R = &lambda;/&delta;&lambda;) :&nbsp;&nbsp;<input type="text" name="R" value="<?php echo isset($_GET['R']) ? $Rin : $R ?>"  size="10" maxlength="50"/></td>
-		<td style="padding: 0px 0px 10px 30px;">Telescope aperture (metres) :&nbsp;&nbsp;<input type="text" name="aperture" value="<?php echo isset($_GET['aperture']) ? $aperturein : $aperture ?>"  size="10" maxlength="50"/></td>
+		<td style="padding: 0px 0px 10px 30px;">Spectral resolution (R = &lambda;/&delta;&lambda;) :&nbsp;&nbsp;<input type="text" name="R"
+		value="<?php echo isset($_GET['R']) ? $Rin : $R ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($RErr!=NULL) ? $RErr : "" ?></span></td>
+		<td style="padding: 0px 0px 10px 30px;">Telescope aperture (metres) :&nbsp;&nbsp;<input type="text" name="aperture" value="<?php
+		echo isset($_GET['aperture']) ? $aperturein : $aperture ?>"  size="10" maxlength="50"/></b> &#42;</b>
+		<span class="error"><?php echo ($apertureErr!=NULL) ? $apertureErr : "" ?></span></td>
 	</tr>
 	<tr>
-	        <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value="<?php echo isset($_GET['throughput']) ? $throughputin : $throughput ?>"  size="10" maxlength="50"/></td>
-		<td style="padding: 0px 0px 10px 30px;">Telluric absorption upper limit (0-1) : <input type="text" name="maxtelluric" value="<?php echo isset($_GET['maxtelluric']) ? $maxtelluricin : $maxtelluric ?>"  size="10" maxlength="50"/></td>
+	        <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value="<?php echo
+		isset($_GET['throughput']) ? $throughputin : $throughput ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($throughputErr!=NULL) ? $throughputErr : "" ?></span></td>
+		<td style="padding: 0px 0px 10px 30px;">Maximum telluric absorption (0-1) : <input type="text" name="maxtelluric" value="<?php
+		echo isset($_GET['maxtelluric']) ? $maxtelluricin : $maxtelluric ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($maxtelluricErr!=NULL) ? $maxtelluricErr : "" ?></span></td>
 	</tr>
 	<tr>
-		<td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo isset($_GET['floor']) ? $floorin : $floor ?>"  size="10" maxlength="50"/></td>
+		<td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo
+		isset($_GET['floor']) ? $floorin : $floor ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
 		<td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value="<?php echo
-		isset($_GET['texp']) ? $texpin : $texp ?>"  size="10" maxlength="50"/></td>
+		isset($_GET['texp']) ? $texpin : $texp ?>"  size="10" maxlength="50"/></b> &#42;</b>
+		<span class="error"><?php echo ($texpErr!=NULL) ? $texpErr : "" ?></span></td>
 	</tr>
 	<tr>
-		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value="<?php echo isset($_GET['overhead']) ? $overheadin : $overhead ?>"  size="10" maxlength="50"/></td>
+		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value="<?php echo
+		isset($_GET['overhead']) ? $overheadin : $overhead ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($overheadErr!=NULL) ? $overheadErr : "" ?></span></td>
 	</tr>
 	<td></td>
 </table>

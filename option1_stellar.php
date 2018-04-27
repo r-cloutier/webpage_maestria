@@ -6,6 +6,7 @@
 		<b>Option 1:</b> to-be used when the photon-noise limited RV precision and the effective RV rms are unknown for the target of interest.
 	    </div>
 	    <div style="padding-left:180px;padding-right:160px">
+		<br>
 		<ul>
 			<li>&emsp;1) enter the required parameters of the RV spectrograph. Alternatively, a set of spectrographs with default
 			parameter values can be resolved from the corresponding drop-down menu. The default values are not fixed and may be modified
@@ -107,63 +108,86 @@
 	}
 ?>
 
-<!---<br>&emsp;&emsp;<input type="checkbox" value="Uband" <?php if (isset($_GET['Uband'])) : ?> checked<?php endif; ?> name="Uband">&nbsp;&nbsp;U band
-<br>&emsp;&emsp;<input type="checkbox" value="Bband" <?php if (isset($_GET['Bband'])) : ?> checked<?php endif; ?> name="Bband">&nbsp;&nbsp;B band
-<br>&emsp;&emsp;<input type="checkbox" value="Vband" <?php if (isset($_GET['Vband'])) : ?> checked<?php endif; ?> name="Vband">&nbsp;&nbsp;V band
-<br>&emsp;&emsp;<input type="checkbox" value="Rband" <?php if (isset($_GET['Rband'])) : ?> checked<?php endif; ?> name="Rband">&nbsp;&nbsp;R band
-<br>&emsp;&emsp;<input type="checkbox" value="Iband" <?php if (isset($_GET['Iband'])) : ?> checked<?php endif; ?> name="Iband">&nbsp;&nbsp;I band
-<br>&emsp;&emsp;<input type="checkbox" value="Yband" <?php if (isset($_GET['Yband'])) : ?> checked<?php endif; ?> name="Yband">&nbsp;&nbsp;Y band
-<br>&emsp;&emsp;<input type="checkbox" value="Jband" <?php if (isset($_GET['Jband'])) : ?> checked<?php endif; ?> name="Jband">&nbsp;&nbsp;J band
-<br>&emsp;&emsp;<input type="checkbox" value="Hband" <?php if (isset($_GET['Hband'])) : ?> checked<?php endif; ?> name="Hband">&nbsp;&nbsp;H band
-<br>&emsp;&emsp;<input type="checkbox" value="Kband" <?php if (isset($_GET['Kband'])): ?> checked<?php endif; ?> name="Kband">&nbsp;&nbsp;K band-->
+<!---<br>&emsp;&emsp;<input type="checkbox" value="Uband" <php if (sset($_GET['Uband'])) : ?> checked<php endif; ?> name="Uband">&nbsp;&nbsp;U band
+<br>&emsp;&emsp;<input type="checkbox" value="Bband" <php if (sset($_GET['Bband'])) : ?> checked<php endif; ?> name="Bband">&nbsp;&nbsp;B band
+<br>&emsp;&emsp;<input type="checkbox" value="Vband" <php if (sset($_GET['Vband'])) : ?> checked<php endif; ?> name="Vband">&nbsp;&nbsp;V band
+<br>&emsp;&emsp;<input type="checkbox" value="Rband" <php if (sset($_GET['Rband'])) : ?> checked<php endif; ?> name="Rband">&nbsp;&nbsp;R band
+<br>&emsp;&emsp;<input type="checkbox" value="Iband" <php if (sset($_GET['Iband'])) : ?> checked<php endif; ?> name="Iband">&nbsp;&nbsp;I band
+<br>&emsp;&emsp;<input type="checkbox" value="Yband" <php if (sset($_GET['Yband'])) : ?> checked<php endif; ?> name="Yband">&nbsp;&nbsp;Y band
+<br>&emsp;&emsp;<input type="checkbox" value="Jband" <php if (sset($_GET['Jband'])) : ?> checked<php endif; ?> name="Jband">&nbsp;&nbsp;J band
+<br>&emsp;&emsp;<input type="checkbox" value="Hband" <php if (sset($_GET['Hband'])) : ?> checked<php endif; ?> name="Hband">&nbsp;&nbsp;H band
+<br>&emsp;&emsp;<input type="checkbox" value="Kband" <php if (sset($_GET['Kband'])): ?> checked<php endif; ?> name="Kband">&nbsp;&nbsp;K band-->
 
 <br><br><br>
 <table>
         <tr>
+	        <td style="padding: 0px 0px 10px 30px;"><b>&#42; required field</b></td>
+		<td></td>	
+	</tr>
+	<tr>
 	        <td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmin" value=<?php echo
-		$_GET['wlmin'] ?>  size="10" maxlength="50"/></td> 
+		$_GET['wlmin'] ?>  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($wlminErr!=NULL) ? $wlminErr : "" ?></span></td>
 		<td style="padding: 0px 0px 10px 30px;">Maximum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmax" value=<?php echo
-		$_GET['wlmax'] ?>  size="10" maxlength="50"/></td>
+		$_GET['wlmax'] ?>  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($wlmaxErr!=NULL) ? $wlmaxErr : "" ?></span></td>
 	</tr>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Spectral resolution (R = &lambda;/&delta;&lambda;) :&nbsp;&nbsp;<input type="text" name="R" value=<?php echo $_GET['R'] ?>  size="10" maxlength="50"/></td>
-                <td style="padding: 0px 0px 10px 30px;">Telescope aperture (metres) :&nbsp;&nbsp;<input type="text" name="aperture" value=<?php echo $_GET['aperture'] ?>  size="10" maxlength="50"/></td>
+                <td style="padding: 0px 0px 10px 30px;">Spectral resolution (R = &lambda;/&delta;&lambda;) :&nbsp;&nbsp;<input type="text" name="R"
+		value=<?php echo $_GET['R'] ?>  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($RErr!=NULL) ? $RErr : "" ?></span></td>
+                <td style="padding: 0px 0px 10px 30px;">Telescope aperture (metres) :&nbsp;&nbsp;<input type="text" name="aperture" value=<?php echo
+		$_GET['aperture'] ?>  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($apertureErr!=NULL) ? $apertureErr : "" ?></span></td>
         </tr>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value=<?php echo $_GET['throughput'] ?>  size="10" maxlength="50"/></td>
-                <td style="padding: 0px 0px 10px 30px;">Telluric absorption upper limit (0-1) : <input type="text" name="maxtelluric" value=<?php echo $_GET['maxtelluric'] ?>  size="10" maxlength="50"/></td>
+                <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value=<?php echo
+		$_GET['throughput'] ?>  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($throughputErr!=NULL) ? $throughputErr : "" ?></span></td>
+                <td style="padding: 0px 0px 10px 30px;">Maximum telluric absorption (0-1) : <input type="text" name="maxtelluric" value=<?php echo
+		$_GET['maxtelluric'] ?>  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($maxtelluricErr!=NULL) ? $maxtelluricErr : "" ?></span></td>
 	</tr>
 	<tr>
-                <td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value=<?php echo $_GET['floor'] ?>  size="10" maxlength="50"/></td>
-                <td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value=<?php echo $_GET['texp'] ?>  size="10" maxlength="50"/></td>
+                <td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value=<?php echo
+		$_GET['floor'] ?>  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
+                <td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value=<?php echo
+		$_GET['texp'] ?>  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($texpErr!=NULL) ? $texpErr : "" ?></span></td>
         </tr>
 	<tr>
-		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value=<?php echo $_GET['overhead'] ?>  size="10" maxlength="50"/></td>
+		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value=<?php echo
+		$_GET['overhead'] ?>  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($overheadErr!=NULL) ? $overheadErr : "" ?></span></td>
 	</tr>
 </table>
 
 <br>&emsp;<input type=submit value="Resolve remaining fields" name="stellar"/>
 
 <br><br><br>
-<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Planet parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
+<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Planet parameters:</b></p><br>&nbsp;
 <table>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Orbital period (days) :&nbsp;&nbsp;<input type="text" name="P" value="<?php echo isset($_GET['P']) ? $_GET['P'] : $P ?>"  size="10" maxlength="50"/></td>
+                <td style="padding: 0px 0px 10px 30px;">Orbital period (days) :&nbsp;&nbsp;<input type="text" name="P" value="<?php echo
+		isset($_GET['P']) ? $_GET['P'] : $P ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($PErr!=NULL) ? $PErr : "" ?></span></td>
         </tr>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Planetary radius (R<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="rp" value="<?php echo isset($_GET['rp']) ? $_GET['rp'] : $rp ?>"  size="10" maxlength="50"/></td>
+                <td style="padding: 0px 0px 10px 30px;">Planetary radius (R<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="rp"
+		value="<?php echo isset($_GET['rp']) ? $_GET['rp'] : $rp ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($rpErr!=NULL) ? $rpErr : "" ?></span></td>
         </tr>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Planetary mass (M<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="mp" value="<?php echo isset($_GET['mp']) ? $_GET['mp'] : $mp ?>"  size="10" maxlength="50"/>&ensp;(leave blank to estimate the planetary mass from its radius)</td>
+                <td style="padding: 0px 0px 10px 30px;">Planetary mass (M<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="mp"
+		value="<?php echo isset($_GET['mp']) ? $_GET['mp'] : $mp ?>"  size="10" maxlength="50"/></td>
         </tr>
 </table>
 
 
 
 <br>
-<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Stellar parameters:</b></p>
-<p>&nbsp;&nbsp;&nbsp;The band of the chosen apparent magnitude (<i>V</i>=555 nm or <i>J</i>=1250 nm) must span the spectrograph's spectral coverage
-specified above.</p><br>
+<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Stellar parameters:</b></p><br>
 <table>
 
 	<!--<php if (sset($_GET['Uband'])) : ?>
@@ -228,20 +252,33 @@ specified above.</p><br>
 -->
 		    <tr>
 		    	<td style="padding: 0px 0px 10px 30px;"><i>V</i> or <i>J</i> band magnitude :&nbsp;&nbsp;<input type="text" name="mag"
-			value="<?php echo isset($_GET['mag']) ? $_GET['mag'] : $mag ?>"  size="10" maxlength="50"/></td>
+			value="<?php echo isset($_GET['mag']) ? $_GET['mag'] : $mag ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			<span class="error"><?php echo ($magErr!=NULL) ? $magErr : "" ?></span></td>
 			<td></td>
 		    </tr>
                     <tr>
-                        <td style="padding: 0px 0px 10px 30px;">Stellar mass (M<sub>&#x02299;</sub>) :&nbsp;&nbsp;<input type="text" name="Ms" value="<?php echo isset($_GET['Ms']) ? $_GET['Ms'] : $Ms ?>"  size="10" maxlength="50"/></td>
-                        <td style="padding: 0px 0px 10px 30px;">Stellar radius (R<sub>&#x02299;</sub>) : <input type="text" name="Rs" value="<?php echo isset($_GET['Rs']) ? $_GET['Rs'] : $Rs ?>"  size="10" maxlength="50"/></td>
+                        <td style="padding: 0px 0px 10px 30px;">Stellar mass (M<sub>&#x02299;</sub>) :&nbsp;&nbsp;<input type="text" name="Ms"
+			value="<?php echo isset($_GET['Ms']) ? $_GET['Ms'] : $Ms ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			<span class="error"><?php echo ($MsErr!=NULL) ? $MsErr : "" ?></span></td>
+                        <td style="padding: 0px 0px 10px 30px;">Stellar radius (R<sub>&#x02299;</sub>) : <input type="text" name="Rs" value="<?php
+			echo isset($_GET['Rs']) ? $_GET['Rs'] : $Rs ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			<span class="error"><?php echo ($RsErr!=NULL) ? $RsErr : "" ?></span></td>
                     </tr>
                     <tr>
-                        <td style="padding: 0px 0px 10px 30px;">Effective temperature (K) :&nbsp;&nbsp;<input type="text" name="Teff" value="<?php echo isset($_GET['Teff']) ? $_GET['Teff'] : $Teff ?>"  size="10" maxlength="50"/></td>
-                        <td style="padding: 0px 0px 10px 30px;">Metallicity ([Fe/H]) : <input type="text" name="Z" value="<?php echo isset($_GET['Z']) ? $_GET['Z'] : $Z ?>"  size="10" maxlength="50"/></td>
+                        <td style="padding: 0px 0px 10px 30px;">Effective temperature (K) :&nbsp;&nbsp;<input type="text" name="Teff" value="<?php
+			echo isset($_GET['Teff']) ? $_GET['Teff'] : $Teff ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			<span class="error"><?php echo ($TeffErr!=NULL) ? $TeffErr : "" ?></span></td>
+                        <td style="padding: 0px 0px 10px 30px;">Metallicity ([Fe/H]) : <input type="text" name="Z" value="<?php echo
+			isset($_GET['Z']) ? $_GET['Z'] : $Z ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			<span class="error"><?php echo ($ZErr!=NULL) ? $ZErr : "" ?></span></td>
                     </tr>
                     <tr>
-                        <td style="padding: 0px 0px 10px 30px;">Projected rotation velocity (km/s) :&nbsp;&nbsp;<input type="text" name="vsini" value="<?php echo isset($_GET['vsini']) ? $_GET['vsini'] : $vsini ?>"  size="10" maxlength="50"/></td>
-                        <td style="padding: 0px 0px 10px 30px;">Rotation period (days) :&nbsp;&nbsp;<input type="text" name="Prot" value="<?php echo isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50"/>&ensp;(only required if sampling the RV activity rms)</td>
+                        <td style="padding: 0px 0px 10px 30px;">Projected rotation velocity (km/s) :&nbsp;&nbsp;<input type="text" name="vsini"
+			value="<?php echo isset($_GET['vsini']) ? $_GET['vsini'] : $vsini ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			<span class="error"><?php echo ($vsiniErr!=NULL) ? $vsiniErr : "" ?></span></td>
+                        <td style="padding: 0px 0px 10px 30px;">Rotation period (days) :&nbsp;&nbsp;<input type="text" name="Prot" value="<?php echo
+			isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50"/>
+			<span class="error"><?php echo ($ProtErr!=NULL) ? $ProtErr : "" ?></span></td>
                     </tr>
 </table>
 
@@ -251,10 +288,13 @@ specified above.</p><br>
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>RV noise sources:</b></p><br>&nbsp;&nbsp;&nbsp;
 <table>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">RV activity rms (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVact" value="<?php echo isset($_GET['sigRVact']) ? $_GET['sigRVact'] : $sigRVact ?>"  size="10" maxlength="50"/>&ensp;(leave blank to sample from an appropriate empirical distribution)</td>
+                <td style="padding: 0px 0px 10px 30px;">RV activity rms (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVact" value="<?php echo
+		isset($_GET['sigRVact']) ? $_GET['sigRVact'] : $sigRVact ?>"  size="10" maxlength="50"/>
+		<span class="error"><?php echo ($sigRVactErr!=NULL) ? $sigRVactErr : "" ?></span></td>
         </tr>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">RV rms from additional planets (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVplanets" value="<?php echo isset($_GET['sigRVplanets']) ? $_GET['sigRVplanets'] : $sigRVplanets ?>"  size="10" maxlength="50"/>&ensp;(leave blank to sample from an appropriate empirical distribution)</td>
+                <td style="padding: 0px 0px 10px 30px;">RV rms from additional planets (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVplanets"
+		value="<?php echo isset($_GET['sigRVplanets']) ? $_GET['sigRVplanets'] : $sigRVplanets ?>"  size="10" maxlength="50"/></td>
         </tr>
 </table>
 
@@ -262,10 +302,14 @@ specified above.</p><br>
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Simulation parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
 <table>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Desired K detection signficance (K/&sigma;<sub>K</sub>) :&nbsp;&nbsp;<input type="text" name="Kdetsig" value="<?php echo isset($_GET['Kdetsig']) ? $_GET['Kdetsig'] : 3 ?>"  size="10" maxlength="50"/></td>
+                <td style="padding: 0px 0px 10px 30px;">Desired K detection signficance (K/&sigma;<sub>K</sub>) :&nbsp;&nbsp;<input type="text"
+		name="Kdetsig" value="<?php echo isset($_GET['Kdetsig']) ? $_GET['Kdetsig'] : 3 ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($KdetsigErr!=NULL) ? $KdetsigErr : "" ?></span></td>
         </tr>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials" value="<?php echo isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 10 ?>"  size="10" maxlength="50"/>&ensp;(set to zero for the white noise calculation only)</td>
+                <td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials" value="<?php echo
+		isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 10 ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($NGPtrialsErr!=NULL) ? $NGPtrialsErr : "" ?></span></td>
         </tr>
 </table>
 
