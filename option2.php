@@ -2,8 +2,8 @@
 <p style="font-size:24px" align="center">&nbsp;&nbsp;&nbsp;<b>Option 2: user-specified RV precision</b></p>&nbsp;&nbsp;&nbsp;
 
             <div style="padding-left:160px;padding-right:160px">
-		<b>Option 2:</b> to-be used when the photon-noise limited RV precision is known a-priori for the target of interest (often from
-		previous runs of the RVFC or from independent calculations).
+		<b>Option 2:</b> to-be used when the photon-noise limited RV precision or the effective RV rms is known a-priori for the target 
+		of interest (often from previous runs of the RVFC or from independent calculations).
 	    </div>
 	    <div style="padding-left:180px;padding-right:160px">
 	        <br>
@@ -14,7 +14,7 @@
 			(see step 3).</li><br>
 			<li>&emsp;3) enter the additive RV noise sources individually or the effective RV rms alone. If individual RV noise sources
 			are added (i.e. the spectrograph's RV noise floor, the photon-noise limited RV precision, RV activity, and RV rms from
-			additional planets) then these values are used to calculate the effective RV rms which can alternatively be set verbatim
+			additional planets) then these values are used to calculate the effective RV rms which can alternatively be set verbatim,
 			thus negating the need to specify any other RV noise source. Input values for the stellar activity and/or additional planets 
 			in the system can be set to zero to be ignored or if left blank, their values will be sampled from appropriate empirical 
 			distributions according to the planetary and stellar parameters specified in steps 1 and 2.</li><br>

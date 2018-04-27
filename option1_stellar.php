@@ -3,7 +3,7 @@
 
             <div style="padding-left:160px;padding-right:160px">
 		<br><h5>Instructions</h5>
-		<b>Option 1:</b> to-be used when the photon-noise limited RV precision is unknown for the target of interest.
+		<b>Option 1:</b> to-be used when the photon-noise limited RV precision and the effective RV rms are unknown for the target of interest.
 	    </div>
 	    <div style="padding-left:180px;padding-right:160px">
 		<ul>
