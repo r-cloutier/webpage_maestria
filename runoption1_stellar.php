@@ -84,8 +84,7 @@
 			$NGPtrialsErr = $Errs[12];
 			include "option1_stellar.php";
 		} else {
-			echo 'run RVFC';
-			//include "runRVFC.php";
+			include "runRVFC.php";
 		}
 	}
 ?>

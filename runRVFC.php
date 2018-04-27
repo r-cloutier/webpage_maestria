@@ -41,7 +41,6 @@
         $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin."	".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
 	//echo "/usr/bin/python2.7 php2python.py ".$arguments;
 	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	//$output_fname = "/data/cpapir/www/rvfc/Results/RVFCoutput_0d307020_0d460557.txt";
 
 	// Read output
 	$file = fopen($output_fname, 'r');
@@ -124,7 +123,7 @@
         </tr>
         <tr>
 		<td style="padding: 5px 10px;" width="22%">Exposure time</td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($texpout,2,".",""); ?> minn</td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($texpout,2,".",""); ?> min</td>
                 <td style="padding: 5px 10px;" width="22%">Overhead</td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo number_format($overheadout,2,".",""); ?> min</td>
                 <td></td>
