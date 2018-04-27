@@ -86,42 +86,48 @@ name="Kband">&nbsp;&nbsp;K band-->
 	       	<td style="padding: 0px 0px 10px 30px;"><b>&#42; required field</b></td>
 	       	<td></td>
 	</tr>
+	<?php if ($wlsErr!=NULL) : ?>
+		<tr>
+			<td style="padding: 0px 0px 10px 30px;"><?php echo $wlsErr ?></td>
+			<td></td>
+		</tr>
+	<?php endif; ?>
         <tr>
 	       	<td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text"
-		name="wlmin" value="<?php echo isset($_GET['wlmin']) ? $wlminin : $wlmin ?>"  size="10"
+		name="wlmin" value="<?php echo isset($_GET['wlmin']) ? $_GET['wlmin'] : $wlmin ?>"  size="10"
 		maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($wlminErr!=NULL) ? $wlminErr : "" ?></span></td>
                	<td style="padding: 0px 0px 10px 30px;">Maximum wavelength (nm) :&nbsp;&nbsp;<input type="text"
-	       	name="wlmax" value="<?php echo isset($_GET['wlmax']) ? $wlmaxin : $wlmax ?>"  size="10" maxlength="50"/><b> &#42;</b>
+	       	name="wlmax" value="<?php echo isset($_GET['wlmax']) ? $_GET['wlmax'] : $wlmax ?>"  size="10" maxlength="50"/><b> &#42;</b>
 	       	<span class="error"><?php echo ($wlmaxErr!=NULL) ? $wlmaxErr : "" ?></span></td>
 	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Spectral resolution (R = &lambda;/&delta;&lambda;) :&nbsp;&nbsp;<input type="text" name="R"
-		value="<?php echo isset($_GET['R']) ? $Rin : $R ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		value="<?php echo isset($_GET['R']) ? $_GET['R'] : $R ?>"  size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($RErr!=NULL) ? $RErr : "" ?></span></td>
 		<td style="padding: 0px 0px 10px 30px;">Telescope aperture (metres) :&nbsp;&nbsp;<input type="text" name="aperture" value="<?php
-		echo isset($_GET['aperture']) ? $aperturein : $aperture ?>"  size="10" maxlength="50"/></b> &#42;</b>
+		echo isset($_GET['aperture']) ? $_GET['aperture'] : $aperture ?>"  size="10" maxlength="50"/></b> &#42;</b>
 		<span class="error"><?php echo ($apertureErr!=NULL) ? $apertureErr : "" ?></span></td>
 	</tr>
 	<tr>
 	        <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value="<?php echo
-		isset($_GET['throughput']) ? $throughputin : $throughput ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['throughput']) ? $_GET['throughput'] : $throughput ?>"  size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($throughputErr!=NULL) ? $throughputErr : "" ?></span></td>
 		<td style="padding: 0px 0px 10px 30px;">Maximum telluric absorption (0-1) : <input type="text" name="maxtelluric" value="<?php
-		echo isset($_GET['maxtelluric']) ? $maxtelluricin : $maxtelluric ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		echo isset($_GET['maxtelluric']) ? $_GET['maxtelluric'] : $maxtelluric ?>"  size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($maxtelluricErr!=NULL) ? $maxtelluricErr : "" ?></span></td>
 	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo
-		isset($_GET['floor']) ? $floorin : $floor ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['floor']) ? $_GET['floor'] : $floor ?>"  size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
 		<td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value="<?php echo
-		isset($_GET['texp']) ? $texpin : $texp ?>"  size="10" maxlength="50"/></b> &#42;</b>
+		isset($_GET['texp']) ? $_GET['texp'] : $texp ?>"  size="10" maxlength="50"/></b> &#42;</b>
 		<span class="error"><?php echo ($texpErr!=NULL) ? $texpErr : "" ?></span></td>
 	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value="<?php echo
-		isset($_GET['overhead']) ? $overheadin : $overhead ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['overhead']) ? $_GET['overhead'] : $overhead ?>"  size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($overheadErr!=NULL) ? $overheadErr : "" ?></span></td>
 	</tr>
 	<td></td>

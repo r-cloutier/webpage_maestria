@@ -3,6 +3,16 @@
 
 	function report_missing_fields() {
 		$wlminErr = ((is_wlmin_bad()) ? '<b>&#955;<sub>min</sub> is required</b>' : NULL);
+                $wlmaxErr = ((is_wlmax_bad()) ? '<b>&#955;<sub>max</sub> is required</b>' : NULL);
+		$wlsErr = ((are_wls_bad()) ? '<b>* &#955;<sub>min</sub> and &#955;<sub>max</sub> must span either the <i>V</i> or <i>J</i> bands and
+		&#955;<sub>min</sub> must be less than &#955;<sub>max</sub>' : NULL);
+                $RErr = ((is_R_bad()) ? '<b>R is required</b>' : NULL);
+		$apertureErr = ((is_aperture_bad()) ? '<b>aperture is required</b>' : NULL);
+		$throughputErr = ((is_throughput_bad()) ? '<b>throughput is required</b>' : NULL);
+		$maxtelluricErr = ((is_maxtelluric_bad()) ? '<b>max. telluric is required</b>' : NULL);
+		$floorErr = ((is_floor_bad()) ? '<b>RV noise floor is required</b>' : NULL);
+		$texpErr = ((is_texp_bad()) ? '<b>exposure time is required</b>' : NULL);
+		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
 		/*$PErr = ((is_P_bad()) ? '<b>orbital period is required</b>' : NULL);
                 $rpErr = ((is_rp_bad()) ? '<b>planetary radius is required</b>' : NULL);
 		$mpErr = ((is_mp_bad()) ? '<b>* planetary mass must be positive and non-zero</b>' : NULL);
@@ -13,20 +23,48 @@
                 $ZErr = ((is_Z_bad()) ? '<b>* metallicity is required to sample "RV activity rms"</b>' : NULL);
                 $ProtErr = ((is_Prot_bad()) ? '<b>* rotation period is required to sample "RV activity rms" and for the correlated noise
 		calculations</b>' : NULL);
-		$floorErr = ((is_floor_bad()) ? '<b>* RV noise floor is required to calculate "Effective RV rms"</b>' : NULL);
 		$sigRVphotErr = ((is_sigRVphot_bad()) ? '<b>* Photon-noise limited RV precision is required to calculate "Effective RV rms"</b>' : NULL);
 		$sigRVactErr = ((is_sigRVact_bad()) ? '<b>* RV activity rms must be non-zero for the correlated noise calculations</b>' : NULL);
-		$texpErr = ((is_texp_bad()) ? '<b>exposure time is required</b>' : NULL);
 		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
 		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);*/
-		$error_messages = array($wlminErr); //$PErr, $rpErr, $mpErr, $MsErr, $RsErr, $TeffErr, $ZErr, $ProtErr, $floorErr, $sigRVphotErr, $sigRVactErr, $texpErr, $overheadErr, $KdetsigErr, $NGPtrialsErr);
+		$error_messages = array($wlminErr, $wlmaxErr, $wlsErr, $RErr, $apertureErr, $throughputErr, $maxtelluricErr, $floorErr, $texpErr,
+		$overheadErr); //$PErr, $rpErr, $mpErr, $MsErr, $RsErr, $TeffErr, $ZErr, $ProtErr, $floorErr, $sigRVphotErr, $sigRVactErr, $texpErr, $overheadErr, $KdetsigErr, $NGPtrialsErr);
 		return $error_messages;
 	}
 
 	function is_wlmin_bad() {
-		if (($_GET['wlmin']==NULL) || ($_GET['wlmin']<0)) { $wlmin_bad = True; } else { $wlmin_bad = False;}
+		if (($_GET['wlmin']==NULL) || ($_GET['wlmin']<0) || (are_wls_bad())) { $wlmin_bad = True; } else { $wlmin_bad = False;}
 		return $wlmin_bad; }
+	function is_wlmax_bad() {
+	        if (($_GET['wlmax']==NULL) || ($_GET['wlmax']<0) || (are_wls_bad())) { $wlmax_bad = True; } else { $wlmax_bad = False;}
+		return $wlmax_bad; }
+	function are_wls_bad() {
+		if (($_GET['wlmin']>1250) || (($_GET['wlmax']<555) && ($_GET['wlmax']!=NULL)) || ($_GET['wlmin']>=$_GET['wlmax'])) { $wls_bad = True; } else { $wls_bad = False;}
+		return $wls_bad; }
+	function is_R_bad() {
+		if (($_GET['R']==NULL) || ($_GET['R']<0)) { $R_bad = True; } else { $R_bad = False;}
+		return $R_bad; }
+	function is_aperture_bad() {
+	        if (($_GET['aperture']==NULL) || ($_GET['aperture']<0)) { $aperture_bad = True; } else { $aperture_bad = False;}
+		return $aperture_bad; }
+	function is_throughput_bad() {
+	        if (($_GET['throughput']==NULL) || ($_GET['throughput']<=0) || ($_GET['throughput']>1)) { $throughput_bad = True; } else {
+		$throughput_bad = False;}	                
+		return $throughput_bad; }
+        function is_maxtelluric_bad() {
+	        if (($_GET['maxtelluric']==NULL) || ($_GET['maxtelluric']<=0) || ($_GET['maxtelluric']>1)) { $maxtelluric_bad = True; } else {
+		$maxtelluric_bad = False;}	                
+		return $maxtelluric_bad; }
+	function is_floor_bad() {
+	        if (($_GET['floor']==NULL) || ($_GET['floor']<0)) { $floor_bad = True; } else { $floor_bad = False;}		                
+		return $floor_bad; }
+	function is_texp_bad() {
+	        if (($_GET['texp']==NULL) || ($_GET['texp']<0)) { $texp_bad = True; } else { $texp_bad = False;}
+		return $texp_bad; }
+        function is_overhead_bad() {
+	        if (($_GET['overhead']==NULL) || ($_GET['overhead']<0)) { $overhead_bad = True; } else { $overhead_bad = False;}
+		return $overhead_bad; }
 	function is_P_bad() {
 		if (($_GET['P']==NULL) || ($_GET['P']<0)) { $P_bad = True; } else { $P_bad = False;}
 		return $P_bad; }
@@ -59,9 +97,6 @@
 	        if (((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) || ($_GET['NGPtrials']>0)) && (($_GET['Prot']==NULL) ||
 		($_GET['Prot']<=0))) { $Prot_bad = True; } else { $Prot_bad = False;} 
 		return $Prot_bad; }
-        function is_floor_bad() {
-	        if (($_GET['sigRVeff']==NULL) && (($_GET['floor']==NULL) || ($_GET['floor']<0))) { $floor_bad = True; } else { $floor_bad = False;}
-		return $floor_bad; }
         function is_sigRVphot_bad() {
 	        if (($_GET['sigRVeff']==NULL) && (($_GET['sigRVphot']==NULL) || ($_GET['sigphotRV']<0))) { $sigRVphot_bad = True; } 
 		else { $sigRVphot_bad = False;} 			                
@@ -69,12 +104,6 @@
 	function is_sigRVact_bad() {
 		if (($_GET['NGPtrials']>0) && ($_GET['sigRVact']!=NULL) && ($_GET['sigRVact']==0)) { $sigRVact_bad = True; } else { $sigRVact_bad = False;}
 		return $sigRVact_bad; }
-        function is_texp_bad() {
-	        if (($_GET['texp']==NULL) || ($_GET['texp']<0)) { $texp_bad = True; } else { $texp_bad = False;}    
-		return $texp_bad; }
-        function is_overhead_bad() {
-	        if (($_GET['overhead']==NULL) || ($_GET['overhead']<0)) { $overhead_bad = True; } else { $overhead_bad = False;}    
-		return $overhead_bad; }
         function is_Kdetsig_bad() {
 	        if (($_GET['Kdetsig']==NULL) || ($_GET['Kdetsig']<0)) { $Kdetsig_bad = True; } else { $Kdetsig_bad = False;}    
 		return $Kdetsig_bad; }
@@ -86,9 +115,19 @@
 	// reload the option2 page if missing any required fields
 	// otherwise run the RVFC
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
-		if ((is_wlmin_bad())) {
+		if ((is_wlmin_bad()) || (is_wlmax_bad()) || (are_wls_bad()) || (is_R_bad()) || (is_aperture_bad()) || (is_throughput_bad()) ||
+		(is_maxtelluric_bad()) || (is_floor_bad()) || (is_texp_bad()) || (is_overhead_bad())) {
 			$Errs = report_missing_fields();
 			$wlminErr = $Errs[0];
+			$wlmaxErr = $Errs[1];
+			$wlsErr = $Errs[2];
+			$RErr = $Errs[3];
+			$apertureErr = $Errs[4];
+			$throughputErr = $Errs[5];
+			$maxtelluricErr = $Errs[6];
+			$floorErr = $Errs[7];
+			$texpErr = $Errs[8];
+			$overheadErr = $Errs[9];
 			/*$PErr = $Errs[0];
 			$rpErr = $Errs[1];
 			$mpErr = $Errs[2];
@@ -97,7 +136,6 @@
 			$TeffErr = $Errs[5];
 			$ZErr = $Errs[6];
 			$ProtErr = $Errs[7];
-			$floorErr = $Errs[8];
 			$sigRVphotErr = $Errs[9];
 			$sigRVactErr = $Errs[10];
 			$texpErr = $Errs[11];
@@ -107,7 +145,7 @@
 			$option1Err = True;
 			include "option1.php";
 		} else {
-			include "runRVFC.php";
+			include "option1_stellar.php";
 		}
 	}
 ?>
