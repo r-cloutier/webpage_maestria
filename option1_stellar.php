@@ -180,7 +180,8 @@
         </tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Planetary mass (M<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="mp"
-		value="<?php echo isset($_GET['mp']) ? $_GET['mp'] : $mp ?>"  size="10" maxlength="50"/></td>
+		value="<?php echo isset($_GET['mp']) ? $_GET['mp'] : $mp ?>"  size="10" maxlength="50"/>
+		<span class="error"><?php echo ($mpErr!=NULL) ? $mpErr : "" ?></span></td>
         </tr>
 </table>
 
@@ -308,7 +309,7 @@
         </tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials" value="<?php echo
-		isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 10 ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 0 ?>"  size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($NGPtrialsErr!=NULL) ? $NGPtrialsErr : "" ?></span></td>
         </tr>
 </table>

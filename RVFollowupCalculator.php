@@ -128,7 +128,6 @@ td, th {
 
             <?php if (isset($_GET['stellar'])) : ?>
 	    	<?php include 'runoption1.php'; ?>
-                <!--<php include 'option1_stellar.php'; ?>-->
             <?php endif; ?>
 
 
@@ -151,7 +150,7 @@ td, th {
 
             <!-- Run the RVFC for option 1-->
 	    <?php if (isset($_GET['runrvfc1'])) : ?>
-		<?php include 'runoption1.php'; ?>
+		<?php include 'runoption1_stellar.php'; ?>
 	    <?php endif; ?>
 
 
