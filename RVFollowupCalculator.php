@@ -74,7 +74,8 @@ td, th {
 
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-             		<a class="navbar-brand" href="http://maestria.astro.umontreal.ca/rvfc/"><font style="color:#fff">RVFC</font></a>
+             		<a class="navbar-brand" href="http://astro.utoronto.ca/~cloutier/"><font
+			style="color:#fff">Ryan Cloutier</font></a>
 		        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -110,6 +111,9 @@ td, th {
 	    </div>
 
 	    <form action="http://maestria.astro.umontreal.ca/rvfc/RVFollowupCalculator.php" method="get" >
+	    &nbsp;&nbsp;&nbsp;<button type="button"
+	    onclick="window.location.href='http://maestria.astro.umontreal.ca/rvfc/'">RVFC Homepage</button>
+	    <br><br>
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_calculate_sigRV_phot" value="Option 1: RVFC-derived RV precision" />
 	    <br/><br/>
 	    &nbsp;&nbsp;&nbsp;<input type="submit" name="submit_set_sigRV_phot" value="Option 2: user-specified RV precision" />
@@ -135,6 +139,10 @@ td, th {
             <?php if (isset($_GET['submit_set_sigRV_phot'])) : ?>
                  <?php include 'option2.php'; ?>
             <?php endif; ?>
+
+	    <?php if (isset($_GET['submit_2d1'])) : ?>
+	    	<?php include "option2d1.php"; ?>
+	    <?php endif; ?>
 
 
             <!-- Upload a file that automatically fills the fields -->

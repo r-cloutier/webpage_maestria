@@ -21,7 +21,7 @@
 			in the system. These values can be set to zero to be ignored. If left blank, their values will be sampled from appropriate
 			empirical distributions according to the planetary and stellar parameters specified in steps 2 and 3.</li><br>
 			<li>&emsp;5) enter the required values of the simulation parameters. This includes the number of GP trials to-be run
-			which&#8213;is used&#8213;we recommend be set to at least ten as these results are sensitive to the window function of 
+			which&#8213;if used&#8213;we recommend be set to at least ten as these results are sensitive to the window function of 
 			the observations and should therefore be sampled. Alternatively, this value can be set to zero to only consider the white 
 			noise calculation.</li><br>
 			<li>&emsp;6) Click "Run RVFC" to begin the calculations. Reporting of the results to screen can take seconds up to
@@ -303,7 +303,7 @@
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Simulation parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
 <table>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Desired K detection signficance (K/&sigma;<sub>K</sub>) :&nbsp;&nbsp;<input type="text"
+                <td style="padding: 0px 0px 10px 30px;">Desired K detection significance (K/&sigma;<sub>K</sub>) :&nbsp;&nbsp;<input type="text"
 		name="Kdetsig" value="<?php echo isset($_GET['Kdetsig']) ? $_GET['Kdetsig'] : 3 ?>"  size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($KdetsigErr!=NULL) ? $KdetsigErr : "" ?></span></td>
         </tr>

@@ -21,7 +21,7 @@
 			in the system. These values can be set to zero to be ignored. If left blank, their values will be sampled from appropriate
 			empirical distributions according to the planetary and stellar parameters specified in steps 2 and 3.</li><br>
 			<li>&emsp;5) enter the required values of the simulation parameters. This includes the number of GP trials to-be run
-			which&#8213;is used&#8213;we recommend be set to at least ten as these results are sensitive to the window function of 
+			which&#8213;if used&#8213;we recommend be set to at least ten as these results are sensitive to the window function of 
 			the observations and should therefore be sampled. Alternatively, this value can be set to zero to only consider the white 
 			noise calculation.</li><br>
 			<li>&emsp;6) Click "Run RVFC" to begin the calculations. Reporting of the results to screen can take seconds up to
