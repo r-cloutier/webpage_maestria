@@ -122,17 +122,23 @@ td, th {
 
 
             <!-- Calculate sigRV using the calculator -->
-            <?php if (isset($_GET['submit_calculate_sigRV_phot']) && ! isset($_GET['submit_spec'])) : ?>
-                 <?php include 'option1_stellar.php'; ?>
+	    <?php if (isset($_GET['submit_calculate_sigRV_phot'])) : ?>
+	         <?php include 'option1.php'; ?>		                 
+	    <?php endif; ?>
+
+            <?php if (isset($_GET['submit_1d1'])) : ?>
+                 <?php include 'option1d1.php'; ?>
+            <?php endif; ?>
+            <?php if (isset($_GET['submit_spec1d1'])) : ?>
+                <?php include 'option1d1_withspectrograph.php'; ?>
             <?php endif; ?>
 
-            <!--<php if (sset($_GET['submit_spec']) && ! sset($_GET['stellar'])) : ?>
-                <php include 'option1_withspectrograph.php'; ?>
-            <php endif; ?>-->
-
-            <?php if (isset($_GET['stellar'])) : ?>
-	    	<?php include 'runoption1.php'; ?>
-            <?php endif; ?>
+	    <?php if (isset($_GET['submit_1d2'])) : ?>
+	         <?php include 'option1d2.php'; ?>
+	    <?php endif; ?>
+	    <?php if (isset($_GET['submit_spec1d2'])) : ?>
+		 <?php include 'option1d2_withspectrograph.php'; ?>
+	    <?php endif; ?>
 
 
             <!-- Ask user to specify sigRV instead of calculating it -->
@@ -163,8 +169,11 @@ td, th {
 
 
             <!-- Run the RVFC for option 1-->
-	    <?php if (isset($_GET['runrvfc1'])) : ?>
-		<?php include 'runoption1_stellar.php'; ?>
+	    <?php if (isset($_GET['runrvfc1d1'])) : ?>
+		<?php include 'runoption1d1.php'; ?>
+	    <?php endif; ?>
+	    <?php if (isset($_GET['runrvfc1d2'])) : ?>
+	        <?php include 'runoption1d2.php'; ?>	                
 	    <?php endif; ?>
 
 
