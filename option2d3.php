@@ -1,5 +1,5 @@
 <br><br>
-<p style="font-size:24px" align="center">&nbsp;&nbsp;&nbsp;<b>Option 2.1</b></p>&nbsp;&nbsp;&nbsp;
+<p style="font-size:24px" align="center">&nbsp;&nbsp;&nbsp;<b>Option 2.3</b></p>&nbsp;&nbsp;&nbsp;
 
             <div style="padding-left:160px;padding-right:160px">
 		<b>Option 2:</b> to-be used when the photon-noise limited RV precision or the effective RV rms is known a-priori for the target 
@@ -55,26 +55,16 @@
 		echo isset($_GET['Ms']) ? $_GET['Ms'] : $Ms ?>"  size="10" maxlength="50"/><b> &#42;</b>
                 <span class="error"><?php echo ($MsErr!=NULL) ? $MsErr : "" ?></span></td>
 	</tr>
-	<tr>
-	        <td style="padding: 0px 0px 10px 30px;">Stellar radius (R<sub>&#x02299;</sub>) :&nbsp;&nbsp;<input type="text" name="Rs"
-		value="<?php echo isset($_GET['Rs']) ? $_GET['Rs'] : $Rs ?>"  size="10" maxlength="50"/><b>&#42;</b>
-		<span class="error"><?php echo ($RsErr!=NULL) ? $RsErr : "" ?></span></td>
-	</tr>
-	<tr>
-		<td style="padding: 0px 0px 10px 30px;">Effective temperature (K) :&nbsp;&nbsp;<input type="text" name="Teff" value="<?php echo
-		isset($_GET['Teff']) ? $_GET['Teff'] : $Teff ?>"  size="10" maxlength="50"/><b>&#42;</b>
-		<span class="error"><?php echo ($TeffErr!=NULL) ? $TeffErr : "" ?></span></td>
-        </tr>
+</table>
+
+<br>
+<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>RV noise sources:</b></p><br>&nbsp;&nbsp;&nbsp;
+<table>
 	<tr>                
-		<td style="padding: 0px 0px 10px 30px;">Metallicity ([Fe/H]) :&nbsp;&nbsp;<input type="text" name="Z" value="<?php echo
-		isset($_GET['Z']) ? $_GET['Z'] : $Z ?>"  size="10" maxlength="50"/><b>&#42;</b>
-		<span class="error"><?php echo ($ZErr!=NULL) ? $ZErr : "" ?></span></td>
+		<td style="padding: 0px 0px 10px 30px;">Effective RV rms (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVeff" value="<?php echo
+		isset($_GET['sigRVeff']) ? $_GET['sigRVeff'] : $sigRVeff ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		<span class="error"><?php echo ($sigRVeffErr!=NULL) ? $sigRVeffErr : "" ?></span></td>
 	</tr>
-	<tr>
-		<td style="padding: 0px 0px 10px 30px;">Rotation period (days) :&nbsp;&nbsp;<input type="text" name="Prot" value="<?php echo
-		isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50"/><b>&#42;</b>
-		<span class="error"><?php echo ($ProtErr!=NULL) ? $ProtErr : "" ?></span></td>
-        </tr>
 </table>
 
 <br>

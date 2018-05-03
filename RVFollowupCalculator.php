@@ -143,6 +143,12 @@ td, th {
 	    <?php if (isset($_GET['submit_2d1'])) : ?>
 	    	<?php include "option2d1.php"; ?>
 	    <?php endif; ?>
+	    <?php if (isset($_GET["submit_2d2"])) : ?>
+	    	<?php include "option2d2.php"; ?>
+	    <?php endif; ?>
+	    <?php if (isset($_GET["submit_2d3"])) : ?>
+	    	<?php include "option2d3.php"; ?>
+	    <?php endif; ?>
 
 
             <!-- Upload a file that automatically fills the fields -->
