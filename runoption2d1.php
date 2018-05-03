@@ -11,7 +11,7 @@
                 $ZErr = ((is_Z_bad()) ? '<b>metallicity is required</b>' : NULL);
                 $ProtErr = ((is_Prot_bad()) ? '<b>rotation period is required</b>' : NULL);
 		$floorErr = ((is_floor_bad()) ? '<b>RV noise floor is required</b>' : NULL);
-		$sigRVphotErr = ((is_sigRVphot_bad()) ? '<b>Photon-noise limited RV precision is required</b>' : NULL);
+		$sigRVphotErr = ((is_sigRVphot_bad()) ? $_GET['sigRVphot'].' '.'<b>Photon-noise limited RV precision is required</b>' : NULL);
 		$texpErr = ((is_texp_bad()) ? '<b>exposure time is required</b>' : NULL);
 		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
@@ -52,8 +52,7 @@
 	        if (($_GET['floor']==NULL)) { $floor_bad = True; } else { $floor_bad = False;}
 		return $floor_bad; }
         function is_sigRVphot_bad() {
-	        if (($_GET['sigRVphot']==NULL) || ($_GET['sigphotRV']<0)) { $sigRVphot_bad = True; } 
-		else { $sigRVphot_bad = False;} 			                
+	        if (($_GET['sigRVphot']==NULL) || ($_GET['sigphotRV']<0)) { $sigRVphot_bad = True; } else { $sigRVphot_bad = False;} 
 		return $sigRVphot_bad; }
         function is_texp_bad() {
 	        if (($_GET['texp']==NULL) || ($_GET['texp']<0)) { $texp_bad = True; } else { $texp_bad = False;}    

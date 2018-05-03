@@ -123,12 +123,12 @@ td, th {
 
             <!-- Calculate sigRV using the calculator -->
             <?php if (isset($_GET['submit_calculate_sigRV_phot']) && ! isset($_GET['submit_spec'])) : ?>
-                 <?php include 'option1.php'; ?>
+                 <?php include 'option1_stellar.php'; ?>
             <?php endif; ?>
 
-            <?php if (isset($_GET['submit_spec']) && ! isset($_GET['stellar'])) : ?>
-                <?php include 'option1_withspectrograph.php'; ?>
-            <?php endif; ?>
+            <!--<php if (sset($_GET['submit_spec']) && ! sset($_GET['stellar'])) : ?>
+                <php include 'option1_withspectrograph.php'; ?>
+            <php endif; ?>-->
 
             <?php if (isset($_GET['stellar'])) : ?>
 	    	<?php include 'runoption1.php'; ?>
@@ -176,7 +176,7 @@ td, th {
 	    	<?php include 'runoption2d2.php'; ?>
 	    <?php endif; ?>
 	    <?php if (isset($_GET['runrvfc2d3'])) : ?>
-	    	<?php echo include 'runoption2d3.php'; ?>
+	    	<?php include 'runoption2d3.php'; ?>
 	    <?php endif; ?>
 	    </form>
 	    <!-- ========= END CALCULATOR FUNCTION=========-->
