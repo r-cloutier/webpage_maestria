@@ -27,7 +27,7 @@
 		</ul>
 	    </div>
 
-<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Planet parameters:</b></p><br>
+<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Transiting planet parameters:</b></p><br>
 <table>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;"><b>&#42; required field</b></td>

@@ -27,7 +27,7 @@
 		</ul>
 	    </div>
 
-<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Planet parameters:</b></p><br>
+<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Transiting planet parameters:</b></p><br>
 <table>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;"><b>&#42; required field</b></td>
@@ -54,27 +54,27 @@
 <table>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Stellar mass (M<sub>&#x02299;</sub>) :&nbsp;&nbsp;<input type="text" name="Ms" value="<?php
-		echo isset($_GET['Ms']) ? $_GET['Ms'] : $Ms ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		echo isset($_GET['Ms']) ? $_GET['Ms'] : $Ms ?>"  size="10" maxlength="50"/> <b>&#42;</b>
                 <span class="error"><?php echo ($MsErr!=NULL) ? $MsErr : "" ?></span></td>
 	</tr>
 	<tr>
 	        <td style="padding: 0px 0px 10px 30px;">Stellar radius (R<sub>&#x02299;</sub>) :&nbsp;&nbsp;<input type="text" name="Rs"
-		value="<?php echo isset($_GET['Rs']) ? $_GET['Rs'] : $Rs ?>"  size="10" maxlength="50"/><b>&#42;</b>
+		value="<?php echo isset($_GET['Rs']) ? $_GET['Rs'] : $Rs ?>"  size="10" maxlength="50"/> <b>&#42;</b>
 		<span class="error"><?php echo ($RsErr!=NULL) ? $RsErr : "" ?></span></td>
 	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Effective temperature (K) :&nbsp;&nbsp;<input type="text" name="Teff" value="<?php echo
-		isset($_GET['Teff']) ? $_GET['Teff'] : $Teff ?>"  size="10" maxlength="50"/><b>&#42;</b>
+		isset($_GET['Teff']) ? $_GET['Teff'] : $Teff ?>"  size="10" maxlength="50"/> <b>&#42;</b>
 		<span class="error"><?php echo ($TeffErr!=NULL) ? $TeffErr : "" ?></span></td>
         </tr>
 	<tr>                
 		<td style="padding: 0px 0px 10px 30px;">Metallicity ([Fe/H]) :&nbsp;&nbsp;<input type="text" name="Z" value="<?php echo
-		isset($_GET['Z']) ? $_GET['Z'] : $Z ?>"  size="10" maxlength="50"/><b>&#42;</b>
+		isset($_GET['Z']) ? $_GET['Z'] : $Z ?>"  size="10" maxlength="50"/> <b>&#42;</b>
 		<span class="error"><?php echo ($ZErr!=NULL) ? $ZErr : "" ?></span></td>
 	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Rotation period (days) :&nbsp;&nbsp;<input type="text" name="Prot" value="<?php echo
-		isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50"/><b>&#42;</b>
+		isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50"/> <b>&#42;</b>
 		<span class="error"><?php echo ($ProtErr!=NULL) ? $ProtErr : "" ?></span></td>
         </tr>
 </table>
@@ -84,8 +84,8 @@
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>RV noise sources:</b></p><br>&nbsp;&nbsp;&nbsp;
 <table>
 	<tr>
-		<td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name"floor" value="<?php echo
-		isset($_GET['floor']) ? $_GET['floor'] : $floor ?>" size="10" maxlength="50"/> <b>&#42;</b>
+                <td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo
+		isset($_GET['floor']) ? $_GET['floor'] : $floor ?>" size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
 	</tr>
 	<tr>

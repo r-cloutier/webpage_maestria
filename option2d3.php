@@ -27,7 +27,7 @@
 		</ul>
 	    </div>
 
-<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Planet parameters:</b></p><br>
+<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Transiting planet parameters:</b></p><br>
 <table>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;"><b>&#42; required field</b></td>
@@ -85,11 +85,6 @@
 		name="Kdetsig" value="<?php echo isset($_GET['Kdetsig']) ? $_GET['Kdetsig'] : 3 ?>"  size="10" maxlength="50"/> <b>&#42;</b>
 		<span class="error"><?php echo ($KdetsigErr!=NULL) ? $KdetsigErr : "" ?></span></td>
         </tr>
-        <tr>
-		<td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials" value="<?php echo
-		isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 0 ?>"  size="10" maxlength="50"/> <b>&#42;</b>
-		<span class="error"><?php echo ($NGPtrialsErr!=NULL) ? $NGPtrialsErr : "" ?></span></td>
-    	</tr>
 </table>
 
 <br>&emsp;<input type=submit value="Run RVFC" name="runrvfc2d3"/>

@@ -176,7 +176,7 @@ td, th {
 	    	<?php include 'runoption2d2.php'; ?>
 	    <?php endif; ?>
 	    <?php if (isset($_GET['runrvfc2d3'])) : ?>
-	    	<?php include 'runoption2d3.php'; ?>
+	    	<?php echo include 'runoption2d3.php'; ?>
 	    <?php endif; ?>
 	    </form>
 	    <!-- ========= END CALCULATOR FUNCTION=========-->

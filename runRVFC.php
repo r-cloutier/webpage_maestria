@@ -36,11 +36,13 @@
 	$Zin = (($_GET['Z']>0) ? $_GET['Z'] : 0);
 	$vsiniin = (($_GET['vsini']>0) ? $_GET['vsini'] : 0);
 	$Protin = (($_GET['Prot']>0) ? $_GET['Prot'] : 0);
+	$NGPtrialsin = (($_GET['NGPtrials']!=NULL) ? $_GET['NGPtrials'] : 0);
 
 	// Run calculator and save the output to a txt file
-        $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin."	".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$_GET['NGPtrials'];
+        $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$NGPtrialsin;
 	//echo "/usr/bin/python2.7 php2python.py ".$arguments;
 	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
+	echo $output_fname;
 
 	// Read output
 	$file = fopen($output_fname, 'r');

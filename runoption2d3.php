@@ -10,8 +10,7 @@
 		$texpErr = ((is_texp_bad()) ? '<b>exposure time is required</b>' : NULL);
 		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
-		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
-		$error_messages = array($PErr, $rpErr, $mpErr, $MsErr, $sigRVeffErr, $texpErr, $overheadErr, $KdetsigErr, $NGPtrialsErr);
+		$error_messages = array($PErr, $rpErr, $mpErr, $MsErr, $sigRVeffErr, $texpErr, $overheadErr, $KdetsigErr);
 		return $error_messages;
 	}
 
@@ -43,16 +42,13 @@
         function is_Kdetsig_bad() {
 	        if (($_GET['Kdetsig']==NULL) || ($_GET['Kdetsig']<0)) { $Kdetsig_bad = True; } else { $Kdetsig_bad = False;}    
 		return $Kdetsig_bad; }
-        function is_NGPtrials_bad() {
-	        if (($_GET['NGPtrials']==NULL) || ($_GET['NGPtrials']<0)) { $NGPtrials_bad = True; } else { $NGPtrials_bad = False;}    
-		return $NGPtrials_bad; }
 	
 
 	// reload the option2 page if missing any required fields
 	// otherwise run the RVFC
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 	        if ((is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_Ms_bad()) || (is_sigRVeff_bad()) || (is_texp_bad()) || 
-		(is_overhead_bad()) || (is_Kdetsig_bad()) || (is_NGPtrials_bad())) {
+		(is_overhead_bad()) || (is_Kdetsig_bad())) {
 			$Errs = report_missing_fields();
 			$PErr = $Errs[0];
 			$rpErr = $Errs[1];
@@ -62,8 +58,7 @@
 			$texpErr = $Errs[5];
 			$overheadErr = $Errs[6];
 			$KdetsigErr = $Errs[7];
-			$NGPtrialsErr = $Errs[8];
-			include "option2d3.php";
+			echo include "option2d3.php";
 		} else {
 			include "runRVFC.php";
 		}

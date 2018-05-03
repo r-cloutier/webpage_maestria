@@ -49,10 +49,10 @@
 	        if (($_GET['Prot']==NULL) || ($_GET['Prot']<=0)) { $Prot_bad = True; } else { $Prot_bad = False;} 
 		return $Prot_bad; }
         function is_floor_bad() {
-	        if (($_GET['sigRVeff']==NULL) && (($_GET['floor']==NULL) || ($_GET['floor']<0))) { $floor_bad = True; } else { $floor_bad = False;}
+	        if (($_GET['floor']==NULL)) { $floor_bad = True; } else { $floor_bad = False;}
 		return $floor_bad; }
         function is_sigRVphot_bad() {
-	        if (($_GET['sigRVeff']==NULL) && (($_GET['sigRVphot']==NULL) || ($_GET['sigphotRV']<0))) { $sigRVphot_bad = True; } 
+	        if (($_GET['sigRVphot']==NULL) || ($_GET['sigphotRV']<0)) { $sigRVphot_bad = True; } 
 		else { $sigRVphot_bad = False;} 			                
 		return $sigRVphot_bad; }
         function is_texp_bad() {
