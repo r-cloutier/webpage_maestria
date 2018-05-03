@@ -43,7 +43,9 @@
 		<span class="error"><?php echo ($rpErr!=NULL) ? $rpErr : "" ?></span></td>
         </tr>
         <tr>
-		<td style="padding: 0px 0px 10px 30px;">Planetary mass (M<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="mp" value="<?php echo isset($_GET['mp']) ? $_GET['mp'] : $mp ?>"  size="10" maxlength="50"/></td>
+		<td style="padding: 0px 0px 10px 30px;">Planetary mass (M<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="mp" 
+		value="<?php echo isset($_GET['mp']) ? $_GET['mp'] : $mp ?>"  size="10" maxlength="50"/>
+		<span class="error"><?php echo ($mpErr!=NULL) ? $mpErr : "" ?></span></td>
         </tr>
 </table>
 
@@ -77,6 +79,22 @@
         </tr>
 </table>
 
+
+<br>
+<p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>RV noise sources:</b></p><br>&nbsp;&nbsp;&nbsp;
+<table>
+	<tr>
+		<td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name"floor" value="<?php echo
+		isset($_GET['floor']) ? $_GET['floor'] : $floor ?>" size="10" maxlength="50"/> <b>&#42;</b>
+		<span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
+	</tr>
+	<tr>
+		<td style="padding: 0px 0px 10px 30px;">Photon-noise limited RV precision (m/s) :&nbsp;&nbsp;<input type="text" name="sigRVphot"
+		value="<?php echo isset($_GET['sigRVphot']) ? $_GET['sigRVphot'] : $sigRVphot ?>" size="10" maxlength="50"/> <b>&#42;</b>
+		<span class='error'><?php echo ($sigRVphotErr!=NULL) ? $sigRVphotErr : "" ?></span></td>
+	</tr>
+</table>
+
 <br>
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Simulation parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
 <table>
@@ -102,4 +120,4 @@
     	</tr>
 </table>
 
-<br>&emsp;<input type=submit value="Run RVFC" name="runrvfc2"/>
+<br>&emsp;<input type=submit value="Run RVFC" name="runrvfc2d1"/>
