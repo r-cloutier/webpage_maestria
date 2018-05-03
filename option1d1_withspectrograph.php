@@ -265,7 +265,8 @@
         </tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials" value="<?php echo
-		isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 0 ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 0 ?>"  size="10" maxlength="50"/><b> &#42;</b> (note that increasing the number of
+		GP trials will increase the wall time of the RVFC calculation)
 		<span class="error"><?php echo ($NGPtrialsErr!=NULL) ? $NGPtrialsErr : "" ?></span></td>
         </tr>
 </table>

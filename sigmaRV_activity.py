@@ -133,14 +133,18 @@ def logRhk2sigmaRV(logRhk, Teff, mean_only=False):
     g2 = (Teff >= 52e2) & (Teff < 6e3)
     sigmaRVs[g2] = 7.9 * R5[g2]**(.55)
 
-    g3 = Teff < 52e2
+    g3 = (Teff >= 38e2) & (Teff < 52e2)
     sigmaRVs[g3] = 7.8 * R5[g3]**(.12)
+
+    g4 = Teff < 38e2
+    sigmaRVs[g4] = 2. * R5[g4]**(.1)
 
     if not mean_only:
         sigmaRVs[g1] += np.random.randn(sigmaRVs[g1].size) * 10**(.17)
         sigmaRVs[g2] += np.random.randn(sigmaRVs[g2].size) * 10**(.18)
         sigmaRVs[g3] += np.random.randn(sigmaRVs[g3].size) * 10**(.19)
-        
+        sigmaRVs[g4] += np.random.randn(sigmaRVs[g4].size) * 10**(.2)
+
     return sigmaRVs
 
 
