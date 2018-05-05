@@ -77,7 +77,7 @@
 			$NGPtrialsErr = $Errs[11];
 			include "option1d1.php";
 		} else {
-			include "runRVFC.php";
+			include "runwarning.php";
 		}
 	}
 ?>

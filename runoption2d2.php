@@ -82,7 +82,7 @@
 			$NGPtrialsErr = $Errs[11];
 			include "option2d2.php";
 		} else {
-			include "runRVFC.php";
+			include "runwarning.php";
 		}
 	}
 ?>
