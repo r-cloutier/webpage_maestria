@@ -188,6 +188,12 @@ td, th {
 	    	<?php include 'runoption2d3.php'; ?>
 	    <?php endif; ?>
 
+
+	    <!-- Run the RVFC after the warnings -->
+	    <?php if (isset($_GET['runrvfcfinal'])) : ?>
+	    	<?php include "runRVFC.php"; ?>
+	    <?php endif; ?>
+	    
 	    </form>
 	    <!-- ========= END CALCULATOR FUNCTION=========-->
 
