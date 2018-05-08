@@ -1,7 +1,7 @@
 <br><br>
 <p style="font-size:24px" align="left">&nbsp;&nbsp;&nbsp;<b>Option 1.1</b></p>&nbsp;&nbsp;&nbsp;
-
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Spectrograph parameters (<?php echo $_GET['spectrograph']?>):</b></p><br>&nbsp;&nbsp;&nbsp;
+
 
 <FONT COLOR="990000">(optional: select a spectrograph template)&nbsp;&nbsp;&nbsp;</FONT>
 <select name="spectrograph">
@@ -264,11 +264,29 @@
 		<span class="error"><?php echo ($KdetsigErr!=NULL) ? $KdetsigErr : "" ?></span></td>
         </tr>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials" value="<?php echo
-		isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 0 ?>"  size="10" maxlength="50"/><b> &#42;</b> (note that increasing the number of
-		GP trials will increase the wall time of the RVFC calculation)
+                <td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials"
+		onkeyup="print_warningGP()" id="NGPtrials" value="<?php echo isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 0 ?>"  
+		size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($NGPtrialsErr!=NULL) ? $NGPtrialsErr : "" ?></span></td>
         </tr>
 </table>
+
+<script>
+function print_warningGP() {
+        var NGPtrials = document.getElementById("NGPtrials").value;
+	// if null then do nothing
+        if (NGPtrials === "") {
+	} else {
+             	var NGPtrials_int = parseInt(NGPtrials);
+                // if greater than one send a warning alert
+		if (NGPtrials_int > 0) {
+                      	var NGPtrials_label = NGPtrials_int.toFixed(0);
+                        var trial_label = (NGPtrials_int == 1 ? "trial." : "trials.");
+                        var warning = "Note that the RVFC will take a few minutes to run "+NGPtrials_label+" GP "+trial_label;
+                        alert(warning);
+		}
+	}
+}
+</script>
 
 <br>&emsp;<input type=submit value="Run RVFC" name="runrvfc1d1"/>

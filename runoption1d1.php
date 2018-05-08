@@ -2,6 +2,15 @@
 <?php
 
 	function report_missing_fields() {
+		$wlminErr = ((is_wlmin_bad()) ? '<b>&#955;<sub>min</sub> is required</b>' : NULL);
+              	$wlmaxErr = ((is_wlmax_bad()) ? '<b>&#955;<sub>max</sub> is required</b>' : NULL);
+		$RErr = ((is_R_bad()) ? '<b>spectral resolution is required</b>' : NULL);
+		$apertureErr = ((is_aperture_bad()) ? '<b>telescope aperture is required</b>' : NULL);
+		$throughputErr = ((is_throughput_bad()) ? '<b>throughput is required</b>' : NULL);
+		$maxtelluricErr = ((is_maxtelluric_bad()) ? '<b>max. telluric absorption is required</b>' : NULL);
+		$floorErr = ((is_floor_bad()) ? '<b>RV noise floor is required</b>' : NULL);
+		$texpErr = ((is_texp_bad()) ? '<b>exposure time is required</b>' : NULL);
+		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
 		$PErr = ((is_P_bad()) ? '<b>orbital period is required</b>' : NULL);
                 $rpErr = ((is_rp_bad()) ? '<b>planetary radius is required</b>' : NULL);
 		$mpErr = ((is_mp_bad()) ? '<b>* planetary mass must be positive and non-zero</b>' : NULL);
@@ -14,11 +23,40 @@
                 $ProtErr = ((is_Prot_bad()) ? '<b>rotation period is required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
 		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
-		$error_messages = array($PErr, $rpErr, $mpErr, $magErr, $MsErr, $RsErr, $TeffErr, $ZErr, $vsiniErr, $ProtErr, 
-		$KdetsigErr, $NGPtrialsErr);
+		$error_messages = array($wlminErr, $wlmaxErr, $RErr, $apertureErr, $throughputErr, $maxtelluricErr, $floorErr, $texpErr,
+		$overheadErr, $PErr, $rpErr, $mpErr, $magErr, $MsErr, $RsErr, $TeffErr, $ZErr, $vsiniErr, $ProtErr, $KdetsigErr, $NGPtrialsErr);
 		return $error_messages;
 	}
 
+	function is_wlmin_bad() {
+		if (($_GET['wlmin']==NULL) || ($_GET['wlmin']<0)) { $wlmin_bad = True; } else { $wlmin_bad = False; }
+		return $wlmin_bad; }
+        function is_wlmax_bad() {
+	        if (($_GET['wlmax']==NULL) || ($_GET['wlmax']<0)) { $wlmax_bad = True; } else { $wlmax_bad = False; }
+	        return $wlmax_bad; }
+	function is_R_bad() {
+	        if (($_GET['R']==NULL) || ($_GET['R']<0)) { $R_bad = True; } else { $R_bad = False; }
+		return $R_bad; }
+        function is_aperture_bad() {
+	        if (($_GET['aperture']==NULL) || ($_GET['aperture']<0)) { $aperture_bad = True; } else { $aperture_bad = False; }
+                return $aperture_bad; }
+	function is_throughput_bad() {
+	        if (($_GET['throughput']==NULL) || ($_GET['throughput']<=0) || ($_GET['throughput']>1)) { $throughput_bad = True; } 
+		else { $throughput_bad = False;}
+		return $throughput_bad; }
+	function is_maxtelluric_bad() {
+	        if (($_GET['maxtelluric']==NULL) || ($_GET['maxtelluric']<0) || ($_GET['maxtelluric']>=1)) { $maxtelluric_bad = True; } 
+		else { $maxtelluric_bad = False;}
+                return $maxtelluric_bad; }
+	function is_floor_bad() {
+	        if (($_GET['floor']==NULL) || ($_GET['floor']<0)) { $floor_bad = True; } else { $floor_bad = False;}
+                return $floor_bad; }
+	function is_texp_bad() {
+	        if (($_GET['texp']==NULL) || ($_GET['texp']<0)) { $texp_bad = True; } else { $texp_bad = False;}
+                return $texp_bad; }
+	function is_overhead_bad() {
+	        if (($_GET['overhead']==NULL) || ($_GET['overhead']<0)) { $overhead_bad = True; } else { $overhead_bad = False;}
+                return $overhead_bad; }
 	function is_P_bad() {
 		if (($_GET['P']==NULL) || ($_GET['P']<0)) { $P_bad = True; } else { $P_bad = False;}
 		return $P_bad; }
@@ -57,27 +95,39 @@
 		return $NGPtrials_bad; }
 	
 
-	// reload the option2 page if missing any required fields
+	// reload the option page if missing any required fields
 	// otherwise run the RVFC
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
-		if ((is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_mag_bad()) || (is_Ms_bad()) || (is_Rs_bad()) || (is_Teff_bad()) ||
+		if ((is_wlmin_bad()) || (is_wlmax_bad()) || (is_R_bad()) || (is_aperture_bad()) || (is_throughput_bad()) || (is_maxtelluric_bad())
+		|| (is_floor_bad()) || (is_texp_bad()) || (is_overhead_bad()) ||
+		(is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_mag_bad()) || (is_Ms_bad()) || (is_Rs_bad()) || (is_Teff_bad()) ||
 		(is_Z_bad()) || (is_vsini_bad()) || (is_Prot_bad()) || (is_Kdetsig_bad()) || (is_NGPtrials_bad())) {
 			$Errs = report_missing_fields();
-			$PErr = $Errs[0];
-			$rpErr = $Errs[1];
-			$mpErr = $Errs[2];
-			$magErr = $Errs[3];
-			$MsErr = $Errs[4];
-			$RsErr = $Errs[5];
-			$TeffErr = $Errs[6];
-			$ZErr = $Errs[7];
-			$vsiniErr = $Errs[8];
-			$ProtErr = $Errs[9];
-			$KdetsigErr = $Errs[10];
-			$NGPtrialsErr = $Errs[11];
+			$wlminErr = $Errs[0];
+			$wlmaxErr = $Errs[1];
+			$RErr = $Errs[2];
+			$apertureErr = $Errs[3];
+			$throughputErr = $Errs[4];
+			$maxtelluricErr = $Errs[5];
+			$floorErr = $Errs[6];
+			$texpErr = $Errs[7];
+			$overheadErr = $Errs[8];
+			$PErr = $Errs[9];
+			$rpErr = $Errs[10];
+			$mpErr = $Errs[11];
+			$magErr = $Errs[12];
+			$MsErr = $Errs[13];
+			$RsErr = $Errs[14];
+			$TeffErr = $Errs[15];
+			$ZErr = $Errs[16];
+			$vsiniErr = $Errs[17];
+			$ProtErr = $Errs[18];
+			$KdetsigErr = $Errs[19];
+			$NGPtrialsErr = $Errs[20];
+			$error1d1 = True;
 			include "option1d1.php";
 		} else {
-			include "runwarning.php";
+			include "runRVFC.php";
 		}
 	}
 ?>

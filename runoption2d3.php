@@ -40,7 +40,7 @@
 	        if (($_GET['overhead']==NULL) || ($_GET['overhead']<0)) { $overhead_bad = True; } else { $overhead_bad = False;}    
 		return $overhead_bad; }
         function is_Kdetsig_bad() {
-	        if (($_GET['Kdetsig']==NULL) || ($_GET['Kdetsig']<0)) { $Kdetsig_bad = True; } else { $Kdetsig_bad = False;}    
+	        if (($_GET['Kdetsig']==NULL) || ($_GET['Kdetsig']<=0)) { $Kdetsig_bad = True; } else { $Kdetsig_bad = False;}    
 		return $Kdetsig_bad; }
 	
 
