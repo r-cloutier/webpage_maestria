@@ -95,11 +95,11 @@
 			$KdetsigErr = $Errs[12];
 			$NGPtrialsErr = $Errs[13];
 			include "option2d1.php";
-		} elseif (print_warning()) {
-			$warning = get_warning();
-			echo '<script type="text/javascript">
-				alert("'.$warning.'"); </script>';
-			//include "runRVFC.php";
+		//} elseif (print_warning()) {
+		//	$warning = get_warning();
+		//	echo '<script type="text/javascript">
+		//		alert("'.$warning.'"); </script>';
+		//	//include "runRVFC.php";
 		} else {
 			include "runRVFC.php";
 		}

@@ -1,6 +1,7 @@
 <br><br>
 <p style="font-size:24px" align="left">&nbsp;&nbsp;&nbsp;<b>Option 2.1</b></p>&nbsp;&nbsp;&nbsp;
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Transiting planet parameters:</b></p><br>
+
 <table>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;"><b>&#42; required field</b></td>
@@ -87,11 +88,27 @@
 		<span class="error"><?php echo ($KdetsigErr!=NULL) ? $KdetsigErr : "" ?></span></td>
         </tr>
         <tr>
-		<td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials" value="<?php echo
-		isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 0 ?>"  size="10" maxlength="50"/> <b>&#42;</b> (note that increasing the number of
-		GP trials will increase the wall time of the RVFC calculation)
+		<td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials"
+		onkeyup="print_warning()" id="NGPtrials" value="<?php echo
+		isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : $NGPtrials ?>"  size="10" maxlength="50"/> <b>&#42;</b> <!--(note that increasing the number of
+		GP trials will increase the wall time of the RVFC calculation)-->
 		<span class="error"><?php echo ($NGPtrialsErr!=NULL) ? $NGPtrialsErr : "" ?></span></td>
     	</tr>
 </table>
+<span id="Warning"></span>
+
+
+<script>
+function print_warning() {
+	var NGPtrials = document.getElementById("NGPtrials").value;
+	//document.getElementById("Warning").innerHTML = NGPtrials;
+	alert('hi '+NGPtrials);
+        /*if (NGPtrials > 0) {
+	       	document.getElementById("Warning").innerHTML = "GP geq 1";
+	} else {
+	        document.getElementById("Warning").innerHTML = "";
+	}*/
+}
+</script>
 
 <br>&emsp;<input type=submit value="Run RVFC" name="runrvfc2d1"/>
