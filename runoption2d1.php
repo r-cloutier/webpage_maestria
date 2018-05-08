@@ -66,12 +66,6 @@
         function is_NGPtrials_bad() {
 	        if (($_GET['NGPtrials']==NULL) || ($_GET['NGPtrials']<0)) { $NGPtrials_bad = True; } else { $NGPtrials_bad = False;}    
 		return $NGPtrials_bad; }
-	function print_warning() {
-		if (($_GET['NGPtrials']!=NULL) && ($_GET['NGPtrials']>0)) { $print_warning = True; } else { $print_warning = False;}
-		return $print_warning; }
-	function get_warning() {
-		$warning = "NGPtrials is ".$_GET['NGPtrials'];
-		return $warning; }
 
 	// reload the option2 page if missing any required fields
 	// otherwise run the RVFC
@@ -95,11 +89,6 @@
 			$KdetsigErr = $Errs[12];
 			$NGPtrialsErr = $Errs[13];
 			include "option2d1.php";
-		//} elseif (print_warning()) {
-		//	$warning = get_warning();
-		//	echo '<script type="text/javascript">
-		//		alert("'.$warning.'"); </script>';
-		//	//include "runRVFC.php";
 		} else {
 			include "runRVFC.php";
 		}
