@@ -58,7 +58,7 @@
 			$texpErr = $Errs[5];
 			$overheadErr = $Errs[6];
 			$KdetsigErr = $Errs[7];
-			echo include "option2d3.php";
+			include "option2d3.php";
 		} else {
 			include "runRVFC.php";
 		}

@@ -111,8 +111,9 @@ function print_warning() {
 	        <td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmin" value="<?php echo
 		isset($_GET['wlmin']) ? $_GET['wlmin'] : $wlmin ?>" size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($wlminErr!=NULL) ? $wlminErr : "" ?></span></td>
-		<td style="padding: 0px 0px 10px 30px;">Maximum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmax" value="<?php echo
-		isset($_GET['wlmax']) ? $_GET['wlmax'] : $wlmax ?>" size="10" maxlength="50"/><b> &#42;</b>
+		<td style="padding: 0px 0px 10px 30px;">Maximum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmax" 
+		onkeyup="stellar_magnitude()" id="wlmax" value="<?php echo isset($_GET['wlmax']) ? $_GET['wlmax'] : $wlmax ?>" 
+		size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($wlmaxErr!=NULL) ? $wlmaxErr : "" ?></span></td>
 	</tr>
         <tr>
@@ -310,6 +311,15 @@ function print_warningGP() {
                         alert(warning);
 		}
 	}
+}
+
+function stellar_magnitude() {
+	var wlmin = document.getElementById("wlmin");
+	var wlmax = document.getElementById("wlmax");
+	if (wlmin === "" || wlmax === "") {
+	} else {
+		
+	alert(wlmax);
 }
 </script>
 
