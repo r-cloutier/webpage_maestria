@@ -110,7 +110,8 @@ function print_warning() {
 	</tr>
 	<tr>
 	        <td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmin" 
-		id="wlmin" value="<?php echo isset($_GET['wlmin']) ? $_GET['wlmin'] : $wlmin ?>" size="10" maxlength="50"/><b> &#42;</b>
+		id="wlmin" onkeyup="stellar_magnitude()"  
+		value="<?php echo isset($_GET['wlmin']) ? $_GET['wlmin'] : $wlmin ?>" size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($wlminErr!=NULL) ? $wlminErr : "" ?></span></td>
 		<td style="padding: 0px 0px 10px 30px;">Maximum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmax" 
 		onkeyup="stellar_magnitude()" id="wlmax" value="<?php echo isset($_GET['wlmax']) ? $_GET['wlmax'] : $wlmax ?>" 
@@ -235,8 +236,6 @@ function print_warning() {
 		  ?>
 -->
 		    <tr>
-		    	<!--<td style="padding: 0px 0px 10px 30px;"><i>V</i> or <i>J</i> band magnitude :&nbsp;&nbsp;<input type="text" name="mag"
-			value="<php echo sset($_GET['mag']) ? $_GET['mag'] : $mag ?>"  size="10" maxlength="50"/><b> &#42;</b>-->
 			<td style="padding: 0px 0px 10px 30px;"><span id="mag_label"></span><input type="text" name="mag"
 			value="<?php echo isset($_GET['mag']) ? $_GET['mag'] : $mag ?>"  size="10" maxlength="50"/><b> &#42;</b>
 			<span class="error"><?php echo ($magErr!=NULL) ? $magErr : "" ?></span></td>
@@ -324,7 +323,7 @@ function stellar_magnitude() {
 	} else if (wlmin < 1250 && wlmax > 1250) {
 		var mag_label = "<i>J</i> band magnitude :&nbsp;&nbsp;";
 	} else {
-		var mag_label = "<i>V</i> or <i>J</i> band mangitude :&nbsp;&nbsp;"
+		var mag_label = "<b>&#42; the spectrograph wavelength coverage must span either the <i>V</i> or <i>J</i> band (i.e. 555 and 1250 nm respectively) </b> :&nbsp;&nbsp;"
 	}
 	document.getElementById("mag_label").innerHTML = mag_label;
 }

@@ -13,6 +13,7 @@ function print_warning() {
 		var warning = "Note that the RVFC will take a few minutes to compute the photon-noise limited RV precision in Option 1.1.";
 		alert(warning);
 	}
+	stellar_magnitude();
 }
 </script>
 
@@ -110,10 +111,11 @@ function print_warning() {
 		<td></td>	
 	</tr>
 	<tr>
-	        <td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmin" value="<?php echo
-		isset($_GET['wlmin']) ? $_GET['wlmin'] : $wlmin ?>" size="10" maxlength="50"/><b> &#42;</b>
+	        <td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmin" id="wlmin" 
+		onkeyup="stellar_magnitude()" value="<?php echo isset($_GET['wlmin']) ? $_GET['wlmin'] : $wlmin ?>" size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($wlminErr!=NULL) ? $wlminErr : "" ?></span></td>
-		<td style="padding: 0px 0px 10px 30px;">Maximum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmax" value="<?php echo
+		<td style="padding: 0px 0px 10px 30px;">Maximum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmax" id="wlmax" 
+		onkeyup="stellar_magnitude()" value="<?php echo
 		isset($_GET['wlmax']) ? $_GET['wlmax'] : $wlmax ?>" size="10" maxlength="50"/><b> &#42;</b>
 		<span class="error"><?php echo ($wlmaxErr!=NULL) ? $wlmaxErr : "" ?></span></td>
 	</tr>
@@ -235,7 +237,7 @@ function print_warning() {
 		  ?>
 -->
 		    <tr>
-		    	<td style="padding: 0px 0px 10px 30px;"><i>V</i> or <i>J</i> band magnitude :&nbsp;&nbsp;<input type="text" name="mag"
+		    	<td style="padding: 0px 0px 10px 30px;"><span id="mag_label"></span><input type="text" name="mag"
 			value="<?php echo isset($_GET['mag']) ? $_GET['mag'] : $mag ?>"  size="10" maxlength="50"/><b> &#42;</b>
 			<span class="error"><?php echo ($magErr!=NULL) ? $magErr : "" ?></span></td>
 			<td></td>
@@ -298,6 +300,19 @@ function print_warningGP() {
 		        alert(warning);
 		}
 	}
+}
+
+function stellar_magnitude() {
+        var wlmin = document.getElementById("wlmin").value;
+        var wlmax = document.getElementById("wlmax").value;
+        if (wlmin < 555 && wlmax > 555) {
+               	var mag_label = "<i>V</i> band mangitude :&nbsp;&nbsp;";
+        } else if (wlmin < 1250 && wlmax > 1250) {
+                var mag_label = "<i>J</i> band magnitude :&nbsp;&nbsp;";
+	} else {
+                var mag_label = "<b>&#42; the spectrograph wavelength coverage must span either the <i>V</i> or <i>J</i> band (i.e. 555 and 1250 nm respectively) </b> :&nbsp;&nbsp;"
+    	}
+        document.getElementById("mag_label").innerHTML = mag_label;
 }
 </script>
 
