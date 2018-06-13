@@ -139,7 +139,7 @@ def nRV_calculator(Kdetsig,
     	NGPtrials = int(NGPtrials)
         nRVGPs = np.zeros(NGPtrials)
         for i in range(NGPtrials):
-            aGP = sigRV_act if sigRV_act >= 0 else sigRV_eff
+            aGP = sigRV_act if sigRV_act > 0 else sigRV_eff
 	    if aGP < 0:
 	    	raise ValueError('aGP cannot be negative.')
             lambdaGP = Prot * (3 + np.random.randn() * .1)

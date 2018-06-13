@@ -33,8 +33,7 @@
 	        if (($_GET['Ms']==NULL) || ($_GET['Ms']<0)) { $Ms_bad = True; } else { $Ms_bad = False;}    
 		return $Ms_bad; }
 	function is_Prot_bad() {
-		if (($_GET['NGPtrials']>0) && (($_GET['Prot']==NULL) || ($_GET['Prot']<=0))) { $Prot_bad = True;}
-		{ $Prot_bad = False;}
+		if (($_GET['NGPtrials']>0) && (($_GET['Prot']==NULL) || ($_GET['Prot']<=0))) { $Prot_bad = True;} else { $Prot_bad = False;}
 		return $Prot_bad; }
 	/*function is_Rs_bad() {
 		if (((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) || (($_GET['sigRVact']==NULL) && ($_GET['NGPtrials']>0))) && 
