@@ -9,7 +9,7 @@
 		$ProtErr = ((is_Prot_bad()) ? '<b>stellar rotation period is required</b>' : NULL);
 		$floorErr = ((is_floor_bad()) ? '<b>RV noise floor is required</b>' : NULL);
 		$sigRVphotErr = ((is_sigRVphot_bad()) ? '<b>Photon-noise limited RV precision is required</b>' : NULL);
-		$sigRVactErr = ((is_sigRVact_bad()) ? '<b>RV activity rms is required</b>' : NULL);
+		$sigRVactErr = ((is_sigRVact_bad()) ? '<b>RV activity rms is required and must be > 0 if the number of GP trials > 0</b>' : NULL);
 		$sigRVplanetsErr = ((is_sigRVplanets_bad()) ? '<b>RV rms from additional planets is required</b>' : NULL);
 		$texpErr = ((is_texp_bad()) ? '<b>exposure time is required</b>' : NULL);
 		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
@@ -46,7 +46,8 @@
 	        if (($_GET['sigRVphot']==NULL) || ($_GET['sigphotRV']<0)) { $sigRVphot_bad = True; } else { $sigRVphot_bad = False;}
 		return $sigRVphot_bad; }
 	function is_sigRVact_bad() {
-		if (($_GET['sigRVact']==NULL) || ($_GET['sigRVact']<0)) { $sigRVact_bad = True; } else { $sigRVact_bad = False;}
+		if (($_GET['sigRVact']==NULL) || ($_GET['sigRVact']<0) || (($_GET['NGPtrials']>0) && ($_GET['sigRVact']==0))) 
+		{ $sigRVact_bad = True; } else { $sigRVact_bad = False;}
 		return $sigRVact_bad; }
 	function is_sigRVplanets_bad() {
 		if (($_GET['sigRVplanets']==NULL) || ($_GET['sigRVplanets']<0)) { $sigRVplanets_bad = True; } else { $sigRVplanets_bad = False;}
