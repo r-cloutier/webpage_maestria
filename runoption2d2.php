@@ -6,6 +6,7 @@
                 $rpErr = ((is_rp_bad()) ? '<b>planetary radius is required</b>' : NULL);
 		$mpErr = ((is_mp_bad()) ? '<b>* planetary mass must be positive and non-zero</b>' : NULL);
 		$MsErr = ((is_Ms_bad()) ? '<b>stellar mass is required</b>' : NULL);
+		$ProtErr = ((is_Prot_bad()) ? '<b>stellar rotation period is required</b>' : NULL);
 		$floorErr = ((is_floor_bad()) ? '<b>RV noise floor is required</b>' : NULL);
 		$sigRVphotErr = ((is_sigRVphot_bad()) ? '<b>Photon-noise limited RV precision is required</b>' : NULL);
 		$sigRVactErr = ((is_sigRVact_bad()) ? '<b>RV activity rms is required</b>' : NULL);
@@ -14,7 +15,7 @@
 		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
 		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
-		$error_messages = array($PErr, $rpErr, $mpErr, $MsErr, $floorErr, $sigRVphotErr, $sigRVactErr, $sigRVplanetsErr, $texpErr, 
+		$error_messages = array($PErr, $rpErr, $mpErr, $MsErr, $ProtErr, $floorErr, $sigRVphotErr, $sigRVactErr, $sigRVplanetsErr, $texpErr, 
 		$overheadErr, $KdetsigErr, $NGPtrialsErr);
 		return $error_messages;
 	}
@@ -31,6 +32,10 @@
         function is_Ms_bad() {
 	        if (($_GET['Ms']==NULL) || ($_GET['Ms']<0)) { $Ms_bad = True; } else { $Ms_bad = False;}    
 		return $Ms_bad; }
+	function is_Prot_bad() {
+		if (($_GET['NGPtrials']>0) && (($_GET['Prot']==NULL) || ($_GET['Prot']<=0))) { $Prot_bad = True;}
+		{ $Prot_bad = False;}
+		return $Prot_bad; }
 	/*function is_Rs_bad() {
 		if (((($_GET['sigRVact']==NULL) && ($_GET['sigRVeff']==NULL)) || (($_GET['sigRVact']==NULL) && ($_GET['NGPtrials']>0))) && 
 		(($_GET['Rs']==NULL) || ($_GET['Rs']<0))) { $Rs_bad = True; } else { $Rs_bad = False;}
@@ -64,7 +69,7 @@
 	// reload the option2 page if missing any required fields
 	// otherwise run the RVFC
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
-	        if ((is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_Ms_bad()) || (is_floor_bad()) || (is_sigRVphot_bad()) ||
+	        if ((is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_Ms_bad()) || (is_Prot_bad()) || (is_floor_bad()) || (is_sigRVphot_bad()) ||
 		(is_sigRVact_bad()) || (is_sigRVplanets_bad()) || (is_texp_bad()) || (is_overhead_bad()) || (is_Kdetsig_bad()) || 
 		(is_NGPtrials_bad())) {
 			$Errs = report_missing_fields();
@@ -72,14 +77,15 @@
 			$rpErr = $Errs[1];
 			$mpErr = $Errs[2];
 			$MsErr = $Errs[3];
-			$floorErr = $Errs[4];
-			$sigRVphotErr = $Errs[5];
-			$sigRVactErr = $Errs[6];
-			$sigRVplanetsErr = $Errs[7];
-			$texpErr = $Errs[8];
-			$overheadErr = $Errs[9];
-			$KdetsigErr = $Errs[10];
-			$NGPtrialsErr = $Errs[11];
+			$ProtErr = $Errs[4];
+			$floorErr = $Errs[5];
+			$sigRVphotErr = $Errs[6];
+			$sigRVactErr = $Errs[7];
+			$sigRVplanetsErr = $Errs[8];
+			$texpErr = $Errs[9];
+			$overheadErr = $Errs[10];
+			$KdetsigErr = $Errs[11];
+			$NGPtrialsErr = $Errs[12];
 			include "option2d2.php";
 		} else {
 			include "runRVFC.php";

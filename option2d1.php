@@ -94,13 +94,12 @@
 		<span class="error"><?php echo ($NGPtrialsErr!=NULL) ? $NGPtrialsErr : "" ?></span></td>
     	</tr>
 </table>
-<!--<span id="Warning"></span>-->
-
+<span id="Warning"></span>
+<br>
 
 <script>
 function print_warning() {
 	var NGPtrials = document.getElementById("NGPtrials").value;
-	//document.getElementById("Warning").innerHTML = NGPtrials;
 	// if null then do nothing
 	if (NGPtrials === "") {
 	} else {
@@ -109,8 +108,9 @@ function print_warning() {
 		if (NGPtrials_int > 0) {
 			var NGPtrials_label = NGPtrials_int.toFixed(0);
 			var trial_label = (NGPtrials_int == 1 ? "trial." : "trials.");
-			var warning = "Note that the RVFC will take a few minutes to run "+NGPtrials_label+" GP "+trial_label;
-			alert(warning);
+			var warning = "&emsp;&emsp;<b>&#42;Note that the RVFC will take a few minutes to run "+NGPtrials_label+" GP "+trial_label+"</b>";
+			//alert(warning);
+			document.getElementById("Warning").innerHTML = warning;
 		}
 	}
 }
