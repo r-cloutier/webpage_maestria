@@ -1,5 +1,6 @@
 <br><br>
-<p style="font-size:24px" align="left">&nbsp;&nbsp;&nbsp;<b>Option 1.2</b></p>&nbsp;&nbsp;&nbsp;
+<p style="font-size:24px" align="left">&nbsp;&nbsp;&nbsp;<b>Option 1.2</b><span style="font-size:18px">: manually set the RV noise
+sources</span></p>&nbsp;&nbsp;&nbsp;
 
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Spectrograph parameters (<?php echo $_GET['spectrograph']?>):</b></p><br>&nbsp;&nbsp;&nbsp;
 

@@ -1,5 +1,5 @@
 <br><br>
-<p style="font-size:24px" align="left">&nbsp;&nbsp;&nbsp;<b>Option 1.1</b></p>&nbsp;&nbsp;&nbsp;
+<p style="font-size:24px" align="left">&nbsp;&nbsp;&nbsp;<b>Option 1.1</b><span style="font-size:18px">: sampling sources of RV noise</span></p>&nbsp;&nbsp;&nbsp;
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Spectrograph parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
 
 
