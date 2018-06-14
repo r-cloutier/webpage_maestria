@@ -20,12 +20,13 @@
                 $TeffErr = ((is_Teff_bad()) ? '<b>effective temperature is required</b>' : NULL);
                 $ZErr = ((is_Z_bad()) ? '<b>metallicity is required</b>' : NULL);
 		$vsiniErr = ((is_vsini_bad()) ? '<b>vsini is required</b>' : NULL);
+                $ProtErr = ((is_Prot_bad()) ? '<b>stellar rotation period is required</b>' : NULL);
                 $sigRVactErr = ((is_sigRVact_bad()) ? '<b>RV activity rms is required and must be > 0 if the number of GP trials > 0</b>' : NULL);
 		$sigRVplanetsErr = ((is_sigRVplanets_bad()) ? '<b>RV rms from additional planets is required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
 		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
 		$error_messages = array($wlminErr, $wlmaxErr, $RErr, $apertureErr, $throughputErr, $maxtelluricErr, $floorErr, $texpErr,
-                $overheadErr, $PErr, $rpErr, $mpErr, $magErr, $MsErr, $RsErr, $TeffErr, $ZErr, $vsiniErr, $sigRVactErr, $sigRVplanetsErr,
+                $overheadErr, $PErr, $rpErr, $mpErr, $magErr, $MsErr, $RsErr, $TeffErr, $ZErr, $vsiniErr, $ProtErr, $sigRVactErr, $sigRVplanetsErr,
 		$KdetsigErr, $NGPtrialsErr);
 		return $error_messages;
 	}
@@ -86,6 +87,9 @@
         function is_vsini_bad() {
 	        if (($_GET['vsini']==NULL) || ($_GET['vsini']<0)) { $vsini_bad = True; } else { $vsini_bad = False;}
 		return $vsini_bad; }
+        function is_Prot_bad() {
+                if (($_GET['NGPtrials']>0) && (($_GET['Prot']==NULL) || ($_GET['Prot']<=0))) { $Prot_bad = True;} else { $Prot_bad = False;}
+                return $Prot_bad; }
         function is_sigRVact_bad() {
 	        if (($_GET['sigRVact']==NULL) || ($_GET['sigRVact']<0) || (($_GET['NGPtrials']>0) && ($_GET['sigRVact']==0))) 
 		{ $sigRVact_bad = True; } else { $sigRVact_bad = False;} 
@@ -107,7 +111,8 @@
 		if ((is_wlmin_bad()) || (is_wlmax_bad()) || (is_R_bad()) || (is_aperture_bad()) || (is_throughput_bad()) || (is_maxtelluric_bad())
                 || (is_floor_bad()) || (is_texp_bad()) || (is_overhead_bad()) ||
 		(is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_mag_bad()) || (is_Ms_bad()) || (is_Rs_bad()) || (is_Teff_bad()) ||
-		(is_Z_bad()) || (is_vsini_bad()) || (is_sigRVact_bad()) || (is_sigRVplanets_bad()) || (is_Kdetsig_bad()) || (is_NGPtrials_bad())) {
+		(is_Z_bad()) || (is_vsini_bad()) || (is_Prot_bad()) || (is_sigRVact_bad()) || (is_sigRVplanets_bad()) || (is_Kdetsig_bad()) || 
+		(is_NGPtrials_bad())) {
 			$Errs = report_missing_fields();
                         $wlminErr = $Errs[0];
                         $wlmaxErr = $Errs[1];
@@ -127,10 +132,11 @@
 			$TeffErr = $Errs[15];
 			$ZErr = $Errs[16];
 			$vsiniErr = $Errs[17];
-			$sigRVactErr = $Errs[18];
-			$sigRVplanetsErr = $Errs[19];
-			$KdetsigErr = $Errs[20];
-			$NGPtrialsErr = $Errs[21];
+			$ProtErr = $Errs[18];
+			$sigRVactErr = $Errs[19];
+			$sigRVplanetsErr = $Errs[20];
+			$KdetsigErr = $Errs[21];
+			$NGPtrialsErr = $Errs[22];
 			$error1d2 = True;
 			include "option1d2.php";
 		} else {

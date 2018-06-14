@@ -261,7 +261,15 @@ function print_warning() {
                         <td style="padding: 0px 0px 10px 30px;">Projected rotation velocity (km/s) :&nbsp;&nbsp;<input type="text" name="vsini"
 			value="<?php echo isset($_GET['vsini']) ? $_GET['vsini'] : $vsini ?>"  size="10" maxlength="50"/><b> &#42;</b>
 			<span class="error"><?php echo ($vsiniErr!=NULL) ? $vsiniErr : "" ?></span></td>
-                        <td></td>
+		        <?php if ($_GET['NGPtrials']>0) : ?>
+		                <td style="padding: 0px 0px 10px 30px;">Rotation period (days) :&nbsp;&nbsp;<input
+				type="text" name="Prot" value="<?php echo isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10"
+				maxlength="50"/><b> &#42;</b>  
+				<span class="error"><?php echo ($ProtErr!=NULL) ? $ProtErr : "" ?></span></td>
+		        <?php endif; ?>
+			<?php if ($_GET['NGPtrials']<=0) : ?>
+				<td></td>
+			<?php endif; ?>
                     </tr>
 </table>
 
