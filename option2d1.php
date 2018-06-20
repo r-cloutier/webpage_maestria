@@ -8,7 +8,7 @@
 	</tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Orbital period (days) :&nbsp;&nbsp;<input type="text" name="P" value="<?php echo
-		isset($_GET['P']) ? $_GET['P'] : $P ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['P']) ? $_GET['P'] : $P ?>"  size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($PErr!=NULL) ? $PErr : "" ?></span></td>
         </tr>
         <tr>
@@ -113,6 +113,10 @@ function print_warning() {
 			document.getElementById("Warning").innerHTML = warning;
 		}
 	}
+}
+
+function noenter() {
+  	return !(window.event && window.event.keyCode == 13); }
 }
 </script>
 
