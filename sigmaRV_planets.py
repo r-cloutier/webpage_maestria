@@ -147,14 +147,18 @@ def get_sigmaRV_planets(P, rp, Teff, Ms, sigmaRV_phot):
     # FGK star
     if Teff > 3800:
         mult = int(np.round(1.1 + np.random.randn() * 0.1))
+	print mult
 	if mult > 0:
-            _,_,_,Ks = draw_FGK_planets(P, rp, int(np.round(mult)), Ms)
+            _,_,_,Ks = draw_FGK_planets(P, rp, mult+1, Ms)
 	else:
 	   Ks = np.zeros(0)
     # M dwarf
     else:
-        mult = 2.5 + np.random.randn() * 0.2 
-        _,_,_,Ks = draw_M_planets(P, rp, int(np.round(mult)), Ms)
+        mult = int(np.round(2.5 + np.random.randn() * 0.2 ))
+	if mult > 0:
+	    _,_,_,Ks = draw_M_planets(P, rp, mult+1, Ms)
+	else:
+	    Ks = np.zeros(0)
 
     # only include undetected planets with K < sigmaRV_phot
     Ks = Ks[Ks < sigmaRV_phot]
