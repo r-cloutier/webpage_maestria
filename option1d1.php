@@ -110,6 +110,12 @@ function print_warning() {
 	        <td style="padding: 0px 0px 10px 30px;"><b>&#42; required field</b></td>
 		<td></td>	
 	</tr>
+	<?php if ($specdomainErr!=NULL) : ?>
+		<tr>
+			<td style="padding: 0px 0px 10px 30px;"><span class="error"><?php echo $specdomainErr ?></span></td>
+			<td></td>
+		</tr>
+	<?php endif; ?>
 	<tr>
 	        <td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmin" id="wlmin" 
 		onkeyup="stellar_magnitude()" value="<?php echo isset($_GET['wlmin']) ? $_GET['wlmin'] : $wlmin ?>" size="10" maxlength="50"/><b> &#42;</b>

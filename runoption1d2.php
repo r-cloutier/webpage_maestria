@@ -4,7 +4,9 @@
 	function report_missing_fields() {
                 $wlminErr = ((is_wlmin_bad()) ? '<b>&#955;<sub>min</sub> is required</b>' : NULL);
                 $wlmaxErr = ((is_wlmax_bad()) ? '<b>&#955;<sub>max</sub> is required</b>' : NULL);
-                $RErr = ((is_R_bad()) ? '<b>spectral resolution is required</b>' : NULL);
+                $specdomainErr = ((is_spectraldomain_bad()) ? '<b>&#42; the spectrograph wavelength coverage must span either the V or J band (i.e.
+		555 and 1250 nm respectively)</b>' : NULL);
+		$RErr = ((is_R_bad()) ? '<b>spectral resolution is required</b>' : NULL);
                 $apertureErr = ((is_aperture_bad()) ? '<b>telescope aperture is required</b>' :	NULL);
                 $throughputErr = ((is_throughput_bad()) ? '<b>throughput is required</b>' : NULL);
                 $maxtelluricErr = ((is_maxtelluric_bad()) ? '<b>max. telluric absorption is required</b>' : NULL);
@@ -25,7 +27,7 @@
 		$sigRVplanetsErr = ((is_sigRVplanets_bad()) ? '<b>RV rms from additional planets is required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
 		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
-		$error_messages = array($wlminErr, $wlmaxErr, $RErr, $apertureErr, $throughputErr, $maxtelluricErr, $floorErr, $texpErr,
+		$error_messages = array($wlminErr, $wlmaxErr, $specdomainErr, $RErr, $apertureErr, $throughputErr, $maxtelluricErr, $floorErr, $texpErr,
                 $overheadErr, $PErr, $rpErr, $mpErr, $magErr, $MsErr, $RsErr, $TeffErr, $ZErr, $vsiniErr, $ProtErr, $sigRVactErr, $sigRVplanetsErr,
 		$KdetsigErr, $NGPtrialsErr);
 		return $error_messages;
@@ -37,6 +39,10 @@
         function is_wlmax_bad() {
                 if (($_GET['wlmax']==NULL) || ($_GET['wlmax']<0)) { $wlmax_bad = True; } else {	$wlmax_bad = False; }
                 return $wlmax_bad; }
+        function is_spectraldomain_bad() {
+             	if ((($_GET['wlmin']<555) && ($_GET['wlmax']<555)) || (($_GET['wlmin']>555) && ($_GET['wlmax']<1250)) ||
+		(($_GET['wlmin']>1250) && ($_GET['wlmax']>1250))) { $specdomain_bad = True; } else { $specdomain_bad = False; }
+                return $specdomain_bad; }
         function is_R_bad() {
                 if (($_GET['R']==NULL) || ($_GET['R']<0)) { $R_bad = True; } else { $R_bad = False; }
                 return $R_bad; }
@@ -108,35 +114,36 @@
 	// reload the option2 page if missing any required fields
 	// otherwise run the RVFC
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
-		if ((is_wlmin_bad()) || (is_wlmax_bad()) || (is_R_bad()) || (is_aperture_bad()) || (is_throughput_bad()) || (is_maxtelluric_bad())
-                || (is_floor_bad()) || (is_texp_bad()) || (is_overhead_bad()) ||
+		if ((is_wlmin_bad()) || (is_wlmax_bad()) || (is_spectraldomain_bad()) || (is_R_bad()) || (is_aperture_bad()) || (is_throughput_bad()) || 
+		(is_maxtelluric_bad()) || (is_floor_bad()) || (is_texp_bad()) || (is_overhead_bad()) ||
 		(is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_mag_bad()) || (is_Ms_bad()) || (is_Rs_bad()) || (is_Teff_bad()) ||
 		(is_Z_bad()) || (is_vsini_bad()) || (is_Prot_bad()) || (is_sigRVact_bad()) || (is_sigRVplanets_bad()) || (is_Kdetsig_bad()) || 
 		(is_NGPtrials_bad())) {
 			$Errs = report_missing_fields();
                         $wlminErr = $Errs[0];
                         $wlmaxErr = $Errs[1];
-                        $RErr = $Errs[2];
-                        $apertureErr = $Errs[3];
-                        $throughputErr = $Errs[4];
-                        $maxtelluricErr = $Errs[5];
-			$floorErr = $Errs[6];
-                        $texpErr = $Errs[7];
-                        $overheadErr = $Errs[8];
-			$PErr = $Errs[9];
-			$rpErr = $Errs[10];
-			$mpErr = $Errs[11];
-			$magErr = $Errs[12];
-			$MsErr = $Errs[13];
-			$RsErr = $Errs[14];
-			$TeffErr = $Errs[15];
-			$ZErr = $Errs[16];
-			$vsiniErr = $Errs[17];
-			$ProtErr = $Errs[18];
-			$sigRVactErr = $Errs[19];
-			$sigRVplanetsErr = $Errs[20];
-			$KdetsigErr = $Errs[21];
-			$NGPtrialsErr = $Errs[22];
+			$specdomainErr = $Errs[2];
+                        $RErr = $Errs[3];
+                        $apertureErr = $Errs[4];
+                        $throughputErr = $Errs[5];
+                        $maxtelluricErr = $Errs[6];
+			$floorErr = $Errs[7];
+                        $texpErr = $Errs[8];
+                        $overheadErr = $Errs[9];
+			$PErr = $Errs[10];
+			$rpErr = $Errs[11];
+			$mpErr = $Errs[12];
+			$magErr = $Errs[13];
+			$MsErr = $Errs[14];
+			$RsErr = $Errs[15];
+			$TeffErr = $Errs[16];
+			$ZErr = $Errs[17];
+			$vsiniErr = $Errs[18];
+			$ProtErr = $Errs[19];
+			$sigRVactErr = $Errs[20];
+			$sigRVplanetsErr = $Errs[21];
+			$KdetsigErr = $Errs[22];
+			$NGPtrialsErr = $Errs[23];
 			$error1d2 = True;
 			include "option1d2.php";
 		} else {
