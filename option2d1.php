@@ -116,7 +116,7 @@ function print_warning() {
 }
 
 function noenter() {
-  	return !(window.event && window.event.keyCode == 13); }
+  	return !(window.event && window.event.keyCode == 13); 
 }
 </script>
 
