@@ -146,8 +146,11 @@ def get_sigmaRV_planets(P, rp, Teff, Ms, sigmaRV_phot):
     '''
     # FGK star
     if Teff > 3800:
-        mult = 1.1 * np.random.randn() * 0.1
-        _,_,_,Ks = draw_FGK_planets(P, rp, int(np.round(mult)), Ms)
+        mult = int(np.round(1.1 + np.random.randn() * 0.1))
+	if mult > 0:
+            _,_,_,Ks = draw_FGK_planets(P, rp, int(np.round(mult)), Ms)
+	else:
+	   Ks = np.zeros(0)
     # M dwarf
     else:
         mult = 2.5 + np.random.randn() * 0.2 
