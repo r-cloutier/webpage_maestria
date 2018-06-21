@@ -118,40 +118,41 @@ function print_warning() {
 	<?php endif; ?>
 	<tr>
 	        <td style="padding: 0px 0px 10px 30px;">Minimum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmin" id="wlmin" 
-		onkeyup="stellar_magnitude()" value="<?php echo isset($_GET['wlmin']) ? $_GET['wlmin'] : $wlmin ?>" size="10" maxlength="50"/><b> &#42;</b>
+		onkeyup="stellar_magnitude()" value="<?php echo isset($_GET['wlmin']) ? $_GET['wlmin'] : $wlmin ?>" size="10" maxlength="50"
+	        onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($wlminErr!=NULL) ? $wlminErr : "" ?></span></td>
 		<td style="padding: 0px 0px 10px 30px;">Maximum wavelength (nm) :&nbsp;&nbsp;<input type="text" name="wlmax" id="wlmax" 
 		onkeyup="stellar_magnitude()" value="<?php echo
-		isset($_GET['wlmax']) ? $_GET['wlmax'] : $wlmax ?>" size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['wlmax']) ? $_GET['wlmax'] : $wlmax ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($wlmaxErr!=NULL) ? $wlmaxErr : "" ?></span></td>
 	</tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Spectral resolution (R = &lambda;/&delta;&lambda;) :&nbsp;&nbsp;<input type="text" name="R"
-		value="<?php echo isset($_GET['R']) ? $_GET['R'] : $R ?>" size="10" maxlength="50"/><b> &#42;</b>
+		value="<?php echo isset($_GET['R']) ? $_GET['R'] : $R ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($RErr!=NULL) ? $RErr : "" ?></span></td>
                 <td style="padding: 0px 0px 10px 30px;">Telescope aperture (metres) :&nbsp;&nbsp;<input type="text" name="aperture" value="<?php echo
-		isset($_GET['aperture']) ? $_GET['aperture'] : $aperture ?>" size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['aperture']) ? $_GET['aperture'] : $aperture ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($apertureErr!=NULL) ? $apertureErr : "" ?></span></td>
         </tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value="<?php echo
-		isset($_GET['throughput']) ? $_GET['throughput'] : $throughput ?>" size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['throughput']) ? $_GET['throughput'] : $throughput ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($throughputErr!=NULL) ? $throughputErr : "" ?></span></td>
                 <td style="padding: 0px 0px 10px 30px;">Maximum telluric absorption (0-1) : <input type="text" name="maxtelluric" value="<?php echo
-		isset($_GET['maxtelluric']) ? $_GET['maxtelluric'] : $maxtelluric ?>" size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['maxtelluric']) ? $_GET['maxtelluric'] : $maxtelluric ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($maxtelluricErr!=NULL) ? $maxtelluricErr : "" ?></span></td>
 	</tr>
 	<tr>
                 <td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo
-		isset($_GET['floor']) ? $_GET['floor'] : $floor ?>" size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['floor']) ? $_GET['floor'] : $floor ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
                 <td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value="<?php echo
-		isset($_GET['texp']) ? $_GET['texp'] : $texp ?>" size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['texp']) ? $_GET['texp'] : $texp ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($texpErr!=NULL) ? $texpErr : "" ?></span></td>
         </tr>
 	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value="<?php echo
-		isset($_GET['overhead']) ? $_GET['overhead'] : $overhead ?>" size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['overhead']) ? $_GET['overhead'] : $overhead ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($overheadErr!=NULL) ? $overheadErr : "" ?></span></td>
 	</tr>
 </table>
@@ -161,17 +162,17 @@ function print_warning() {
 <table>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Orbital period (days) :&nbsp;&nbsp;<input type="text" name="P" value="<?php echo
-		isset($_GET['P']) ? $_GET['P'] : $P ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		isset($_GET['P']) ? $_GET['P'] : $P ?>"  size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($PErr!=NULL) ? $PErr : "" ?></span></td>
         </tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Planetary radius (R<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="rp"
-		value="<?php echo isset($_GET['rp']) ? $_GET['rp'] : $rp ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		value="<?php echo isset($_GET['rp']) ? $_GET['rp'] : $rp ?>"  size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($rpErr!=NULL) ? $rpErr : "" ?></span></td>
         </tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Planetary mass (M<sub>&#x02295;</sub>) :&nbsp;&nbsp;<input type="text" name="mp"
-		value="<?php echo isset($_GET['mp']) ? $_GET['mp'] : $mp ?>"  size="10" maxlength="50"/>
+		value="<?php echo isset($_GET['mp']) ? $_GET['mp'] : $mp ?>"  size="10" maxlength="50" onkeypress="return noenter()"/>
 		<span class="error"><?php echo ($mpErr!=NULL) ? $mpErr : "" ?></span></td>
         </tr>
 </table>
@@ -244,32 +245,34 @@ function print_warning() {
 -->
 		    <tr>
 		    	<td style="padding: 0px 0px 10px 30px;"><span id="mag_label"></span><input type="text" name="mag"
-			value="<?php echo isset($_GET['mag']) ? $_GET['mag'] : $mag ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			value="<?php echo isset($_GET['mag']) ? $_GET['mag'] : $mag ?>"  size="10" maxlength="50"
+			onkeypress="return noenter()"/><b> &#42;</b>
 			<span class="error"><?php echo ($magErr!=NULL) ? $magErr : "" ?></span></td>
 			<td></td>
 		    </tr>
                     <tr>
                         <td style="padding: 0px 0px 10px 30px;">Stellar mass (M<sub>&#x02299;</sub>) :&nbsp;&nbsp;<input type="text" name="Ms"
-			value="<?php echo isset($_GET['Ms']) ? $_GET['Ms'] : $Ms ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			value="<?php echo isset($_GET['Ms']) ? $_GET['Ms'] : $Ms ?>"  size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 			<span class="error"><?php echo ($MsErr!=NULL) ? $MsErr : "" ?></span></td>
                         <td style="padding: 0px 0px 10px 30px;">Stellar radius (R<sub>&#x02299;</sub>) : <input type="text" name="Rs" value="<?php
-			echo isset($_GET['Rs']) ? $_GET['Rs'] : $Rs ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			echo isset($_GET['Rs']) ? $_GET['Rs'] : $Rs ?>"  size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 			<span class="error"><?php echo ($RsErr!=NULL) ? $RsErr : "" ?></span></td>
                     </tr>
                     <tr>
                         <td style="padding: 0px 0px 10px 30px;">Effective temperature (K) :&nbsp;&nbsp;<input type="text" name="Teff" value="<?php
-			echo isset($_GET['Teff']) ? $_GET['Teff'] : $Teff ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			echo isset($_GET['Teff']) ? $_GET['Teff'] : $Teff ?>"  size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 			<span class="error"><?php echo ($TeffErr!=NULL) ? $TeffErr : "" ?></span></td>
                         <td style="padding: 0px 0px 10px 30px;">Metallicity ([Fe/H]) : <input type="text" name="Z" value="<?php echo
-			isset($_GET['Z']) ? $_GET['Z'] : $Z ?>"  size="10" maxlength="50"/><b> &#42;</b>
+			isset($_GET['Z']) ? $_GET['Z'] : $Z ?>"  size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 			<span class="error"><?php echo ($ZErr!=NULL) ? $ZErr : "" ?></span></td>
                     </tr>
                     <tr>
-                        <td style="padding: 0px 0px 10px 30px;">Projected rotation velocity (km/s) :&nbsp;&nbsp;<input type="text" name="vsini"
-			value="<?php echo isset($_GET['vsini']) ? $_GET['vsini'] : $vsini ?>"  size="10" maxlength="50"/><b> &#42;</b>
+                        <td style="padding: 0px 0px 10px 30px;">vsini (km/s) :&nbsp;&nbsp;<input type="text" name="vsini"
+			value="<?php echo isset($_GET['vsini']) ? $_GET['vsini'] : $vsini ?>"  size="10" maxlength="50"
+			onkeypress="return noenter()"/><b> &#42;</b>
 			<span class="error"><?php echo ($vsiniErr!=NULL) ? $vsiniErr : "" ?></span></td>
                         <td style="padding: 0px 0px 10px 30px;">Rotation period (days) :&nbsp;&nbsp;<input type="text" name="Prot" value="<?php echo
-			isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50"/> <b>&#42;</b>
+			isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50" onkeypress="return noenter()"/> <b>&#42;</b>
 			<span class="error"><?php echo ($ProtErr!=NULL) ? $ProtErr : "" ?></span></td>
                     </tr>
 </table>
@@ -280,13 +283,14 @@ function print_warning() {
 <table>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Desired K detection significance (K/&sigma;<sub>K</sub>) :&nbsp;&nbsp;<input type="text"
-		name="Kdetsig" value="<?php echo isset($_GET['Kdetsig']) ? $_GET['Kdetsig'] : 3 ?>"  size="10" maxlength="50"/><b> &#42;</b>
+		name="Kdetsig" value="<?php echo isset($_GET['Kdetsig']) ? $_GET['Kdetsig'] : 3 ?>"  size="10" maxlength="50"
+		onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($KdetsigErr!=NULL) ? $KdetsigErr : "" ?></span></td>
         </tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Number of GP trials :&nbsp;&nbsp;<input type="text" name="NGPtrials"
 		onkeyup="print_warningGP()" id="NGPtrials" value="<?php echo isset($_GET['NGPtrials']) ? $_GET['NGPtrials'] : 0 ?>"  
-		size="10" maxlength="50"/><b> &#42;</b> 
+		size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b> 
 		<span class="error"><?php echo ($NGPtrialsErr!=NULL) ? $NGPtrialsErr : "" ?></span></td>
         </tr>
 </table>
@@ -323,6 +327,10 @@ function stellar_magnitude() {
                 var mag_label = "<b>&#42; the spectrograph wavelength coverage must span either the <i>V</i> or <i>J</i> band (i.e. 555 and 1250 nm respectively) </b> :&nbsp;&nbsp;"
     	}
         document.getElementById("mag_label").innerHTML = mag_label;
+}
+
+function noenter() {
+        return !(window.event && window.event.keyCode == 13); 
 }
 </script>
 
