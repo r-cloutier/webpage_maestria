@@ -63,7 +63,7 @@ def update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric
     g = g.replace('<<Teff>>', '%i'%Teff)
     g = g.replace('<<Z>>', '%.2f'%Z)
     g = g.replace('<<vsini>>', '%.2f'%vsini)
-    if (Prot==0) & (vsini>0) & (Rs>0):
+    if (Prot==0) & (vsini>0) & (Rs>0): 
     	Prot = rvs.sec2days(2*np.pi*rvs.Rsun2m(Rs)*1e-3 / vsini)
     g = g.replace('<<Prot>>', '%.2f'%Prot)    
     h = open('/data/cpapir/www/rvfc/InputFiles/user_star_%s.in'%suffix, 'w')
