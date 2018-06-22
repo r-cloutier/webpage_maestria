@@ -261,7 +261,7 @@ sources</span></p>&nbsp;&nbsp;&nbsp;
                         <?php if ($_GET['NGPtrials']>0) : ?>
                                 <td style="padding: 0px 0px 10px 30px;">Rotation period (days) :&nbsp;&nbsp;<input
                                 type="text" name="Prot" value="<?php echo isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10"
-                                maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
+                                maxlength="50" onkeypress="return noenter()"/>
                                 <span class="error"><?php echo ($ProtErr!=NULL) ? $ProtErr : "" ?></span></td>
                         <?php endif; ?>
 			<?php if ($_GET['NGPtrials']<=0) : ?>

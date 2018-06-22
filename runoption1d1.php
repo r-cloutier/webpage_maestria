@@ -22,7 +22,7 @@
                 $TeffErr = ((is_Teff_bad()) ? '<b>effective temperature is required</b>' : NULL);
                 $ZErr = ((is_Z_bad()) ? '<b>metallicity is required</b>' : NULL);
 		$vsiniErr = ((is_vsini_bad()) ? '<b>vsini is required</b>' : NULL);
-                $ProtErr = ((is_Prot_bad()) ? '<b>rotation period is required</b>' : NULL);
+                $ProtErr = ((is_Prot_bad()) ? '<b>&#42; rotation period (or the stellar radius and vsini) are required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
 		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
 		$error_messages = array($wlminErr, $wlmaxErr, $specdomainErr, $RErr, $apertureErr, $throughputErr, $maxtelluricErr, $floorErr, $texpErr,
@@ -91,8 +91,8 @@
 	        if (($_GET['vsini']==NULL) || ($_GET['vsini']<0)) { $vsini_bad = True; } else { $vsini_bad = False;}
 		return $vsini_bad; }
         function is_Prot_bad() {
-                if ((($_GET['NGPtrials']>0) && ($_GET['Prot']==0)) || (($_GET['Prot']==NULL) && ($_GET['vsini']==NULL) && ($_GET['Rs']==NULL)) || 
-		($_GET['Prot']<0)) { $Prot_bad = True;} else { $Prot_bad = False;}
+                if ((($_GET['Prot']==NULL) && (($_GET['vsini']==NULL) || ($_GET['Rs']==NULL))) || ($_GET['Prot']<0)) 
+		{ $Prot_bad = True;} else { $Prot_bad = False;}
 		return $Prot_bad; }
         function is_Kdetsig_bad() {
 	        if (($_GET['Kdetsig']==NULL) || ($_GET['Kdetsig']<0)) { $Kdetsig_bad = True; } else { $Kdetsig_bad = False;}    

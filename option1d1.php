@@ -272,7 +272,7 @@ function print_warning() {
 			onkeypress="return noenter()"/><b> &#42;</b>
 			<span class="error"><?php echo ($vsiniErr!=NULL) ? $vsiniErr : "" ?></span></td>
                         <td style="padding: 0px 0px 10px 30px;">Rotation period (days) :&nbsp;&nbsp;<input type="text" name="Prot" value="<?php echo
-			isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50" onkeypress="return noenter()"/> <b>&#42;</b>
+			isset($_GET['Prot']) ? $_GET['Prot'] : $Prot ?>"  size="10" maxlength="50" onkeypress="return noenter()"/>
 			<span class="error"><?php echo ($ProtErr!=NULL) ? $ProtErr : "" ?></span></td>
                     </tr>
 </table>
