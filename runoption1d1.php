@@ -91,8 +91,8 @@
 	        if (($_GET['vsini']==NULL) || ($_GET['vsini']<0)) { $vsini_bad = True; } else { $vsini_bad = False;}
 		return $vsini_bad; }
         function is_Prot_bad() {
-                if ((($_GET['NGPtrials']>0) && ($_GET['Prot']==0)) || ($_GET['Prot']==NULL) || ($_GET['Prot']<0)) 
-		{ $Prot_bad = True;} else { $Prot_bad = False;}
+                if ((($_GET['NGPtrials']>0) && ($_GET['Prot']==0)) || (($_GET['Prot']==NULL) && ($_GET['vsini']==NULL) && ($_GET['Rs']==NULL)) || 
+		($_GET['Prot']<0)) { $Prot_bad = True;} else { $Prot_bad = False;}
 		return $Prot_bad; }
         function is_Kdetsig_bad() {
 	        if (($_GET['Kdetsig']==NULL) || ($_GET['Kdetsig']<0)) { $Kdetsig_bad = True; } else { $Kdetsig_bad = False;}    

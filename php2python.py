@@ -1,6 +1,7 @@
 #!/usr/bin/python2.7
 import os, sys
 import numpy as np
+import rvs_custom as rvs
 from RVFollowupCalculator import nRV_calculator
 
 
@@ -62,6 +63,8 @@ def update_input_files(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric
     g = g.replace('<<Teff>>', '%i'%Teff)
     g = g.replace('<<Z>>', '%.2f'%Z)
     g = g.replace('<<vsini>>', '%.2f'%vsini)
+    if (vsini>0) & (Rs>0) & (Prot==0):  # compute Prot
+    	Prot = rvs.sec2days(2*np.pi*rvs.Rsun2m(Rs)*1e-3 / vsini)
     g = g.replace('<<Prot>>', '%.2f'%Prot)    
     h = open('/data/cpapir/www/rvfc/InputFiles/user_star_%s.in'%suffix, 'w')
     h.write(g)
