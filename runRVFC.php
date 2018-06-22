@@ -238,7 +238,7 @@
                 <td></td>
                 <td></td>
                 <td style="padding: 5px 10px;" width="22%">Rotation period</td>
-                <?php if (floatval($_GET['Prot']) > 0) : ?>
+                <?php if ((floatval($_GET['Prot'])>0) || (($_GET['vsini']>0) && ($_GET['Rs']>0))) : ?>
                         <td style="padding: 5px 10px;" width="11%"><?php echo number_format($Protout,2,'.',''); ?> days</td>
                 <?php else: ?>
                         <td style="padding: 5px 10px;" width="11%">-</td>
