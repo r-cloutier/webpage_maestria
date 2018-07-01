@@ -649,7 +649,7 @@ def compute_sigmaRV(wl_band, spec_band, mag, band_str, texp, aperture,
 
 
 def interpolate_sigmaRV(mag, band_str, texp, aperture, throughput, 
-			R, Teff, logg, Z, vsini, SNRtarget):
+			R, Teff, logg, Z, vsini, SNRtarget=1e2):
     '''Interpolate the value of sigmaRV in a single band from a precomputed table.'''
     # get the table in this band
     assert band_str in ['U','B','V','R','I','Y','J','H','K']
@@ -665,6 +665,23 @@ def interpolate_sigmaRV(mag, band_str, texp, aperture, throughput,
 
     # get weighting in each parameter dimension
     Rinds, Rcoeffs = _get_weighting_coeffs(Rs, R)
+    Teffinds, Teffcoeffs = _get_weighting_coeffs(Teffs, Teff)
+    logginds, loggcoeffs = _get_weighting_coeffs(loggs, logg)
+    Zinds, Zcoeffs = _get_weighting_coeffs(Zs, Z)
+    vsiniinds, vsinicoeffs = _get_weighting_coeffs(vsinis, vsini)
+
+    # interpolate with weightings to get sigmaRV
+    sigs4 = d[Rinds[0]]*Rcoeffs[0] + d[Rinds[1]]*Rcoeffs[1]
+    sigs3 = sigs4[Teffinds[0]]*Teffcoeffs[0] + sigs4[Teffinds[1]]*Teffcoeffs[1]
+    sigs2 = sigs3[logginds[0]]*loggcoeffs[0] + sigs3[logginds[1]]*loggcoeffs[1]
+    sigs1 = sigs2[Zinds[0]]*Zcoeffs[0] + sigs2[Zinds[1]]*Zcoeffs[1]
+    sigmaRV = sigs1[vsiniinds[0]]*vsinicoeffs[0] + sigs1[vsiniinds[1]]*vsinicoeffs[1]
+
+    # rescale by SNR
+    snr = get_snr(mag, band_str, texp, aperture, throughput, R)
+    sigmaRV_scaled = sigmaRV * SNRtarget / snr
+
+    return sigmaRV
 
 
 def _get_weighting_coeffs(arr, value):
