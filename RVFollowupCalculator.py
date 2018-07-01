@@ -291,13 +291,15 @@ def _compute_sigRV_phot(band_strs, mags, Teff, logg, Z, vsini, texp, R,
     for i in range(sigmaRVs.size):
         t0 = time.time()
         SNRtargets[i] = get_snr(mags[i], band_strs[i], texp, aperture, throughput, R)
-        wl, spec = get_reduced_spectrum(Teff_round, logg_round, Z_round, vsini,
-                                        band_strs[i], R, centralwl_nm*1e-3,
-                                        SNRtargets[i])
-        sigmaRVs[i] = compute_sigmaRV(wl, spec, mags[i], band_strs[i], texp,
-                                      aperture, throughput, R,
-                                      transmission_threshold, wl_telluric,
-                                      trans_telluric, SNRtargets[i])
+        #wl, spec = get_reduced_spectrum(Teff_round, logg_round, Z_round, vsini,
+        #                                band_strs[i], R, centralwl_nm*1e-3,
+        #                                SNRtargets[i])
+        #sigmaRVs[i] = compute_sigmaRV(wl, spec, mags[i], band_strs[i], texp,
+        #                              aperture, throughput, R,
+        #                              transmission_threshold, wl_telluric,
+        #                              trans_telluric, SNRtargets[i])
+	sigmaRVs[i] = interpolate_sigmaRV(mags[i], band_strs[i], texp, aperture, throughput,
+                        		  R, Teff, logg, Z, vsini
         print 'Took %.1f seconds\n'%(time.time()-t0)
 
     # compute SNRtarget
