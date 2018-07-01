@@ -3,7 +3,7 @@
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Spectrograph parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
 
 
-<body onload="print_warning()">
+<!--<body onload="print_warning()">-->
 <script>
 function print_warning() {
         var no_error = "<?php echo ($error1d2==NULL) ? True : False ; ?>";

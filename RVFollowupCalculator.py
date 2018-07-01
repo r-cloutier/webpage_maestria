@@ -299,7 +299,7 @@ def _compute_sigRV_phot(band_strs, mags, Teff, logg, Z, vsini, texp, R,
         #                              transmission_threshold, wl_telluric,
         #                              trans_telluric, SNRtargets[i])
 	sigmaRVs[i] = interpolate_sigmaRV(mags[i], band_strs[i], texp, aperture, throughput,
-                        		  R, Teff, logg, Z, vsini
+                        		  R, Teff, logg, Z, vsini)
         print 'Took %.1f seconds\n'%(time.time()-t0)
 
     # compute SNRtarget

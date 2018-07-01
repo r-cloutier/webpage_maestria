@@ -95,9 +95,9 @@ def run_calculator(wlmin, wlmax, R, aperture, throughput, floor, maxtelluric, ov
 
 if __name__ == '__main__':
    
-    #f = open('Results/tmp', 'w')
-    #f.write('%i'%len(sys.argv))
-    #f.close()
+    f = open('Results/tmp', 'w')
+    f.write('%i'%len(sys.argv))
+    f.close()
 
     assert len(sys.argv) == 26
 

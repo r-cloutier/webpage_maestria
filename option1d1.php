@@ -3,7 +3,7 @@
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Spectrograph parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
 
 
-<body onload="print_warning()">
+<!--<body onload="print_warning()">-->
 <script>
 function print_warning() {
 	/*var warning = "Note that the RVFC will take a few minutes to compute the photon-noise limited RV precision in Option 1.1.";
