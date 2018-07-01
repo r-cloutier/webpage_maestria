@@ -647,3 +647,33 @@ def compute_sigmaRV(wl_band, spec_band, mag, band_str, texp, aperture,
                                       aperture, throughput, R, SNRtarget)
     return sigmaRV_scaled
 
+
+def interpolate_sigmaRV(mag, band_str, texp, aperture, throughput, 
+			R, Teff, logg, Z, vsini, SNRtarget):
+    '''Interpolate the value of sigmaRV in a single band from a precomputed table.'''
+    # get the table in this band
+    assert band_str in ['U','B','V','R','I','Y','J','H','K']
+    d = fits.open('SigmaRV_Grids/SigmaRV_%sgrid'%band_str)[0].data
+    assert d.shape == (8, 68, 9, 9, 7)  # R,Teff,logg,Z,vsini
+
+    # define parameter grids
+    Rs = np.arange(20e3, 161e3, 2e4)
+    Teffs = np.append(np.arange(28e2,7e3,1e2), np.arange(7e3,121e2,2e2))
+    loggs = np.arange(2, 6.1, .5)
+    Zs = np.append(np.arange(-4,-1,dtype=float), np.arange(-1.5,1.5,.5))
+    vsinis = np.array([.05,.1,.5,1.,5.,10.,50.])
+
+    # get weighting in each parameter dimension
+    Rinds, Rcoeffs = _get_weighting_coeffs(Rs, R)
+
+
+def _get_weighting_coeffs(arr, value):
+    '''Get the weighting of an input value within an array.'''
+    assert arr.min <= value <= arr.max()
+    assert len(arr.shape) == 1
+
+    # get nearby values
+    inds = np.where(abs(arr-value) == np.min(abs(arr-value)))[0][:2]
+
+    if value in arr:
+        np.where(arr == value)
