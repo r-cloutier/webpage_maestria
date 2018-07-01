@@ -669,11 +669,18 @@ def interpolate_sigmaRV(mag, band_str, texp, aperture, throughput,
 
 def _get_weighting_coeffs(arr, value):
     '''Get the weighting of an input value within an array.'''
-    assert arr.min <= value <= arr.max()
+    assert arr.min() <= value <= arr.max()
     assert len(arr.shape) == 1
 
-    # get nearby values
-    inds = np.where(abs(arr-value) == np.min(abs(arr-value)))[0][:2]
-
+    #see if the value is exact
     if value in arr:
-        np.where(arr == value)
+        inds = np.append(np.where(arr == value)[0][0], 0)
+	coeffs = np.array([1., 0.])
+
+    # get surrounding values
+    else:
+    	inds = np.argsort(abs(arr-value))[:2]
+	delta = float(abs(np.diff(arr[inds])))
+	coeffs = abs(1 - np.array([abs(value-arr[inds][0]), abs(value-arr[inds][1])]) / delta)
+
+    return inds, coeffs
