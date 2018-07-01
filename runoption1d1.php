@@ -6,7 +6,7 @@
               	$wlmaxErr = ((is_wlmax_bad()) ? '<b>&#955;<sub>max</sub> is required</b>' : NULL);
 		$specdomainErr = ((is_spectraldomain_bad()) ? '<b>&#42; the spectrograph wavelength coverage must span either the V or J band (i.e. 555
 		and 1250 nm respectively)</b>' : NULL);
-		$RErr = ((is_R_bad()) ? '<b>spectral resolution is required</b>' : NULL);
+		$RErr = ((is_R_bad()) ? '<b>spectral resolution must be &isin; [20,000, 160,000]</b>' : NULL);
 		$apertureErr = ((is_aperture_bad()) ? '<b>telescope aperture is required</b>' : NULL);
 		$throughputErr = ((is_throughput_bad()) ? '<b>throughput is required</b>' : NULL);
 		$maxtelluricErr = ((is_maxtelluric_bad()) ? '<b>max. telluric absorption is required</b>' : NULL);
@@ -19,9 +19,11 @@
 		$magErr = ((is_mag_bad()) ? '<b>stellar magnitude is required</b>' : NULL);
 		$MsErr = ((is_Ms_bad()) ? '<b>stellar mass is required</b>' : NULL);
                 $RsErr = ((is_Rs_bad()) ? '<b>stellar radius is required</b>' : NULL);
-                $TeffErr = ((is_Teff_bad()) ? '<b>effective temperature is required</b>' : NULL);
-                $ZErr = ((is_Z_bad()) ? '<b>metallicity is required</b>' : NULL);
-		$vsiniErr = ((is_vsini_bad()) ? '<b>vsini is required</b>' : NULL);
+                $TeffErr = ((is_Teff_bad()) ? '<b>effective temperature must be &isin; [2800, 12000] K</b>' : NULL);
+		$MsErr = ((is_logg_bad()) ? '<b>stellar mass must result in logg in [2, 6]</b>' : NULL);
+		$RsErr = ((is_logg_bad()) ? '<b>stellar radius must result in logg in [2, 6]</b>' : NULL);
+                $ZErr = ((is_Z_bad()) ? '<b>metallicity must be &isin; [-4, 1]</b>' : NULL);
+		$vsiniErr = ((is_vsini_bad()) ? '<b>vsini must be &isin; [0.05, 50] km/s</b>' : NULL);
                 $ProtErr = ((is_Prot_bad()) ? '<b>&#42; rotation period (or the stellar radius and vsini) are required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
 		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
@@ -41,7 +43,7 @@
 		($_GET['wlmax']>1250))) { $specdomain_bad = True; } else { $specdomain_bad = False; }
 		return $specdomain_bad; }
 	function is_R_bad() {
-	        if (($_GET['R']==NULL) || ($_GET['R']<0)) { $R_bad = True; } else { $R_bad = False; }
+	        if (($_GET['R']==NULL) || ($_GET['R']<20000) || ($_GET['R']>160000)) { $R_bad = True; } else { $R_bad = False; }
 		return $R_bad; }
         function is_aperture_bad() {
 	        if (($_GET['aperture']==NULL) || ($_GET['aperture']<0)) { $aperture_bad = True; } else { $aperture_bad = False; }
@@ -82,13 +84,17 @@
 	        if (($_GET['Rs']==NULL) || ($_GET['Rs']<0)) { $Rs_bad = True; } else { $Rs_bad = False;}
 		return $Rs_bad; }
         function is_Teff_bad() {
-	        if (($_GET['Teff']==NULL) || ($_GET['Teff']<0)) { $Teff_bad = True; } else { $Teff_bad = False;} 
+	        if (($_GET['Teff']==NULL) || ($_GET['Teff']<2800) || ($_GET['Teff']>12000)) { $Teff_bad = True; } else { $Teff_bad = False;} 
 		return $Teff_bad; }
+	function is_logg_bad() {
+		$logg = log10(6.67e-11*1.98855e32*$_GET['Ms'] / pow(6.957e8*$_GET['Rs'],2));
+		if (($logg<2) || ($logg>6)) { $logg_bad = True; } else { $logg_bad = $False; }
+		return $logg_bad; }
 	function is_Z_bad() {
-	        if (($_GET['Z']==NULL)) { $Z_bad = True; } else { $Z_bad = False;}
+	        if (($_GET['Z']==NULL) || ($_GET['Z']<-4) || ($_GET['Z']>1)) { $Z_bad = True; } else { $Z_bad = False;}
 		return $Z_bad; }
         function is_vsini_bad() {
-	        if (($_GET['vsini']==NULL) || ($_GET['vsini']<0)) { $vsini_bad = True; } else { $vsini_bad = False;}
+	        if (($_GET['vsini']==NULL) || ($_GET['vsini']<.05) || ($_GET['vsini']>50)) { $vsini_bad = True; } else { $vsini_bad = False;}
 		return $vsini_bad; }
         function is_Prot_bad() {
                 if ((($_GET['Prot']==NULL) && (($_GET['vsini']==NULL) || ($_GET['Rs']==NULL))) || ($_GET['Prot']<0)) 
@@ -108,6 +114,7 @@
 		if ((is_wlmin_bad()) || (is_wlmax_bad()) || (is_spectraldomain_bad()) || (is_R_bad()) || (is_aperture_bad()) || (is_throughput_bad()) || 
 		(is_maxtelluric_bad()) || (is_floor_bad()) || (is_texp_bad()) || (is_overhead_bad()) ||
 		(is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_mag_bad()) || (is_Ms_bad()) || (is_Rs_bad()) || (is_Teff_bad()) ||
+		(is_logg_bad()) ||
 		(is_Z_bad()) || (is_vsini_bad()) || (is_Prot_bad()) || (is_Kdetsig_bad()) || (is_NGPtrials_bad())) {
 			$Errs = report_missing_fields();
 			$wlminErr = $Errs[0];
