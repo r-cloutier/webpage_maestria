@@ -51,10 +51,9 @@ noise</span></p>&nbsp;&nbsp;&nbsp;
 		$Rin = number_format($data[3],0,"","");
 		$aperturein = number_format($data[4],2,".","");
 		$throughputin = number_format($data[5],2,".","");
-		$maxtelluricin = number_format($data[6],2,".","");
-		$floorin = number_format($data[7],1,".",""); 
-		$texpin = number_format($data[8],0,"","");
-		$overheadin = number_format($data[9],0,"","");
+		$floorin = number_format($data[6],1,".",""); 
+		$texpin = number_format($data[7],0,"","");
+		$overheadin = number_format($data[8],0,"","");
 
 		// get spectral bands
 		/*for ($i=8; $i<=sizeof($data)-1; $i++) {
@@ -124,19 +123,14 @@ noise</span></p>&nbsp;&nbsp;&nbsp;
                 <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value="<?php echo
 		$throughputin ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($throughputErr!=NULL) ? $throughputErr : "" ?></span></td>
-                <td style="padding: 0px 0px 10px 30px;">Maximum telluric absorption (0-1) : <input type="text" name="maxtelluric" value="<?php echo
-		$maxtelluricin ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
-		<span class="error"><?php echo ($maxtelluricErr!=NULL) ? $maxtelluricErr : "" ?></span></td>
-	</tr>
-	<tr>
                 <td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo
 		$floorin ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
+	</tr>
+	<tr>
                 <td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value="<?php echo
 		$texpin ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($texpErr!=NULL) ? $texpErr : "" ?></span></td>
-        </tr>
-	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value="<?php echo
 		$overheadin ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($overheadErr!=NULL) ? $overheadErr : "" ?></span></td>

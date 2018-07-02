@@ -138,19 +138,14 @@ function print_warning() {
                 <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value="<?php echo
 		isset($_GET['throughput']) ? $_GET['throughput'] : $throughput ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($throughputErr!=NULL) ? $throughputErr : "" ?></span></td>
-                <td style="padding: 0px 0px 10px 30px;">Maximum telluric absorption (0-1) : <input type="text" name="maxtelluric" value="<?php echo
-		isset($_GET['maxtelluric']) ? $_GET['maxtelluric'] : $maxtelluric ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
-		<span class="error"><?php echo ($maxtelluricErr!=NULL) ? $maxtelluricErr : "" ?></span></td>
-	</tr>
-	<tr>
                 <td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo
 		isset($_GET['floor']) ? $_GET['floor'] : $floor ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
+	</tr>
+	<tr>
                 <td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value="<?php echo
 		isset($_GET['texp']) ? $_GET['texp'] : $texp ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($texpErr!=NULL) ? $texpErr : "" ?></span></td>
-        </tr>
-	<tr>
 		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value="<?php echo
 		isset($_GET['overhead']) ? $_GET['overhead'] : $overhead ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($overheadErr!=NULL) ? $overheadErr : "" ?></span></td>

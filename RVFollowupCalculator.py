@@ -189,7 +189,7 @@ def nRV_calculator(Kdetsig,
 def do_checks(throughput, maxtelluric):
     if (throughput <= 0) or (throughput >= 1):
         raise ValueError('Throughput must be between 0-1.')
-    if (maxtelluric <= 0) or (throughput >= 1):
+    if (maxtelluric != 0):
         raise ValueError('Maxtelluric must be between 0-1.')
 
 

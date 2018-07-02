@@ -9,7 +9,6 @@
 		$RErr = ((is_R_bad()) ? '<b>spectral resolution must be &isin; [20,000, 160,000]</b>' : NULL);
 		$apertureErr = ((is_aperture_bad()) ? '<b>telescope aperture is required</b>' : NULL);
 		$throughputErr = ((is_throughput_bad()) ? '<b>throughput is required</b>' : NULL);
-		$maxtelluricErr = ((is_maxtelluric_bad()) ? '<b>max. telluric absorption is required</b>' : NULL);
 		$floorErr = ((is_floor_bad()) ? '<b>RV noise floor is required</b>' : NULL);
 		$texpErr = ((is_texp_bad()) ? '<b>exposure time is required</b>' : NULL);
 		$overheadErr = ((is_overhead_bad()) ? '<b>overhead is required</b>' : NULL);
@@ -27,7 +26,7 @@
                 $ProtErr = ((is_Prot_bad()) ? '<b>&#42; rotation period (or the stellar radius and vsini) are required</b>' : NULL);
 		$KdetsigErr = ((is_Kdetsig_bad()) ? '<b>desired K detection significance is required</b>' : NULL);
 		$NGPtrialsErr = ((is_NGPtrials_bad()) ? '<b>number of GP trials is required</b>' : NULL);
-		$error_messages = array($wlminErr, $wlmaxErr, $specdomainErr, $RErr, $apertureErr, $throughputErr, $maxtelluricErr, $floorErr, $texpErr,
+		$error_messages = array($wlminErr, $wlmaxErr, $specdomainErr, $RErr, $apertureErr, $throughputErr, $floorErr, $texpErr,
 		$overheadErr, $PErr, $rpErr, $mpErr, $magErr, $MsErr, $RsErr, $TeffErr, $ZErr, $vsiniErr, $ProtErr, $KdetsigErr, $NGPtrialsErr);
 		return $error_messages;
 	}
@@ -52,10 +51,6 @@
 	        if (($_GET['throughput']==NULL) || ($_GET['throughput']<=0) || ($_GET['throughput']>1)) { $throughput_bad = True; } 
 		else { $throughput_bad = False;}
 		return $throughput_bad; }
-	function is_maxtelluric_bad() {
-	        if (($_GET['maxtelluric']==NULL) || ($_GET['maxtelluric']<0) || ($_GET['maxtelluric']>=1)) { $maxtelluric_bad = True; } 
-		else { $maxtelluric_bad = False;}
-                return $maxtelluric_bad; }
 	function is_floor_bad() {
 	        if (($_GET['floor']==NULL) || ($_GET['floor']<0)) { $floor_bad = True; } else { $floor_bad = False;}
                 return $floor_bad; }
@@ -112,7 +107,7 @@
 	// otherwise run the RVFC
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		if ((is_wlmin_bad()) || (is_wlmax_bad()) || (is_spectraldomain_bad()) || (is_R_bad()) || (is_aperture_bad()) || (is_throughput_bad()) || 
-		(is_maxtelluric_bad()) || (is_floor_bad()) || (is_texp_bad()) || (is_overhead_bad()) ||
+		(is_floor_bad()) || (is_texp_bad()) || (is_overhead_bad()) ||
 		(is_P_bad()) || (is_rp_bad()) || (is_mp_bad()) || (is_mag_bad()) || (is_Ms_bad()) || (is_Rs_bad()) || (is_Teff_bad()) ||
 		(is_logg_bad()) ||
 		(is_Z_bad()) || (is_vsini_bad()) || (is_Prot_bad()) || (is_Kdetsig_bad()) || (is_NGPtrials_bad())) {
@@ -123,22 +118,21 @@
 			$RErr = $Errs[3];
 			$apertureErr = $Errs[4];
 			$throughputErr = $Errs[5];
-			$maxtelluricErr = $Errs[6];
-			$floorErr = $Errs[7];
-			$texpErr = $Errs[8];
-			$overheadErr = $Errs[9];
-			$PErr = $Errs[10];
-			$rpErr = $Errs[11];
-			$mpErr = $Errs[12];
-			$magErr = $Errs[13];
-			$MsErr = $Errs[14];
-			$RsErr = $Errs[15];
-			$TeffErr = $Errs[16];
-			$ZErr = $Errs[17];
-			$vsiniErr = $Errs[18];
-			$ProtErr = $Errs[19];
-			$KdetsigErr = $Errs[20];
-			$NGPtrialsErr = $Errs[21];
+			$floorErr = $Errs[6];
+			$texpErr = $Errs[7];
+			$overheadErr = $Errs[8];
+			$PErr = $Errs[9];
+			$rpErr = $Errs[10];
+			$mpErr = $Errs[11];
+			$magErr = $Errs[12];
+			$MsErr = $Errs[13];
+			$RsErr = $Errs[14];
+			$TeffErr = $Errs[15];
+			$ZErr = $Errs[16];
+			$vsiniErr = $Errs[17];;
+			$ProtErr = $Errs[18];
+			$KdetsigErr = $Errs[19];
+			$NGPtrialsErr = $Errs[20];
 			$error1d1 = True;
 			include "option1d1.php";
 		} else {

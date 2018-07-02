@@ -108,6 +108,7 @@ if __name__ == '__main__':
     throughput = float(sys.argv[5])
     floor = float(sys.argv[6])
     maxtelluric = float(sys.argv[7])
+    assert maxtelluric == 0
     overhead = float(sys.argv[8])
 
     texp = float(sys.argv[9])

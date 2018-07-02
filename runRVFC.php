@@ -116,19 +116,19 @@
                 <td></td>
         </tr>
         <tr>
-                <td style="padding: 5px 10px;" width="22%">Telluric absorption upper limit</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($maxtelluricout,2,".",""); ?></td>
                 <td style="padding: 5px 10px;" width="22%">RV noise floor</td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo number_format($floorout,1,".",""); ?> m/s</td>
-                <td></td>
-                <td></td>
-        </tr>
-        <tr>
 		<td style="padding: 5px 10px;" width="22%">Exposure time</td>
 		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($texpout,2,".",""); ?> min</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
                 <td style="padding: 5px 10px;" width="22%">Overhead</td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo number_format($overheadout,2,".",""); ?> min</td>
                 <td></td>
+		<td></td>
+		<td></td>
                 <td></td>
         </tr>
 </table>
