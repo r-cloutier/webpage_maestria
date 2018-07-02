@@ -21,7 +21,7 @@
 	$Rin = (($_GET['R']>0) ? $_GET['R'] : 0);
 	$aperturein = (($_GET['aperture']>0) ? $_GET['aperture'] : 0);
 	$throughputin = (($_GET['throughput']>0) ? $_GET['throughput'] : 0);
-	$maxtelluricin = (($_GET['maxtelluric']>0) ? $_GET['maxtelluric'] : 0);
+	$maxtelluricin = 0;//($_GET['maxtelluric']>0) ? $_GET['maxtelluric'] : 0);
 	$floorin = (($_GET['floor']>0) ? $_GET['floor'] : 0);
 	$overheadin = (($_GET['overhead']>0) ? $_GET['overhead'] : 0);
 	$sigRVphotin = (($_GET['sigRVphot']>0) ? $_GET['sigRVphot'] : 0);
