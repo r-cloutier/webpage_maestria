@@ -653,7 +653,7 @@ def interpolate_sigmaRV(mag, band_str, texp, aperture, throughput,
     '''Interpolate the value of sigmaRV in a single band from a precomputed table.'''
     # get the table in this band
     assert band_str in ['U','B','V','R','I','Y','J','H','K']
-    d = fits.open('SigmaRV_Grids/SigmaRV_%sgrid'%band_str)[0].data
+    d = fits.open('SigmaRV_Grids/SigmaRV_filter0d8_%sgrid'%band_str)[0].data
     assert d.shape == (8, 68, 9, 9, 7)  # R,Teff,logg,Z,vsini
 
     # define parameter grids
