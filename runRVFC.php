@@ -37,11 +37,11 @@
 	$sigRVplanetsin = (($_GET['sigRVplanets']!=NULL) ? floatval($_GET['sigRVplanets']) : -1);
 	$sigRVeffin = (($_GET['sigRVeff']>0) ? $_GET['sigRVeff'] : -1);
 	$mpin = (($_GET['mp']>0) ? $_GET['mp'] : 0);
-	$magin = (($_GET['mag']>0) ? $_GET['mag'] : 0);
+	$magin = (($_GET['mag']!=NULL) ? $_GET['mag'] : 0);
 	$Msin = (($_GET['Ms']>0) ? $_GET['Ms'] : 0);
 	$Rsin = (($_GET['Rs']>0) ? $_GET['Rs'] : 0);
 	$Teffin = (($_GET['Teff']>0) ? $_GET['Teff'] : 0);
-	$Zin = (($_GET['Z']>0) ? $_GET['Z'] : 0);
+	$Zin = (($_GET['Z']!=NULL) ? $_GET['Z'] : 0);
 	$vsiniin = (($_GET['vsini']>0) ? $_GET['vsini'] : 0);
 	$Protin = (($_GET['Prot']>0) ? $_GET['Prot'] : 0);
 	$NGPtrialsin = (($_GET['NGPtrials']!=NULL) ? $_GET['NGPtrials'] : 0);
