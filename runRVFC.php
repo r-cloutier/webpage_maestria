@@ -12,6 +12,14 @@
 	function Omega($P, $rp) {
 		return $rp / pow($P, 1./3);
 	}
+
+	function logg($Ms, $Rs) {
+		$G = 6.67408e-11;
+                $MSun2kg = 1.98855e30;
+		$Rsun2m = 6.957e8;
+		$logg = log10($G*$Ms*$Msun2kg*1e2/pow($Rs*$Rsun2m,2));
+		return $logg;
+	}
 ?>
 
 <!-- Set dumby variables for spectrograph parameters -->
