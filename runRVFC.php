@@ -13,11 +13,11 @@
 		return $rp / pow($P, 1./3);
 	}
 
-	function logg($Ms, $Rs) {
+	function compute_logg($Ms, $Rs) {
 		$G = 6.67408e-11;
-                $MSun2kg = 1.98855e30;
+                $Msun2kg = 1.98855e30;
 		$Rsun2m = 6.957e8;
-		$logg = log10($G*$Ms*$Msun2kg*1e2/pow($Rs*$Rsun2m,2));
+		$logg = log10($G*$Ms*$Msun2kg*1e2/($Rs*$Rs*$Rsun2m*$Rsun2m));
 		return $logg;
 	}
 ?>
@@ -217,9 +217,9 @@
         <tr>
                 <td style="padding: 5px 10px;" width="22%">RV semi-amplitude</td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo number_format(RV_K($Pout,$Msout,$mpout),2,'.',''); ?> m/s</td>
-		<td style="padding: 5px 10px;" width="22%">Metallicity</td>
+		<td style="padding: 5px 10px;" width="22%">logg</td>
                 <?php if ($_GET['Z'] != "") : ?>
-                        <td style="padding: 5px 10px;" width="11%"><?php echo number_format($Zout,2,'.',''); ?> [Fe/H]</td>
+                        <td style="padding: 5px 10px;" width="11%"><?php echo number_format(compute_logg($Msout,$Rsout),2,'.',''); ?> [cgs]</td>
                 <?php else: ?>
 			<td style="padding: 5px 10px;" width="11%">-</td>
                 <?php endif; ?>
@@ -233,15 +233,27 @@
         <tr>    
                 <td style="padding: 5px 10px;" width="22%">&#937; &#8801; (r<sub>p</sub>/R<sub>&#x02295;</sub>) (P/day)<sup>-1/3</sup></td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo number_format(Omega($Pout,$rpout),2,'.',''); ?></td>
-                <td style="padding: 5px 10px;" width="22%">Projected rotation velocity</td>
-                <?php if (floatval($_GET['vsini']) > 0) : ?>
-                        <td style="padding: 5px 10px;" width="11%"><?php echo number_format($vsiniout,2,'.',''); ?> km/s</td>
+                <td style="padding: 5px 10px;" width="22%">Metallicity</td>
+                <?php if (floatval($_GET['Z']) != "") : ?>
+                        <td style="padding: 5px 10px;" width="11%"><?php echo number_format($Zout,2,'.',''); ?> [Fe/H]</td>
                 <?php else: ?>
                         <td style="padding: 5px 10px;" width="11%">-</td>
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">Effective RV rms</td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_effout,2,'.',''); ?> m/s</td>
         </tr>
+	<tr>
+		<td></td>
+		<td></td>
+                <td style="padding: 5px 10px;" width="22%">vsini</td>
+                <?php if (floatval($_GET['vsini']) > 0) : ?>
+                        <td style="padding: 5px 10px;" width="11%"><?php echo number_format($vsiniout,2,'.',''); ?> [km/s]</td>
+                <?php else: ?>
+                        <td style="padding: 5px 10px;" width="11%">-</td>
+                <?php endif; ?>
+		<td></td>
+		<td></td>
+	</tr>
         <tr>
                 <td></td>
                 <td></td>
