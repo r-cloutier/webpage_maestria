@@ -151,13 +151,14 @@ def nRV_calculator(Kdetsig,
 	    print GPtheta
             nRVGPs[i] = compute_nRV_GP(GPtheta, keptheta, sigRV_phot,
                                        sigK_target, duration=duration)
-        nRVGP = np.median(nRVGPs)
+        nRVGP, enRVGP = np.median(nRVGPs), MAD(nRVGPs)
     else:
-        nRVGP = 0.
+        nRVGP, enRVGP = 0., 0.
         
     # compute total observing time in hours
     tobs = nRV * (texp + toverhead) / 60.
     tobsGP = nRVGP * (texp + toverhead) / 60.
+    etobsGP = enRVGP * (texp + toverhead) / 60.
 
     # is SNRtarget set?
     try:
@@ -176,7 +177,7 @@ def nRV_calculator(Kdetsig,
               band_strs, R, aperture, throughput, RVnoisefloor,
               centralwl_nm*1e-3, maxtelluric, toverhead, texp,
               SNRtarget, sigRV_phot, sigRV_act, sigRV_planet, sigRV_eff,
-              sigK_target, nRV, nRVGP, NGPtrials, tobs, tobsGP]
+              sigK_target, nRV, nRVGP, enRVGP, NGPtrials, tobs, tobsGP, etobsGP]
     ##_write_results2file(output_fname, output)
     ##create_pdf(output_fname, output)
     if verbose_results:
@@ -445,8 +446,10 @@ def _write_results2file(output_fname, magiclistofstuff2write):
 
 
 def _save_RVFC(output, output_fname):
-    P, rp, mp, K, mags, Ms, Rs, Teff, Z, vsini, Prot, band_strs, R, aperture, throughput, RVnoisefloor, centralwl_microns, maxtelluric, toverhead, texp, SNRtarget, sigRV_phot, sigRV_act, sigRV_planet, sigRV_eff, sigK_target, nRV, nRVGP, NGPtrials, tobs, tobsGP = output
-    g = '%.7f,%.4f,%.4f,%s,%s,%.4f,%.4f,%i,%.3f,%.3f,%.3f,%i,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.2f,%.2f,%i,%.1f,%.1f,%.3f,%.3f'%(P,rp,mp,'-'.join(mags.astype(str)),''.join(band_strs),Ms,Rs,Teff,Z,vsini,Prot,R,aperture,throughput,RVnoisefloor,centralwl_microns,maxtelluric,toverhead,texp,sigRV_phot,sigRV_act,sigRV_planet,sigRV_eff,sigK_target,NGPtrials,nRV,nRVGP,tobs,tobsGP)
+    P, rp, mp, K, mags, Ms, Rs, Teff, Z, vsini, Prot, band_strs, R, aperture, throughput, RVnoisefloor, centralwl_microns,
+    maxtelluric, toverhead, texp, SNRtarget, sigRV_phot, sigRV_act, sigRV_planet, sigRV_eff, sigK_target, nRV, nRVGP, enRVGP, NGPtrials, tobs, tobsGP, etobsGP = output
+    g =
+    '%.7f,%.4f,%.4f,%s,%s,%.4f,%.4f,%i,%.3f,%.3f,%.3f,%i,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.2f,%.2f,%i,%.1f,%.1f,%.1f,%.3f,%.3f,%.3f'%(P,rp,mp,'-'.join(mags.astype(str)),''.join(band_strs),Ms,Rs,Teff,Z,vsini,Prot,R,aperture,throughput,RVnoisefloor,centralwl_microns,maxtelluric,toverhead,texp,sigRV_phot,sigRV_act,sigRV_planet,sigRV_eff,sigK_target,NGPtrials,nRV,nRVGP,enRVGP,tobs,tobsGP,etobsGP)
     f = open(output_fname, 'w')
     f.write(g)
     f.close()
@@ -504,6 +507,10 @@ def _save_results(output):
     f = open(fname, 'w')
     f.write(tocsv)
     f.close()
+
+
+def MAD(arr):
+    return np.median(abs(arr-np.median(arr)))
 
 
 def clean_input_files(input_sigRV_fname, input_spectrograph_fname, 

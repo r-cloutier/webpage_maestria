@@ -289,8 +289,8 @@ function print_warningGP() {
                 // if greater than one send a warning alert
 		if (NGPtrials_int > 0) {
                       	var NGPtrials_label = NGPtrials_int.toFixed(0);
-                        var trial_label = (NGPtrials_int == 1 ? "trial." : "trials.");
-                        var warning = "&emsp;&emsp;<b>&#42;Note that the RVFC will take a few minutes to run "+NGPtrials_label+" GP "+trial_label+"</b>";
+                        var trial_label = (NGPtrials_int == 1 ? "trial" : "trials");
+                        var warning = "&emsp;&emsp;<b>&#42;Note that the RVFC will take a few minutes to run "+NGPtrials_label+" GP "+trial_label+" (&asymp; 90 seconds per GP trial).</b>";
                         //alert(warning);
                         document.getElementById("Warning").innerHTML = warning;
 		}
