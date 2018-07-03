@@ -55,7 +55,7 @@
 	        if (($_GET['sigRVphot']==NULL) || ($_GET['sigphotRV']<0)) { $sigRVphot_bad = True; } else { $sigRVphot_bad = False;} 
 		return $sigRVphot_bad; }
         function is_texp_bad() {
-	        if (($_GET['texp']==NULL) || ($_GET['texp']<0)) { $texp_bad = True; } else { $texp_bad = False;}    
+	        if (($_GET['texp']==NULL) || ($_GET['texp']<=0)) { $texp_bad = True; } else { $texp_bad = False;}    
 		return $texp_bad; }
         function is_overhead_bad() {
 	        if (($_GET['overhead']==NULL) || ($_GET['overhead']<0)) { $overhead_bad = True; } else { $overhead_bad = False;}    

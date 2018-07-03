@@ -34,7 +34,7 @@
 		if (($_GET['sigRVeff']==NULL) || ($_GET['sigRVeff']<0)) { $sigRVeff_bad = True; } else { $sigRVeff_bad = False;}
 		return $sigRVeff_bad; }
         function is_texp_bad() {
-	        if (($_GET['texp']==NULL) || ($_GET['texp']<0)) { $texp_bad = True; } else { $texp_bad = False;}    
+	        if (($_GET['texp']==NULL) || ($_GET['texp']<=0)) { $texp_bad = True; } else { $texp_bad = False;}    
 		return $texp_bad; }
         function is_overhead_bad() {
 	        if (($_GET['overhead']==NULL) || ($_GET['overhead']<0)) { $overhead_bad = True; } else { $overhead_bad = False;}    

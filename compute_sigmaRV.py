@@ -681,7 +681,7 @@ def interpolate_sigmaRV(mag, band_str, texp, aperture, throughput,
     snr = get_snr(mag, band_str, texp, aperture, throughput, R)
     sigmaRV_scaled = sigmaRV * SNRtarget / snr
 
-    return sigmaRV
+    return sigmaRV_scaled
 
 
 def _get_weighting_coeffs(arr, value):

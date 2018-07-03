@@ -47,8 +47,8 @@ def nRV_calculator(Kdetsig,
         toverhead = _read_spectrograph_input(input_spectrograph_fname)
     P, rp, mp = _read_planet_input(input_planet_fname)
     mag, Ms, Rs, Teff, Z, vsini, Prot = _read_star_input(input_star_fname)
-    clean_input_files(input_sigRV_fname, input_spectrograph_fname, 
-    		      input_planet_fname, input_star_fname)
+    #clean_input_files(input_sigRV_fname, input_spectrograph_fname, 
+    #		      input_planet_fname, input_star_fname)
 
     # checks
     if NGPtrials > NGPmax:

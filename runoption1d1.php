@@ -55,7 +55,7 @@
 	        if (($_GET['floor']==NULL) || ($_GET['floor']<0)) { $floor_bad = True; } else { $floor_bad = False;}
                 return $floor_bad; }
 	function is_texp_bad() {
-	        if (($_GET['texp']==NULL) || ($_GET['texp']<0)) { $texp_bad = True; } else { $texp_bad = False;}
+	        if (($_GET['texp']==NULL) || ($_GET['texp']<=0)) { $texp_bad = True; } else { $texp_bad = False;}
                 return $texp_bad; }
 	function is_overhead_bad() {
 	        if (($_GET['overhead']==NULL) || ($_GET['overhead']<0)) { $overhead_bad = True; } else { $overhead_bad = False;}
