@@ -51,10 +51,10 @@ sources</span></p>&nbsp;&nbsp;&nbsp;
 		$wlmaxin = number_format($data[2],0,"","");
 		$Rin = number_format($data[3],0,"","");
 		$aperturein = number_format($data[4],2,".","");
-		$throughputin = number_format($data[5],2,".","");
+		/*$throughputin = number_format($data[5],2,".","");
 		$floorin = number_format($data[6],1,".",""); 
 		$texpin = number_format($data[7],0,"","");
-		$overheadin = number_format($data[8],0,"","");
+		$overheadin = number_format($data[8],0,"","");*/
 
 		// get spectral bands
 		/*for ($i=8; $i<=sizeof($data)-1; $i++) {
@@ -122,18 +122,19 @@ sources</span></p>&nbsp;&nbsp;&nbsp;
         </tr>
         <tr>
                 <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value="<?php echo
-		$throughputin ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
+		isset($_GET['throughput']) ? $_GET['throughput'] : $throughput ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($throughputErr!=NULL) ? $throughputErr : "" ?></span></td>
                 <td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo
-		$floorin ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
+		isset($_GET['floor']) ? $_GET['floor'] : $floor ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
+		
 		<span class="error"><?php echo ($floorErr!=NULL) ? $floorErr : "" ?></span></td>
 	</tr>
 	<tr>
                 <td style="padding: 0px 0px 10px 30px;">Exposure time (min) :&nbsp;&nbsp;<input type="text" name="texp" value="<?php echo
-		$texpin ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
+		isset($_GET['texp']) ? $_GET['texp'] : $texp ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($texpErr!=NULL) ? $texpErr : "" ?></span></td>
 		<td style="padding: 0px 0px 10px 30px;">Overhead (min) :&nbsp;&nbsp;<input type="text" name="overhead" value="<?php echo
-		$overheadin ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
+		isset($_GET['overhead']) ? $_GET['overhead'] : $overhead ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($overheadErr!=NULL) ? $overheadErr : "" ?></span></td>
 	</tr>
 </table>
