@@ -87,8 +87,10 @@
 	$NGPtrialsout = $data[24];
 	$nRVout = $data[25];
 	$nRVGPout = $data[26];
-	$tobsout = $data[27];
-	$tobsGPout = $data[28];
+	$enRVGPout = $data[27];
+	$tobsout = $data[28];
+	$tobsGPout = $data[29];
+	$etobsGPout = $data[30];
 ?>
 
 
@@ -314,14 +316,13 @@
 	<tr>	
 		<td style="padding: 5px 10px;" width="24%"><b>Number of RV measurements (correlated noise)</b></td>
 		<?php if ($NGPtrialsout>0) : ?>
-		    	<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($nRVGPout,1,'.','').'</b>'; ?></td>
+		    	<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($nRVGPout,1,'.','').'&plusmn;'.number_format($enRVGPout,1,'.','').'</b>'; ?></td>
 		<?php else: ?>
 		        <td style="padding: 5px 10px;" width="11%"><b>-</b></td>
 		<?php endif; ?>
 		<td style="padding: 5px 10px;" width="24%"><b>Total observing time (correlated noise)</b></td>
 		<?php if ($NGPtrialsout>0) : ?>
-			<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($tobsGPout,1,'.','').' hrs
-			&nbsp;('.number_format($tobsGPout/7.,1,'.','').' nights)</b>'; ?></td>
+			<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($tobsGPout,1,'.','').'&plusmn;'.number_format($etobsGP,1,'.','').' hrs &nbsp;('.number_format($tobsGPout/7.,1,'.','').'&plusmn;'.number_format($etobsGP/7.,1,'.','').' nights)</b>'; ?></td>
 		<?php else: ?>
 		        <td style="padding: 5px 10px;" width="11%"><b>-</b></td>
 		<?php endif; ?>
