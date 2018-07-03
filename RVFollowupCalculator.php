@@ -228,7 +228,12 @@ td, th {
 		<!-- Theme JS -->
 		<script src="js/theme.js"></script>
 
+		<script>
+		function goBack() {
+		    window.history.back();
+		}
+		</script>
+
     </body> 
-        
-            
+
 </html>

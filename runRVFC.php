@@ -22,6 +22,7 @@
 	}
 ?>
 
+
 <!-- Set dumby variables for spectrograph parameters -->
 <?php 
 	$wlminin = (($_GET['wlmin']>0) ? $_GET['wlmin'] : 0);
@@ -50,7 +51,9 @@
         $arguments = $wlminin." ".$wlmaxin." ".$Rin." ".$aperturein." ".$throughputin." ".$floorin." ".$maxtelluricin." ".$overheadin." ".$_GET['texp']." ".$sigRVphotin." ".$sigRVactin." ".$sigRVplanetsin." ".$sigRVeffin." ".$_GET['P']." ".$_GET['rp']." ".$mpin." ".$magin." ".$Msin." ".$Rsin." ".$Teffin." ".$Zin." ".$vsiniin." ".$Protin." ".$_GET['Kdetsig']." ".$NGPtrialsin;
 	//echo "/usr/bin/python2.7 php2python.py ".$arguments;
 	$output_fname = exec("/usr/bin/python2.7 php2python.py ".$arguments);
-	//echo $output_fname;
+	if (($output_fname==NULL)) {
+		echo '<br><br><p style="font-size:18px">&nbsp;&nbsp;&nbsp;<b>&#42;&#42; Calculation failure.<br>&nbsp;&nbsp;&nbsp;This can often be due to an issue with interpolation parameters. Please ensure that your input parameters are correct in the previous step.</b></p>&nbsp;&nbsp;&nbsp;';
+	} 
 
 	// Read output
 	$file = fopen($output_fname, 'r');
