@@ -3,14 +3,14 @@
 <p style="font-size:20px">&nbsp;&nbsp;&nbsp;<b>Spectrograph parameters:</b></p><br>&nbsp;&nbsp;&nbsp;
 
 
-<!--<body onload="print_warning()">-->
+<body onload="print_warning()">
 <script>
 function print_warning() {
 	/*var warning = "Note that the RVFC will take a few minutes to compute the photon-noise limited RV precision in Option 1.1.";
         alert(warning);*/
 	var no_error = "<?php echo ($error1d1==NULL) ? True : False ; ?>";
 	if (no_error) {
-		var warning = "Note that the RVFC will take a few minutes to compute the photon-noise limited RV precision in Option 1.1.";
+		var warning = "Note that the RVFC will take a few seconds to interpolate the photon-noise limited RV precision in Option 1.1.";
 		alert(warning);
 	}
 	stellar_magnitude();
