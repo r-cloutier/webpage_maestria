@@ -118,15 +118,14 @@ td, th {
 		RV measurements&#8213;and total observing time&#8213;are useful for planning 
 		RV follow-up observations and how to distribute observing time among a set of targeted transiting planetary
 		systems. The inherent assumptions in the RVFC and instructions on its use are provided below. Additionally, 
-		the model and calculator are described in detail in <b>add paper link here.</b></p>
+		the model and calculator are described in detail in <a href="https://arxiv.org/abs/1807.01263"
+		style="color:#D45C00">this paper</a></p>
 
 		<br><h5>Version history</h5>
 	    </div>
 	    <div style="padding-left:180px;padding-right:160px">
 		<ul>
-			<li><b>v1.0</b> <i>18/04/2018:</i> initial version of the RVFC</li>
-			<li><b>v1.1</b> <i>08/05/2018:</i> RVFC no longer runs when any required input field is missing or its value is invalid</li>
-			<li><b>v1.2</b> <i>01/07/2018:</i> the photon-noise limited RV precision is now interpolated from a
+			<li><b>v1.0</b> <i>01/07/2018:</i> the photon-noise limited RV precision is now interpolated from a
 			pre-computed grid rather than calculated. This decreases the run time in option 1 by a few factors
 			or ten on average.
 		</ul>
@@ -160,8 +159,8 @@ td, th {
 		<br><h5>Instructions</h5>
 		To begin, select one of the two options at the bottom of this page. The applicability of each option is described below along
 		with instructions on their usage.<br><br>
-		<b>Option 1:</b> to-be used when the photon-noise limited RV precision and the effective RV rms are unknown for the target of
-		interest. 
+		<b>Option 1: to-be used when the photon-noise limited RV precision and the effective RV rms are unknown for the target of
+		interest.</b>
 	    </div>
 	    <div style="padding-left:180px;padding-right:160px">
 		<br>
@@ -173,20 +172,21 @@ td, th {
 			Most fields are required to successfully run the RVFC and are highlighted with an "*". The exception being the              
 			planetary mass which if left blank, the planet's mass will be estimated from its radius using an empirically-derived 
                         mass-radius relation.</li><br>
-			<li>&emsp;3) the specification of the spectrograph parameters can be done individually by hand or-alternatively, any of a set of 
+			<li>&emsp;3) the specification of the spectrograph parameters can be done individually by hand or alternatively, any of a set of 
 			spectrographs with default parameter values can be resolved from the corresponding drop-down menu. The default values are 
 			not fixed and may be modified before proceeding if desired.</li><br>
 			<li>&emsp;4) Note on the stellar magnitude: the passband corresponding to the input stellar magnitude is determined by the
                         wavelength domain of the spectrograph specified by the user. This wavelength range <i>must</i> span either the <i>V</i> or
                         <i>J</i> central wavelengths (i.e. 555 and 1250 nm respectively).</li><br>
-			<li>&emsp;5) once all of the required fields are filled the RVFC can be run. If any required fields are missing or invalid
+			<li>&emsp;5) once all of the required fields are filled the RVFC can be run via the submission button at the bottom of the
+			form. If any required fields are missing or invalid
 			then the submission page will be reloaded with warning messages indicating which fields need to be modified before
 			resubmitting the RVFC calculation.</li><br>
 		</ul>
 	    </div>
 	    <div style="padding-left:160px;padding-right:160px">
-		<b>Option 2:</b> to-be used when the photon-noise limited RV precision or the effective RV rms is known a-priori for the target 
-		of interest (often from previous runs of the RVFC or from independent calculations).
+		<b>Option 2: to-be used when the photon-noise limited RV precision or the effective RV rms is known a-priori for the target 
+		of interest (often from previous runs of the RVFC or from independent calculations).</b>
 	    </div>
 	    <div style="padding-left:180px;padding-right:160px">
 	        <br>
@@ -199,24 +199,30 @@ td, th {
 			fill. Most fields are required to successfully run the RVFC and are highlighted with an "*". The exception being the
 			planetary mass which if left blank, the planet's mass will be estimated from its radius using an empirically-derived 
 			mass-radius relation.</li><br>
-			<li>&emsp;3) once all of the required fields are filled the RVFC can be run. If any required fields are missing or invalid
+			<li>&emsp;3) once all of the required fields are filled the RVFC can be run via the submission button at the bottom of the
+                     	form. If any required fields are missing or invalid
                         then the submission page will be reloaded with warning messages indicating which fields need to be modified before
                         resubmitting the RVFC calculation.</li><br>
 		</ul>
 	    </div>
 	    <div style="padding-left:160px;padding-right:160px">
 	         <br><h5>Notes</h5>
-		 &#9679;&emsp;<b>Acknowledgement</b>: if you make use of the RVFC please cite <b>add paper link here.</b><br><br>
-	         &#9679;&emsp;Where applicable, input values for the stellar activity and/or RV rms from additional planets in the system 
-		 can be set to zero to be ignored or if left blank, have their values sampled from appropriate empirical
-		 distributions according to the specified planetary and stellar parameters.<br><br>
+		 &#9679;&emsp;<b>Acknowledgement</b>: if you make use of the RVFC please cite <a href="https://arxiv.org/abs/1807.01263"
+                 style="color:#D45C00">this paper</a><br><br>
+	         &#9679;&emsp;The various sources of additive RV noise included in the RVFC calculations include the photon-noise limited RV
+		 precision, stellar activity, RV rms from additional planets in the system, and a systematic uncertainty from the RV noise floor.
+		 These parameters can be set explicitly by the user or sampled from empirical distributions depending on which RVFC suboption is
+		 selected.<br><br>
 		 &#9679;&emsp;If the RVFC is run in the presence of correlated RV noise, it is recommended that the number of Gaussian process
-		 (GP) trials be set to at least ten as these results are sensitive to the window function of the observations which are not fixed and 
-		 should be sampled. Alternatively, this value can be set to zero to only consider the white noise calculation.<br><br>
+		 (GP) trials be set to &#8819; 10 as these results are sensitive to the window function of the observations which are not fixed and 
+		 should be sampled. Note however that more GP trials will result in a longer wall time for the calculation. When more than one GP
+		 trial is submitted the median and median absolute deviation of the results over the multiple GP trials are returned. Alternatively,
+		 the number of GP trials can be set to zero to only consider the white noise calculation.<br><br>
 		 &#9679;&emsp;The window functions adopted when using the RVFC in the presence of correlated noise (i.e. number of GP trials
-		 > 0) are uniformly sampled over a span of 100 days. The ability to upload custom window functions is intended for future
+		 > 0) are uniformly sampled in time. The ability to upload custom window functions is intended for future
 		 versions of the RVFC.<br><br>
-		 &#9679;&emsp;Questions and comments about the RVFC (including any bug encounters) should be sent to <a href="mailto:cloutier@astro.utoronto.ca?" style="color:#C60000" target="_top">cloutier@astro.utoronto.ca</a>.
+		 &#9679;&emsp;Questions and comments about the RVFC (including any bug encounters) should be sent to <a
+		 href="mailto:cloutier@astro.utoronto.ca?" style="color:#D45C00" target="_top">cloutier@astro.utoronto.ca</a>.
 	    </div>
 	    <br><br>
 
