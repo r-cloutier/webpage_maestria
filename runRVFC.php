@@ -121,7 +121,7 @@
                 <td></td>
 	</tr>
         <tr>
-		<td style="padding: 5px 10px;" width="22%">Telescope aperture</td>
+		<td style="padding: 5px 10px;" width="22%">Telescope diameter</td>
 		<td style="padding: 5px 10px;" width="11%"><?php echo number_format($apertureout,2,".",""); ?> m</td>
                 <td style="padding: 5px 10px;" width="22%">Throughput</td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo number_format($throughputout,2,".",""); ?></td>
