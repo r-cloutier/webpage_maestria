@@ -15,5 +15,5 @@
 			: select to set the individual RV noise sources explicitly.</br><br><br>
 			<input type="submit" name="submit_2d3" style="font-weight:bold;" value="Option 2.3"/>
 			: select to set the effective RV rms verbatim thus negating the need to specify any other RV noise source. This
-			option is not compatible with GP calculations.
+			option is not compatible with RVFC calculations in the presence of correlated noise.
 	    </div>

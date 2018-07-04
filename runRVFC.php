@@ -244,8 +244,8 @@
                 <?php else: ?>
                         <td style="padding: 5px 10px;" width="11%">-</td>
                 <?php endif; ?>
-                <td style="padding: 5px 10px;" width="22%">Effective RV rms</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_effout,2,'.',''); ?> m/s</td>
+                <td style="padding: 5px 10px;" width="22%"><b>Effective RV rms</b></td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($sigRV_effout,2,'.','').'</b>'; ?> <b>m/s</b></td>
         </tr>
 	<tr>
 		<td></td>
