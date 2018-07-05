@@ -30,8 +30,8 @@ function print_warning() {
 <option value="G-CLEF">G-CLEF</option>
 <option value="GIANO">GIANO</option>
 <option value="HARPS">HARPS</option>
-<option value="HARPS-N">HARPS-N</option>
 <option value="HARPS-3">HARPS-3</option>
+<option value="HARPS-N">HARPS-N</option>
 <option value="HDS">HDS</option>
 <option value="HPF">HPF</option>
 <option value="iLocater">iLocater</option>
