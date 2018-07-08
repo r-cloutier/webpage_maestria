@@ -132,7 +132,7 @@ function print_warning() {
                 <td style="padding: 0px 0px 10px 30px;">Spectral resolution (R = &lambda;/&delta;&lambda;) :&nbsp;&nbsp;<input type="text" name="R"
 		value="<?php echo isset($_GET['R']) ? $_GET['R'] : $R ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($RErr!=NULL) ? $RErr : "" ?></span></td>
-                <td style="padding: 0px 0px 10px 30px;">Telescope diameter (metres) :&nbsp;&nbsp;<input type="text" name="aperture" value="<?php echo
+                <td style="padding: 0px 0px 10px 30px;">Effective telescope diameter (metres) :&nbsp;&nbsp;<input type="text" name="aperture" value="<?php echo
 		isset($_GET['aperture']) ? $_GET['aperture'] : $aperture ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($apertureErr!=NULL) ? $apertureErr : "" ?></span></td>
         </tr>
