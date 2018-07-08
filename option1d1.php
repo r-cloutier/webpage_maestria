@@ -28,6 +28,7 @@ function print_warning() {
 <option value="ESPRESSO">ESPRESSO</option>
 <option value="EXPRES">EXPRES</option>
 <option value="G-CLEF">G-CLEF</option>
+<option value="GANS">GANS</option>
 <option value="GIANO">GIANO</option>
 <option value="HARPS">HARPS</option>
 <option value="HARPS-3">HARPS-3</option>
@@ -137,7 +138,7 @@ function print_warning() {
 		<span class="error"><?php echo ($apertureErr!=NULL) ? $apertureErr : "" ?></span></td>
         </tr>
         <tr>
-                <td style="padding: 0px 0px 10px 30px;">Throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value="<?php echo
+                <td style="padding: 0px 0px 10px 30px;">End-to-end throughput (0-1) :&nbsp;&nbsp;<input type="text" name="throughput" value="<?php echo
 		isset($_GET['throughput']) ? $_GET['throughput'] : $throughput ?>" size="10" maxlength="50" onkeypress="return noenter()"/><b> &#42;</b>
 		<span class="error"><?php echo ($throughputErr!=NULL) ? $throughputErr : "" ?></span></td>
                 <td style="padding: 0px 0px 10px 30px;">RV noise floor (m/s) :&nbsp;&nbsp;<input type="text" name="floor" value="<?php echo
