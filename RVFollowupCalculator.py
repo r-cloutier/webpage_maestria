@@ -16,7 +16,7 @@ def nRV_calculator(Kdetsig,
                    input_star_fname='/data/cpapir/www/rvfc/InputFiles/user_star.in',
                    input_spectrograph_fname='/data/cpapir/www/rvfc/InputFiles/user_spectrograph.in',
                    input_sigRV_fname='/data/cpapir/www/rvfc/InputFiles/user_sigRV.in',
-                   output_fname='/data/cpapir/www/rvfc/Results/RVFollowupCalculator.txt',
+                   output_fname='Results/RVFollowupCalculator.txt',
                    duration=100, NGPtrials=0, verbose_results=True):
     '''
     Compute the number of RV measurements required to detect an input 
@@ -47,16 +47,15 @@ def nRV_calculator(Kdetsig,
         toverhead = _read_spectrograph_input(input_spectrograph_fname)
     P, rp, mp = _read_planet_input(input_planet_fname)
     mag, Ms, Rs, Teff, Z, vsini, Prot = _read_star_input(input_star_fname)
-    #clean_input_files(input_sigRV_fname, input_spectrograph_fname, 
-   # 		      input_planet_fname, input_star_fname)
+    clean_input_files(input_sigRV_fname, input_spectrograph_fname, 
+    		      input_planet_fname, input_star_fname)
 
     # checks
     if NGPtrials > NGPmax:
     	raise ValueError('Cannot exceed the maximum number of GP trials (i.e. 100).')
     runGP = True if NGPtrials > 0 else False
     if runGP and (duration < P):
-        raise ValueError('Time-series duration must be longer than the' + \
-                         "planet's orbital period.")
+        duration = P
     
     # compute sigRV_eff from other sources if not specified
     if sigRV_eff < 0:
@@ -103,32 +102,68 @@ def nRV_calculator(Kdetsig,
             Bmag, Vmag = _get_magnitudes(band_strs, mags, Ms)
             B_V = Bmag - Vmag
             if sigRV_act < 0:
-            	sigRV_act = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
+            	#sigRV_act  = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
+		sigRV_act, esigRV_act = get_sigmaRV_activity_mean_dispersion(Teff, Ms, Prot, B_V)
+            else:
+                esigRV_act = 0.
             if sigRV_planet < 0:
-            	sigRV_planet = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
-
+            	#sigRV_planet  = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
+		sigRV_planet, esigRV_planet = get_sigmaRV_planets_mean_dispersion(P,rp,Teff,Ms,sigRV_phot)
+            else:
+                esigRV_planet = 0.
+                
 	else:
 	    if sigRV_act < 0:
 	        logg = float(unp.nominal_values(_compute_logg(Ms, Rs)))
-	        B_V = get_B_V(Teff, logg, Z)
-	    	sigRV_act = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
+	        B_V = float(get_B_V(Teff, logg, Z))
+	    	#sigRV_act  = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
+		sigRV_act, esigRV_act = get_sigmaRV_activity_mean_dispersion(Teff, Ms, Prot, B_V)
+            else:
+                esigRV_act = 0.
 	    if sigRV_planet < 0:
-		sigRV_planet = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
-
+		#sigRV_planet  = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
+		sigRV_planet, esigRV_planet = get_sigmaRV_planets_mean_dispersion(P,rp,Teff,Ms,sigRV_phot)
+            else:
+                esigRV_planet = 0.
+                
         # compute sigRV_eff
-        sigRV_eff = np.sqrt(RVnoisefloor**2 + \
-                            sigRV_phot**2 + \
-                            sigRV_act**2 + \
-                            sigRV_planet**2)
+	usigRV_act = unp.uarray(sigRV_act, esigRV_act)
+	usigRV_planet = unp.uarray(sigRV_planet, esigRV_planet)
+	usigRV_eff = unp.sqrt(RVnoisefloor**2 + \
+			      sigRV_phot**2 + \
+			      usigRV_act**2 + \
+			      usigRV_planet**2)
+	sigRV_eff = unp.nominal_values(usigRV_eff)
+	esigRV_eff = unp.std_devs(usigRV_eff)
+        #sigRV_eff = np.sqrt(RVnoisefloor**2 + \
+        #                    sigRV_phot**2 + \
+        #                    sigRV_act**2 + \
+        #                    sigRV_planet**2)
 
+    else:  # verbatim sigeff
+        esigRV_act, esigRV_planet, esigRV_eff = np.zeros(3)
+        usigRV_eff = unp.uarray(sigRV_eff, esigRV_eff)
+        
     # get target K measurement uncertainty
-    mp = float(_get_planet_mass(rp)) if mp <= 0 else mp
-    K, sigK_target = _get_sigK(Kdetsig, P, Ms, mp)
-
+    if mp <= 0:
+        mp = float(_get_planet_mass(rp))
+        emp = mp*.1  #float(_get_planet_mass_dispersion(rp)) TEMP
+    else:
+        mp, emp = float(mp), 0.
+    #K, sigK_target = _get_sigK(Kdetsig, P, Ms, mp)
+    ump = unp.uarray(mp, emp)
+    uK, usigK_target = _get_sigK(Kdetsig, P, Ms, ump)
+    K, eK, sigK_target, esigK_target = float(unp.nominal_values(uK)), \
+                                       float(unp.std_devs(uK)), \
+                                       float(unp.nominal_values(usigK_target)), \
+                                       float(unp.std_devs(usigK_target))
+    
     # compute number of RVs required for a white and red noise model
     print 'Computing nRVs...'
-    nRV = 2. * (sigRV_eff / sigK_target)**2
-
+    #nRV = 2. * (sigRV_eff / sigK_target)**2
+    unRV = 2. * (usigRV_eff / usigK_target)**2
+    nRV, enRV = float(unp.nominal_values(unRV)), float(unp.std_devs(unRV))
+    
     if runGP:
 	#if sigRV_act < 0:
 	#    logg = float(unp.nominal_values(_compute_logg(Ms, Rs)))
@@ -156,7 +191,8 @@ def nRV_calculator(Kdetsig,
         nRVGP, enRVGP = 0., 0.
         
     # compute total observing time in hours
-    tobs = nRV * (texp + toverhead) / 60.
+    utobs = unRV * (texp + toverhead) / 60.
+    tobs, etobs = float(unp.nominal_values(utobs)), float(unp.std_devs(utobs))
     tobsGP = nRVGP * (texp + toverhead) / 60.
     etobsGP = enRVGP * (texp + toverhead) / 60.
 
@@ -172,17 +208,16 @@ def nRV_calculator(Kdetsig,
       	_ = mags
     except NameError:
         mags, band_strs, centralwl_nm = np.zeros(1), [''], 0
-    output = [P, rp, mp, K,
+
+    output = [P, rp, mp, emp, K, eK,
               mags, Ms, Rs, Teff, Z, vsini, Prot,
               band_strs, R, aperture, throughput, RVnoisefloor,
               centralwl_nm*1e-3, maxtelluric, toverhead, texp,
-              SNRtarget, sigRV_phot, sigRV_act, sigRV_planet, sigRV_eff,
-              sigK_target, nRV, nRVGP, enRVGP, NGPtrials, tobs, tobsGP, etobsGP]
-    ##_write_results2file(output_fname, output)
-    ##create_pdf(output_fname, output)
+              SNRtarget, sigRV_phot, sigRV_act, esigRV_act, sigRV_planet, esigRV_planet,
+              sigRV_eff, esigRV_eff, sigK_target, esigK_target, nRV, enRV, nRVGP, enRVGP,
+              NGPtrials, tobs, etobs, tobsGP, etobsGP]
     if verbose_results:
-        #_print_results(output, output_fname)
-	print output_fname
+    	print output_fname
 	_save_RVFC(output, output_fname)
     return output
 
@@ -336,6 +371,47 @@ def _get_planet_mass(rps, Fs=336.5):
     return mps
 
 
+def _get_planet_mass_dispersion(rps, Fs=336.5, N=100):
+    rps, Fs = np.ascontiguousarray(rps), np.ascontiguousarray(Fs)
+    assert rps.size == Fs.size
+
+    # isolate different regimes
+    Fs = Fs*1367*1e7*1e-4   # erg/s/cm^2
+    rocky = rps < 1.5
+    small = (1.5 <= rps) & (rps < 4)
+    neptune = (4 <= rps) & (rps < 13.668)
+    giant = rps >= 13.668
+
+    # compute mass uncertainty in each regime
+    emps, N = np.zeros(rps.size), int(N)
+    for i in range(rps.size):
+        mps_tmp = np.zeros(N)
+        for j in range(N):
+            if giant[i]:
+                mps_tmp[j] = _get_planet_mass(np.random.normal(rps[i], 1.15))
+                while mps_tmp[j] <= 0:
+                    mps_tmp[j] = _get_planet_mass(np.random.normal(rps[i], 1.15))
+
+            elif neptune[i]:
+                mps_tmp[j] = _get_planet_mass(np.random.normal(rps[i], 1.41))
+                while mps_tmp[j] <= 0:
+                    mps_tmp[j] = _get_planet_mass(np.random.normal(rps[i], 1.41))
+
+            elif small[i]:
+                mps_tmp[j] = _get_planet_mass(rps[i]) + np.random.normal(0, 4.7)
+                while mps_tmp[j] <= 0:
+                    mps_tmp[j] = _get_planet_mass(rps[i]) + np.random.normal(0, 4.7)
+
+            elif rocky[i]:
+                mps_tmp[j] = _get_planet_mass(rps[i]) + np.random.normal(0, 2.7)
+                while mps_tmp[j] <= 0:
+                    mps_tmp[j] = _get_planet_mass(rps[i]) + np.random.normal(0, 2.7)
+
+        # get dispersion in masses
+        emps[i] = mps_tmp.std()
+    return emps
+                    
+
 def _get_sigK(Kdetsig, P, Ms, mp):
     '''
     Compute the desired semi-amplitude detection measurement uncertainty.
@@ -446,8 +522,8 @@ def _write_results2file(output_fname, magiclistofstuff2write):
 
 
 def _save_RVFC(output, output_fname):
-    P, rp, mp, K, mags, Ms, Rs, Teff, Z, vsini, Prot, band_strs, R, aperture, throughput, RVnoisefloor, centralwl_microns, maxtelluric, toverhead, texp, SNRtarget, sigRV_phot, sigRV_act, sigRV_planet, sigRV_eff, sigK_target, nRV, nRVGP, enRVGP, NGPtrials, tobs, tobsGP, etobsGP = output
-    g = '%.7f,%.4f,%.4f,%s,%s,%.4f,%.4f,%i,%.3f,%.3f,%.3f,%i,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.2f,%.2f,%i,%.1f,%.1f,%.1f,%.3f,%.3f,%.3f'%(P,rp,mp,'-'.join(mags.astype(str)),''.join(band_strs),Ms,Rs,Teff,Z,vsini,Prot,R,aperture,throughput,RVnoisefloor,centralwl_microns,maxtelluric,toverhead,texp,sigRV_phot,sigRV_act,sigRV_planet,sigRV_eff,sigK_target,NGPtrials,nRV,nRVGP,enRVGP,tobs,tobsGP,etobsGP)
+    P, rp, mp, emp, K, eK, mags, Ms, Rs, Teff, Z, vsini, Prot, band_strs, R, aperture, throughput, RVnoisefloor, centralwl_microns, maxtelluric, toverhead, texp, SNRtarget, sigRV_phot, sigRV_act, esigRV_act, sigRV_planet, esigRV_planet, sigRV_eff, esigRV_eff, sigK_target, esigK_target, nRV, enRV, nRVGP, enRVGP, NGPtrials, tobs, etobs, tobsGP, etobsGP = output
+    g = '%.7f,%.4f,%.4f,%.4f,%s,%s,%.4f,%.4f,%i,%.3f,%.3f,%.3f,%i,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%i,%.1f,%.1f,%.1f,%.1f,%.3f,%.3f,%.3f,%.3f'%(P,rp,mp,emp,'-'.join(mags.astype(str)),''.join(band_strs),Ms,Rs,Teff,Z,vsini,Prot,R,aperture,throughput,RVnoisefloor,centralwl_microns,maxtelluric,toverhead,texp,sigRV_phot,sigRV_act,esigRV_act,sigRV_planet,esigRV_planet,sigRV_eff,esigRV_eff,sigK_target,esigK_target,NGPtrials,nRV,enRV,nRVGP,enRVGP,tobs,etobs,tobsGP,etobsGP)
     f = open(output_fname, 'w')
     f.write(g)
     f.close()

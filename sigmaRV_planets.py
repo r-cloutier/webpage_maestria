@@ -165,7 +165,7 @@ def get_sigmaRV_planets(P, rp, Teff, Ms, sigmaRV_phot):
     return _compute_sigmaRV_planets(Ks)
 
 
-def get_sigmaRV_planets_dispersion(P, rp, Teff, Ms, sigmaRV_phot, N=100):
+def get_sigmaRV_planets_mean_dispersion(P, rp, Teff, Ms, sigmaRV_phot, N=500):
     N = int(N)
     sigRV_planets = np.zeros(N)
     for i in range(N):
@@ -173,4 +173,4 @@ def get_sigmaRV_planets_dispersion(P, rp, Teff, Ms, sigmaRV_phot, N=100):
 	while np.any(theta < 0):
 	    theta = np.append(np.array([P, rp, Teff, Ms]) * np.random.normal(1,.1,4), sigmaRV_phot)
 	sigRV_planets[i] = get_sigmaRV_planets(*theta)
-    return sigRV_planets.std()
+    return sigRV_planets.mean(), sigRV_planets.std()

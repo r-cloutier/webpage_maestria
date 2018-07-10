@@ -374,7 +374,7 @@ def get_sigmaRV_activity(Teff, Ms, Prot, B_V):
     return float(abs(sigmaRV_act))
 
 
-def get_sigmaRV_activity_dispersion(Teff, Ms, Prot, B_V, N=100):
+def get_sigmaRV_activity_mean_dispersion(Teff, Ms, Prot, B_V, N=500):
     N = int(N)
     sigRV_acts = np.zeros(N)
     for i in range(N):
@@ -382,4 +382,4 @@ def get_sigmaRV_activity_dispersion(Teff, Ms, Prot, B_V, N=100):
 	while np.any(theta[:3] < 0):
 	    theta = np.array([Teff, Ms, Prot, B_V]) * np.random.normal(1,.1,4)
 	sigRV_acts[i] = get_sigmaRV_activity(*theta)
-    return sigRV_acts.std()
+    return sigRV_acts.mean(), sigRV_acts.std()
