@@ -112,7 +112,6 @@ def nRV_calculator(Kdetsig,
 	        logg = float(unp.nominal_values(_compute_logg(Ms, Rs)))
 	        B_V = get_B_V(Teff, logg, Z)
 	    	sigRV_act = get_sigmaRV_activity(Teff, Ms, Prot, B_V)
-		esigRV_act = get_sigmaRV_activity_dispersion(Teff, Ms, Prot, B_V)
 	    if sigRV_planet < 0:
 		sigRV_planet = get_sigmaRV_planets(P,rp,Teff,Ms,sigRV_phot)
 
