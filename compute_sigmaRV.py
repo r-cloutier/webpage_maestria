@@ -654,10 +654,10 @@ def interpolate_sigmaRV(mag, band_str, texp, aperture, throughput,
     # get the table in this band
     assert band_str in ['U','B','V','R','I','Y','J','H','K']
     d = fits.open('SigmaRV_Grids/SigmaRV_filter0d8_%sgrid'%band_str)[0].data
-    assert d.shape == (8, 68, 9, 9, 7)  # R,Teff,logg,Z,vsini
+    assert d.shape == (10, 68, 9, 9, 7)  # R,Teff,logg,Z,vsini
 
     # define parameter grids
-    Rs = np.arange(20e3, 161e3, 2e4)
+    Rs = np.arange(20e3, 201e3, 2e4)
     Teffs = np.append(np.arange(28e2,7e3,1e2), np.arange(7e3,121e2,2e2))
     loggs = np.arange(2, 6.1, .5)
     Zs = np.append(np.arange(-4,-1,dtype=float), np.arange(-1.5,1.5,.5))
