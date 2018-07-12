@@ -320,7 +320,7 @@
 		<td style="padding: 5px 10px;" width="24%"><b>Number of RV measurements (white noise)</b></td>
                 <td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($nRVout,1,'.','').' &plusmn; '.number_format($enRVout,1,'.','').'</b>'; ?></td>
 		<td style="padding: 5px 10px;" width="24%"><b>Total observing time (white noise)</b></td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($tobsout,1,'.','').' hrs &nbsp;('.number_format($tobsout/7.,1,'.','').' nights)</b>'; ?></td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($tobsout,1,'.','').' &plusmn; '.number_format($etobsout,1,'.','').' hrs &nbsp;('.number_format($tobsout/7.,1,'.','').' &plusmn; '.number_format($etobsout/7.,1,'.','').' nights)</b>'; ?></td>
 	</tr>
 	<tr>	
 		<td style="padding: 5px 10px;" width="24%"><b>Number of RV measurements (correlated noise)</b></td>
