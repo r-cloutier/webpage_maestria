@@ -212,7 +212,7 @@
         </tr>
         <tr>
                 <td style="padding: 5px 10px;" width="22%">Planetary mass</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($mpout,2,".",""); ?> M<sub>&#x02295;</sub></td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format($mpout,2,".","").' &plusmn; '.number_format($empout,2,'.',''); ?> M<sub>&#x02295;</sub></td>
                 <td style="padding: 5px 10px;" width="22%">Effective temperature</td>
                 <?php if (floatval($_GET['Teff']) > 0) : ?>
                         <td style="padding: 5px 10px;" width="11%"><?php echo number_format($Teffout,0,"",""); ?> K</td>
@@ -228,7 +228,7 @@
         </tr>
         <tr>
                 <td style="padding: 5px 10px;" width="22%">RV semi-amplitude</td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo number_format(RV_K($Pout,$Msout,$mpout),2,'.',''); ?> m/s</td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo number_format(RV_K($Pout,$Msout,$mpout),2,'.','').' &plusmn; '.number_format(RV_K($Pout,$Msout,$empout),2,'.',''); ?> m/s</td>
 		<td style="padding: 5px 10px;" width="22%">logg</td>
                 <?php if ($_GET['Z'] != "") : ?>
                         <td style="padding: 5px 10px;" width="11%"><?php echo number_format(compute_logg($Msout,$Rsout),2,'.',''); ?> [cgs]</td>
@@ -313,7 +313,7 @@
 <table>
 	<tr>
 		<td style="padding: 5px 10px;" width="24%"><b>Desired K measurement precision</b></td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($sigK_targetout,2,'.','').'</b>'; ?> <b>m/s</b></td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($sigK_targetout,2,'.','').' &plusmn; '.number_format($esigK_targetout,2,'.','').'</b>'; ?> <b>m/s</b></td>
 		<td></td>
 	</tr>
 	<tr>

@@ -272,8 +272,16 @@ def _read_sigRV_input(input_sigRV_fname):
 
 
 def _get_spectral_bands(wlmin, wlmax):
+    if wlmin <= .555 <= wlmax:
+    	Vband, Jband = True, False
+    elif wlmin <= 1.25 <= wlmax:
+        Vband, Jband = False, True
+    else:
+      	raise ValueError('Wavelength range must span the V or J band.')
+				    
     band_strs = np.array(['U','B','V','R','I','Y','J','H','K'])
-    wlcens = np.array([.3531, .4430, .5537, .694, .8781, 1.0259, 1.2545,
+    Vind, Jind = np.where(np.in1d(band_strs, np.array(['V','J'])))[0]
+    wlcens = np.array([.3531, .4430, .5537, .694, .8701, 1.0259, 1.2545,
                        1.631, 2.1498])
     wlwidth = np.array([.0657, .0973, .089, .207, .2316, .1084, .1548,
                         .2886, .3209])
@@ -286,15 +294,24 @@ def _get_spectral_bands(wlmin, wlmax):
                               np.min(abs(lower_bnds-wlmin))),
                      np.where(abs(upper_bnds-wlmax) == \
                               np.min(abs(upper_bnds-wlmax))))
+    bnds = np.append(bnds, np.where(abs(wlcens-wlmin) == \
+                                    np.min(abs(wlcens-wlmin))))
+    bnds = np.append(bnds, np.where(abs(wlcens-wlmax) == \
+                                    np.min(abs(wlcens-wlmax))))
+
     # expand if necessary
     if (lower_bnds[bnds[0]] > wlmin) and (bnds[0] != 0):
         bnds[0] -= 1
     if (upper_bnds[bnds[1]] < wlmax) and (bnds[1] != band_strs.size-1):
         bnds[1] += 1
     inds = np.arange(bnds.min(), bnds.max()+1)
-    
-    if inds.size == 0:
-        raise ValueError('No spectral bands found.')
+
+    # add V or J bands
+    if Vband:
+     	inds = np.append(inds, Vind)
+    elif Jband:
+        inds = np.append(inds, Jind)
+    inds = np.sort(np.unique(inds))
 
     return band_strs[inds]
     
