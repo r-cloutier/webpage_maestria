@@ -338,6 +338,13 @@ def _compute_sigRV_phot(band_strs, mags, Teff, logg, Z, vsini, texp, R,
                         		  R, Teff, logg, Z, vsini)
         print 'Took %.1f seconds\n'%(time.time()-t0)
 
+    # apply corrections
+    #band_strs_all = np.array(['U','B','V','R','I','Y','J','H','K'])
+    #sigRV_corrections = np.array([1,1,.66,.82,.94,.29,.38,1.37,1.47])
+    #g = np.in1d(band_strs_all, np.ascontiguousarray(band_strs))
+    #assert band_strs_all[g].size == sigmaRVs.size
+    #sigmaRVs /= sigRV_corrections[g]
+
     # compute SNRtarget
     SNRtarget = SNRtargets.mean()
 

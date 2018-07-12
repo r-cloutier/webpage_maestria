@@ -221,7 +221,7 @@
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">RV activity rms</td>
 		<?php if ((($sigRV_actout >= 0) && ($_GET['sigRVeff']==NULL)) || (($sigRV_actout>=0) && ($_GET['NGPtrials']>0))) : ?>
-                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_actout,2,".",""); ?> m/s</td>
+                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_actout,2,".","").' &plusmn; '.number_format($esigRV_actout,2,'.',''); ?> m/s</td>
 		<?php else: ?>
 			<td style="padding: 5px 10px;" width="11%">-</td>
 		<?php endif; ?>
@@ -237,7 +237,7 @@
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%">RV rms from additional planets</td>
 		<?php if (($sigRV_planetsout >= 0) && ($_GET['sigRVeff']==NULL)) : ?>
-                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_planetsout,2,'.',''); ?> m/s</td>
+                	<td style="padding: 5px 10px;" width="11%"><?php echo number_format($sigRV_planetsout,2,'.','').' &plusmn; '.number_format($esigRV_planetsout,2,'.',''); ?> m/s</td>
 		<?php else: ?>
 			<td style="padding: 5px 10px;" width="11%">-</td>
 		<?php endif; ?>
@@ -252,7 +252,7 @@
                         <td style="padding: 5px 10px;" width="11%">-</td>
                 <?php endif; ?>
                 <td style="padding: 5px 10px;" width="22%"><b>Effective RV rms</b></td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($sigRV_effout,2,'.','').'</b>'; ?> <b>m/s</b></td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($sigRV_effout,2,'.','').' &plusmn; '.number_format($esigRV_effout,2,'.','').'</b>'; ?> <b>m/s</b></td>
         </tr>
 	<tr>
 		<td></td>
@@ -318,10 +318,9 @@
 	</tr>
 	<tr>
 		<td style="padding: 5px 10px;" width="24%"><b>Number of RV measurements (white noise)</b></td>
-                <td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($nRVout,1,'.','').'</b>'; ?></td>
+                <td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($nRVout,1,'.','').' &plusmn; '.number_format($enRVout,1,'.','').'</b>'; ?></td>
 		<td style="padding: 5px 10px;" width="24%"><b>Total observing time (white noise)</b></td>
-		<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($tobsout,1,'.','').' hrs
-		&nbsp;('.number_format($tobsout/7.,1,'.','').' nights)</b>'; ?></td>
+		<td style="padding: 5px 10px;" width="11%"><?php echo '<b>'.number_format($tobsout,1,'.','').' hrs &nbsp;('.number_format($tobsout/7.,1,'.','').' nights)</b>'; ?></td>
 	</tr>
 	<tr>	
 		<td style="padding: 5px 10px;" width="24%"><b>Number of RV measurements (correlated noise)</b></td>
