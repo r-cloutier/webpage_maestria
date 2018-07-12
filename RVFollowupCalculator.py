@@ -281,7 +281,7 @@ def _get_spectral_bands(wlmin, wlmax):
 				    
     band_strs = np.array(['U','B','V','R','I','Y','J','H','K'])
     Vind, Jind = np.where(np.in1d(band_strs, np.array(['V','J'])))[0]
-    wlcens = np.array([.3531, .4430, .5537, .694, .8701, 1.0259, 1.2545,
+    wlcens = np.array([.3531, .4430, .5537, .694, .8781, 1.0259, 1.2545,
                        1.631, 2.1498])
     wlwidth = np.array([.0657, .0973, .089, .207, .2316, .1084, .1548,
                         .2886, .3209])
