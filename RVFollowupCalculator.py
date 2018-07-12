@@ -92,7 +92,7 @@ def nRV_calculator(Kdetsig,
             wlTAPAS, transTAPAS = np.loadtxt('/data/cpapir/www/rvfc/InputData/%s'%transmission_fname,
                                              skiprows=23).T
             wlTAPAS *= 1e-3  # microns
-            SNRtarget, sigRV_phot = _compute_sigRV_phot(band_strs, mags, Teff, logg,
+            SNRtarget, sigRV_phot = _compute_sigRV_phot(wlmin, wlmax, band_strs, mags, Teff, logg,
                                                         Z, vsini, texp, R, aperture,
                                                         throughput, RVnoisefloor,
                                                         centralwl_nm, maxtelluric,
@@ -324,7 +324,7 @@ def _compute_logg(Ms, Rs):
     return unp.log10(G * Ms / Rs**2 * 1e2)
 
 
-def _compute_sigRV_phot(band_strs, mags, Teff, logg, Z, vsini, texp, R,
+def _compute_sigRV_phot(wlmin, wlmax, band_strs, mags, Teff, logg, Z, vsini, texp, R,
                         aperture, throughput, RVnoisefloor, centralwl_nm,
                         transmission_threshold, wl_telluric, trans_telluric):
     '''
@@ -364,6 +364,13 @@ def _compute_sigRV_phot(band_strs, mags, Teff, logg, Z, vsini, texp, R,
 
     # compute SNRtarget
     SNRtarget = SNRtargets.mean()
+
+    # scale sigmaRVs in each band to the size of the wavelength range to correct for the use of discrete bands
+    # use HARPS as reference
+    Nharps_bands, dwlharps = 4., .691-.378
+    dwl = wlmax-wlmin
+    corr = np.sqrt(Nharps_bands / dwlharps / len(band_strs) * dwl)  # sqrt because sigRV propto 1/sqrt(Nphot)
+    sigmaRVs /= corr
 
     # compute sigmaRV over all bands
     sigRV_phot = 1 / np.sqrt(np.sum(1. / sigmaRVs**2))
