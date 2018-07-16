@@ -337,3 +337,16 @@
 		<?php endif; ?>
 	</tr>
 </table>
+
+<?php if ($enRVout/$nRVout>0.4) : ?>
+&emsp;&emsp;
+<div style="padding-left:160px;padding-right:160px">
+	<p style="padding: 5px 10px;" width="24%">&#42; note that the uncertainty in the number of RV measurements is dominated by the uncertainties
+	in the sampled RV noise sources. We also note that the fractional uncertainty in N<sub>RV</sub> is doubled relative to the effective RV rms
+	by its square dependence. As such, it is not uncommon for uncertainties in N<sub>RV</sub> to be of order N<sub>RV</sub> when sampling RV
+	noise sources given the resulting uncertainty in the effective RV rms. To avoid these issues, please consider using
+options <a href="http://maestria.astro.umontreal.ca/rvfc/RVFollowupCalculator.php?submit_1d2=Option+1.2" style="color:#D45C00">1.2</a> or <a
+href="http://maestria.astro.umontreal.ca/rvfc/RVFollowupCalculator.php?submit_2d2=Option+2.2" style="color:#D45C00">2.2</a> to set the RV noise
+sources explicitly (i.e. with zero uncertainty). We suggest the median RV noise sources reported above as a starting point.</p>
+</div>
+<?php endif; ?>
